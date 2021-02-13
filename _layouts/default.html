@@ -21,11 +21,10 @@ var WRInitTime=(new Date()).getTime();
 <div class="site">
   <div class="title">
     <a href="/">Dilawar Singh</a>
-    {% for page in site.pages %}
     <small>
-      <a style="margin:5px" href="{{ page.url }}"><u>{{ page.title }}</u>/</a>
+      <a style="margin:5px" href="/being-dilawar"><u>Being Dilawar</u>/</a>
+      <a style="margin:5px" href="/tools"><u>Tools</u>/</a>
     </small>
-    {% endfor %}
   </div>
 
   {{ content }}
