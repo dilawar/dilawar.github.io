@@ -1,5 +1,6 @@
 ---
 title: Being Dilawar
+layout: page
 ---
 
 Hello fellow Humans! I like to be called
