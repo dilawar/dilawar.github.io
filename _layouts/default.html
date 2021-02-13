@@ -21,12 +21,15 @@
 <script type="text/javascript">
 var WRInitTime=(new Date()).getTime();
 </script>
-<!-- ClickTale end of Top part -->
 
 <div class="site">
   <div class="title">
     <a href="/">Dilawar Singh</a>
-    <a class="extra" href="/">home</a>
+    {% for page in site.pages %}
+    <small>
+      <a style="margin:5px" href="{{ page.url }}"><u>{{ page.title }}</u>/</a>
+    </small>
+    {% endfor %}
   </div>
 
   {{ content }}
