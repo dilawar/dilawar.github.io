@@ -1,0 +1,10 @@
+---
+title: "Course review: Randomness in Biology"
+date: "2014-11-11"
+categories: 
+  - "ncbs-bangalore"
+tags: 
+  - "course-review"
+---
+
+"[Randomness in Biology](http://courses.ncbs.res.in/course/view.php?id=37)" is a graduate level course offered at NCBS Bangalore by Dr. Mukund Thattai. This course follows -- in spirit -- _Handbook of Stochastic Methods: For Physics, Chemistry, and the Natural Sciences_ by Gardiner and _Stochastic Processes in Physics and Chemistry_ by Van Kampen. It offers a bag full of stochastic tools to biologists for modeling and describing experiments and hypothesis. The course is not intended to be mathematically rigorous but remains very faithful to the spirit of rigor. The instructor strikes the balance between rigor and intuition really well. The crux of course focused on different types of Random Walk: discrete-time discrete-step, discrete-time continuous-step, and continuous-time and continuous steps; and on Master equations which can describe almost all of the chemistry. Stochastic differential equations along with Fokker-Plank equations were introduced. We did simulations using Langevin equations and Gillespie algorithms. The assignments were pleasant to solve and they required good knowledge of some language: matlab, mathematica, python etc. The instructor is full of energy and knows his subject very well. His capacity to switch gears and find connections is breathtaking. He quickly grasps questions asked, and explain the fundamentals very well. Moreover -- what is more important -- he is not at all lazy when it comes to work out derivations and equations. It is just pleasing to see him in action. The classroom **Safeda**, named after a mango variety, deserves as much praise as the instructor for its spacious white-board. To sum up, it is a great course for anyone with graduate level of mathematics. For an engineer who had little exposure to stochastic processes, it was a joyful and enlightening experience, which the instructor did not ruin by setting up unreasonably stupid and routine examinations.
