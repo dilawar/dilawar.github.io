@@ -4,7 +4,7 @@ author: Dilawar Singh
 date: March 23, 2021
 ---
 
-For a personal without deep pockets, finding good quality electronic components is a big challenge. There are usually two options: go to the likes of https://digikey.in and https://mouser.in and spend quite a lot for a premium quality, or go to your local electronic market and get stuff which is usually of a poor quality. For hobbyist, early stage startup (like us), and students, finding a vendor who can deliver a good compromise is very challenging.
+For a person without deep pockets, finding good quality electronic components is a big challenge. There are usually two options: go to the likes of https://digikey.in and https://mouser.in and spend quite a lot for a premium quality, or go to your local electronic market and pray that the stuff you bought has a decent quality. For hobbyist, early stage startup (like us), and students, finding a vendor who can deliver a good compromise is very challenging.
 
 Fortunately there are some options. I’ve used following stores to buy components especially boards, sensors and other kits. I am very happy with their services. Both of them did prompt deliveries.
 
