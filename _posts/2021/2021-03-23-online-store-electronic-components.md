@@ -2,6 +2,7 @@
 title: Online store for electronic parts
 author: Dilawar Singh
 date: March 23, 2021
+comments: true
 ---
 
 For a person without deep pockets, finding good quality electronic components is a big challenge. There are usually two options: go to the likes of https://digikey.in and https://mouser.in and spend quite a lot for a premium quality, or go to your local electronic market and pray that the stuff you bought has a decent quality. For hobbyist, early stage startup (like us), and students, finding a vendor who can deliver a good compromise is very challenging.
