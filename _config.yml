@@ -1,2 +1,4 @@
+kramdown:
+  html_to_native: true
 sass:
-  style: compact
+  sass_dir: _sass
