@@ -17,8 +17,18 @@ div.title a {
 }
 
 a {
-    color: #0366d6;
+    color: #0366f6;
+    text-decoration: none;
 }
+
+a:hover {
+    text-decoration: underline;
+}
+
+.posts li {
+
+}
+
 
 code, pre {
     font-family: 'Fira Code', Menlo, Consolas, "Consolas for Powerline", "Courier New", Courier, monospace;
