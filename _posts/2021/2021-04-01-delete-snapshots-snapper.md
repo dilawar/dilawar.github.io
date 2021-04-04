@@ -10,7 +10,7 @@ comments: true
 
 First list the available configuration.
 
-```terminal
+```shell
 [dilawars@chutki ~]$ sudo snapper list-configs 
 Config | Subvolume
 -------+----------
@@ -19,7 +19,7 @@ root   | /
 
 List the snapshots for a given config.
 
-```terminal
+```shell
 [dilawars@chutki ~]$ sudo snapper --config root list
   # | Type   | Pre # | Date                            | User | Cleanup | Description           | Userdata     
 ----+--------+-------+---------------------------------+------+---------+-----------------------+--------------
@@ -37,7 +37,7 @@ List the snapshots for a given config.
 
 Now delete.
 
-```
+```shell
 [dilawars@chutki ~]$ sudo snapper --config root delete 15
 [dilawars@chutki ~]$ sudo snapper --config root delete 16
 [dilawars@chutki ~]$ sudo snapper --config root delete 17
