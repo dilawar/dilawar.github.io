@@ -26,7 +26,3 @@ If your local government school is bad, I bet, most private schools are only sli
 The government should strive for a decent baseline: MSP for crops, minimum wages, minimum education, and minimum health coverage, even when the private sector is helping and not exploiting the lack of government presence. This is not too much to ask from a government for its people, democratic or otherwise, left or right, sikular or fascist. And every decent society should strive for it.
 
 The MSP is set at 1.5 times the cost of the crop. The _real market_ can't afford to give this much to the farmers hence the MSP was proposed in the first place. If you think that market _must be_ able to pay that much or more ( _balle balle_!), then it does not matter if you leave the MSP alone. If you think the market is fair, then it wouldn't matter if you leave the legal provision for appeal in the court there (it won't ever be used). Even if you think, these are needless in your somewhat utopian view of markets, my request is to _err_ on the side of caution.
-
-It may not be politically correct, but it is decent to act in good faith!
-
-And by the way, the Chinese have figured out quantum supremacy ([https://www.nature.com/articles/d41586-020-03434-7](https://www.nature.com/articles/d41586-020-03434-7)) this week.
