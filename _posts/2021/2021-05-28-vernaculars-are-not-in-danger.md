@@ -1,5 +1,5 @@
 ---
-title: Vernacular are not in danger from others
+title: No, vernaculars do not face external threats
 author: Dilawar Singh
 comment: true
 ---
