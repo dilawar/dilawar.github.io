@@ -57,10 +57,10 @@ the US and Europe after securing them an English medium school here. I grew up a
 suspect everyone who sends their kids to English medium school while lecturing in public about the
 health of vernacular. 
 
-I really don't know what is being my point here. I hope it resonates with someone. We need to have a
-healthy attitude about our predicaments. I am personally annoyed by the hypocrisy shown by the
-language warriors these days. A language grows if the economy around it grows. No amount of
-emotional appeal can help move the needle. Also, I don't think you can force someone to love a
+The liberal mixing of people have created many anxieties. We need to have a healthy attitude about
+our predicaments. I get annoyed by the hypocrisy shown by the local language warriors. A language
+grows if the economy around it grows even if the number of its speaker dwindles. I'd rather be one
+of the peacocks than one of the crows anyday. I don't think you can force someone to love a
 language: you have to give them something worth loving. I remember buying an English-Hindi
 dictionary after I read the translation of _The Happy Price_ by Oscar Wilde in high school. I know
 many people, some hardcore anti-XYZ, searching for the meaning of Arabic words just to enjoy a
