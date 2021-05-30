@@ -14,8 +14,8 @@ $ jekyll --help
 	from /usr/bin/jekyll:23:in `<main>'
 ```
 
-Not sure how to solve it since I know very little about Ruby. Honestly I don't like fight
-with installation process. So I turned to docker which I know little.
+Honestly, I don't like to fight with installation process. And I know very little about ruby. So I
+turned to docker which I know little.
 
 TLDR: Here is my `Makefile`. I run `make` in the Github repository to build and test this site.
 
