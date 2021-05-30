@@ -1,7 +1,7 @@
 ---
-title: No, vernaculars do not face external threats
-author: Dilawar Singh
-comment: true
+title: Vernaculars are not facing external threats
+date: 2021-05-28
+comments: true
 ---
 
 Let me add some context first. I am a native Hindustani speaker who spent most of his life in
