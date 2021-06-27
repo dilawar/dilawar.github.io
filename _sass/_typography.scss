@@ -1,39 +1,18 @@
 // This is partial.
 
 body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif,
+    font-family: -apple-system, BlinkMacSystemFont, sans-serif,
         opensans, ubuntu, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
     color: #24292e;
     background-color: #fff;
     max-width: 650px;
     margin: auto;
-    font-size: 14px;
-    line-height: 1.65;
+    line-height: 1.5;
 }
 
-div.title a {
-    font-size: large;
-    color: green;
-}
-
-a {
-    color: #0366f6;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: underline;
-}
-
-.posts li {
-
-}
-
-
-code, pre {
-    font-family: 'Fira Code', Menlo, Consolas, "Consolas for Powerline", "Courier New", Courier, monospace;
+pre code {
+    font-family:  monospace;
     font-size: small;
-    background-color: #EEEEEE;
     padding: 0.25em;
 
     overflow: auto;
@@ -41,4 +20,6 @@ code, pre {
     padding: 5px;
     white-space: pre-wrap;
     word-break: keep-all;
-}
+    border: 1px dotted lightyellow;
+ }
+
