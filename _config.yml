@@ -1,8 +1,5 @@
 markdown: kramdown
-
 highlighter: rouge
-  input: GFM
-
 kramdown:
   html_to_native: true
 sass:
