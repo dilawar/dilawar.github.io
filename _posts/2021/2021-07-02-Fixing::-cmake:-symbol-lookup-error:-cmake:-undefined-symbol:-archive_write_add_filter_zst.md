@@ -1,5 +1,5 @@
 ---
-title: Fixing:: cmake: symbol lookup error: cmake: undefined symbol: archive_write_add_filter_zst
+title: Fixing 'cmake: symbol lookup error: cmake: undefined symbol: archive_write_add_filter_zst'
 date: 2021-07-02
 comments: true
 ---
