@@ -8,6 +8,10 @@ tags:
 comments: true
 ---
 
+I wrote a small script that is a wrapper around `git push`. It modifies the
+`remote` url and insert username and password (read from `env`) from it. No need
+to store ssh keys on remote server or git clone with https credentials.
+
 For `github.com` repo, It looks for `GITHUB_USER` first, then for `GIT_USER`,
 and then `USER` environment variable. Similarly it looks for `GITHUB_TOKEN`,
 `GIT_TOKEN` for tokens. Fot `gitlab.com` repo, it looks for `GITLAB_USER` or
