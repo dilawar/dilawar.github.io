@@ -1,5 +1,6 @@
 markdown: kramdown
 highlighter: rouge
+theme: minima
 kramdown:
   html_to_native: true
 sass:

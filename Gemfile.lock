@@ -258,6 +258,7 @@ PLATFORMS
 
 DEPENDENCIES
   github-pages
+  minima
   rouge
 
 BUNDLED WITH

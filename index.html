@@ -7,7 +7,11 @@ title: Dilawar Singh
 
     <ul class="posts">
         {% for post in site.posts %}
-        <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ post.url }}">{{ post.title }}</a></li>
+        <li style="max-width:500px;margin-top:5pt;border-top:1px dotted teal;">
+          <span style="color:gray;font-size:x-small;">{{ post.date | date_to_string }}</span>
+          &raquo;
+          <a href="{{ post.url }}">{{ post.title }}</a>
+        </li>
         {% endfor %}
     </ul>
 </div>

@@ -8,6 +8,7 @@ body {
     max-width: 650px;
     margin: auto;
     line-height: 1.5;
+    font-size: 11pt;
 }
 
 pre code {
@@ -22,4 +23,13 @@ pre code {
     word-break: keep-all;
     border: 1px dotted lightyellow;
  }
+
+a:hover {
+    color: red;
+}
+
+ul {
+    list-style-type: none;
+}
+
 
