@@ -5,11 +5,6 @@ author = "Dilawar Singh"
 theme = "hugo-vitae"
 enableRobotsTXT = true
 
-# enable syntax highlighting.
-pygmentsstyle = "colorful"
-pygmentscodefences = true
-pygmentscodefencesguesssyntax = true
-
 googleAnalytics = "UA-180197482-1"
 disqusShortname = "dilawarsblog"
 
@@ -27,7 +22,6 @@ disqusShortname = "dilawarsblog"
 
     readingTime = false
     wordCount = false
-
 
 
 # Main menu which appears below site header.

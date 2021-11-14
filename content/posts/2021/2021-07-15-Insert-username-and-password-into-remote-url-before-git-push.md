@@ -111,5 +111,5 @@ Save it as `gh_push.py` somewhere in `$PATH` and make it executable. Export
 `GITHUB_USER` and `GITHUB_TOKEN`. And instead of `git push`. do
 
 ```sh
-gh_push.py
+$ gh_push.py
 ```
