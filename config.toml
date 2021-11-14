@@ -4,11 +4,7 @@ title = "Dilawar's Blog"
 author = "Dilawar Singh"
 theme = "hugo-vitae"
 enableRobotsTXT = true
-
 googleAnalytics = "UA-180197482-1"
-disqusShortname = "dilawarsblog"
-
-
 
 [params]
     homepage = false
@@ -22,6 +18,12 @@ disqusShortname = "dilawarsblog"
 
     readingTime = false
     wordCount = false
+
+[params.comments]
+enabled = true
+
+[params.comments.disqus]
+shortname = "dilawarsblog"
 
 
 # Main menu which appears below site header.
