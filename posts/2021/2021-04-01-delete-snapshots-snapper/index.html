@@ -71,28 +71,28 @@ Dilawar Singh
 </div>
 <div class=markdown>
 <p>First list the available configuration.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#333>[</span>dilawars@chutki ~<span style=color:#333>]</span>$ sudo snapper list-configs 
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#f92672>[</span>dilawars@chutki ~<span style=color:#f92672>]</span>$ sudo snapper list-configs 
 Config | Subvolume
 -------+----------
 root   | /        
 </code></pre></div><p>List the snapshots for a given config.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#333>[</span>dilawars@chutki ~<span style=color:#333>]</span>$ sudo snapper --config root list
-  <span style=color:#888># | Type   | Pre # | Date                            | User | Cleanup | Description           | Userdata     </span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#f92672>[</span>dilawars@chutki ~<span style=color:#f92672>]</span>$ sudo snapper --config root list
+  <span style=color:#75715e># | Type   | Pre # | Date                            | User | Cleanup | Description           | Userdata     </span>
 ----+--------+-------+---------------------------------+------+---------+-----------------------+--------------
- <span style=color:#60e;font-weight:700>0</span>  | single |       |                                 | root |         | current               |              
- 1* | single |       | Thu <span style=color:#60e;font-weight:700>13</span> Aug <span style=color:#60e;font-weight:700>2020</span> 12:32:08 PM IST | root |         | first root filesystem |              
- <span style=color:#60e;font-weight:700>8</span>  | pre    |       | Sun <span style=color:#60e;font-weight:700>28</span> Mar <span style=color:#60e;font-weight:700>2021</span> 11:33:58 PM IST | root | number  | zypp<span style=color:#333>(</span>zypper<span style=color:#333>)</span>          | <span style=color:#963>important</span><span style=color:#333>=</span>yes
-<span style=color:#60e;font-weight:700>11</span>  | pre    |       | Mon <span style=color:#60e;font-weight:700>29</span> Mar <span style=color:#60e;font-weight:700>2021</span> 02:29:30 PM IST | root | number  | zypp<span style=color:#333>(</span>zypper<span style=color:#333>)</span>          | <span style=color:#963>important</span><span style=color:#333>=</span>yes
-<span style=color:#60e;font-weight:700>12</span>  | post   |    <span style=color:#60e;font-weight:700>11</span> | Mon <span style=color:#60e;font-weight:700>29</span> Mar <span style=color:#60e;font-weight:700>2021</span> 03:13:09 PM IST | root | number  |                       | <span style=color:#963>important</span><span style=color:#333>=</span>yes
-<span style=color:#60e;font-weight:700>15</span>  | pre    |       | Wed <span style=color:#60e;font-weight:700>31</span> Mar <span style=color:#60e;font-weight:700>2021</span> 04:31:40 PM IST | root | number  | zypp<span style=color:#333>(</span>zypper<span style=color:#333>)</span>          | <span style=color:#963>important</span><span style=color:#333>=</span>no 
-<span style=color:#60e;font-weight:700>16</span>  | post   |    <span style=color:#60e;font-weight:700>15</span> | Wed <span style=color:#60e;font-weight:700>31</span> Mar <span style=color:#60e;font-weight:700>2021</span> 04:32:18 PM IST | root | number  |                       | <span style=color:#963>important</span><span style=color:#333>=</span>no 
-<span style=color:#60e;font-weight:700>17</span>  | pre    |       | Thu <span style=color:#60e;font-weight:700>01</span> Apr <span style=color:#60e;font-weight:700>2021</span> 12:05:31 AM IST | root | number  | zypp<span style=color:#333>(</span>zypper<span style=color:#333>)</span>          | <span style=color:#963>important</span><span style=color:#333>=</span>no 
-<span style=color:#60e;font-weight:700>18</span>  | post   |    <span style=color:#60e;font-weight:700>17</span> | Thu <span style=color:#60e;font-weight:700>01</span> Apr <span style=color:#60e;font-weight:700>2021</span> 12:13:33 AM IST | root | number  |                       | <span style=color:#963>important</span><span style=color:#333>=</span>no 
+ <span style=color:#ae81ff>0</span>  | single |       |                                 | root |         | current               |              
+ 1* | single |       | Thu <span style=color:#ae81ff>13</span> Aug <span style=color:#ae81ff>2020</span> 12:32:08 PM IST | root |         | first root filesystem |              
+ <span style=color:#ae81ff>8</span>  | pre    |       | Sun <span style=color:#ae81ff>28</span> Mar <span style=color:#ae81ff>2021</span> 11:33:58 PM IST | root | number  | zypp<span style=color:#f92672>(</span>zypper<span style=color:#f92672>)</span>          | important<span style=color:#f92672>=</span>yes
+<span style=color:#ae81ff>11</span>  | pre    |       | Mon <span style=color:#ae81ff>29</span> Mar <span style=color:#ae81ff>2021</span> 02:29:30 PM IST | root | number  | zypp<span style=color:#f92672>(</span>zypper<span style=color:#f92672>)</span>          | important<span style=color:#f92672>=</span>yes
+<span style=color:#ae81ff>12</span>  | post   |    <span style=color:#ae81ff>11</span> | Mon <span style=color:#ae81ff>29</span> Mar <span style=color:#ae81ff>2021</span> 03:13:09 PM IST | root | number  |                       | important<span style=color:#f92672>=</span>yes
+<span style=color:#ae81ff>15</span>  | pre    |       | Wed <span style=color:#ae81ff>31</span> Mar <span style=color:#ae81ff>2021</span> 04:31:40 PM IST | root | number  | zypp<span style=color:#f92672>(</span>zypper<span style=color:#f92672>)</span>          | important<span style=color:#f92672>=</span>no 
+<span style=color:#ae81ff>16</span>  | post   |    <span style=color:#ae81ff>15</span> | Wed <span style=color:#ae81ff>31</span> Mar <span style=color:#ae81ff>2021</span> 04:32:18 PM IST | root | number  |                       | important<span style=color:#f92672>=</span>no 
+<span style=color:#ae81ff>17</span>  | pre    |       | Thu <span style=color:#ae81ff>01</span> Apr <span style=color:#ae81ff>2021</span> 12:05:31 AM IST | root | number  | zypp<span style=color:#f92672>(</span>zypper<span style=color:#f92672>)</span>          | important<span style=color:#f92672>=</span>no 
+<span style=color:#ae81ff>18</span>  | post   |    <span style=color:#ae81ff>17</span> | Thu <span style=color:#ae81ff>01</span> Apr <span style=color:#ae81ff>2021</span> 12:13:33 AM IST | root | number  |                       | important<span style=color:#f92672>=</span>no 
 
 </code></pre></div><p>Now delete.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#333>[</span>dilawars@chutki ~<span style=color:#333>]</span>$ sudo snapper --config root delete <span style=color:#60e;font-weight:700>15</span>
-<span style=color:#333>[</span>dilawars@chutki ~<span style=color:#333>]</span>$ sudo snapper --config root delete <span style=color:#60e;font-weight:700>16</span>
-<span style=color:#333>[</span>dilawars@chutki ~<span style=color:#333>]</span>$ sudo snapper --config root delete <span style=color:#60e;font-weight:700>17</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell><span style=color:#f92672>[</span>dilawars@chutki ~<span style=color:#f92672>]</span>$ sudo snapper --config root delete <span style=color:#ae81ff>15</span>
+<span style=color:#f92672>[</span>dilawars@chutki ~<span style=color:#f92672>]</span>$ sudo snapper --config root delete <span style=color:#ae81ff>16</span>
+<span style=color:#f92672>[</span>dilawars@chutki ~<span style=color:#f92672>]</span>$ sudo snapper --config root delete <span style=color:#ae81ff>17</span>
 </code></pre></div><p><em>You can&rsquo;t delete the snapshot id with <code>*</code> on it.</em> In this case, it is <code>1*</code>.</p>
 <h2 id=resources>Resources</h2>
 <ol>

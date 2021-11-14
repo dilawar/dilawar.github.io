@@ -78,19 +78,19 @@ saveBlob : function(blob, filename) { var url = window.URL.createObjectURL(blob)
 <li>Create an element with tag <code>a</code> and use the url generated above. Set properties such as <code>a.download</code> and <code>a.href</code> on this <code>a</code>. Use <code>a.click</code> to click on this <code>a</code>.</li>
 </ul>
 <p>Here is the function.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript>saveBlob <span style=color:#333>:</span> <span style=color:#080;font-weight:700>function</span>(blob, filename) {
-      <span style=color:#080;font-weight:700>var</span> url <span style=color:#333>=</span> <span style=color:#007020>window</span>.URL.createObjectURL(blob);
-      <span style=color:#080;font-weight:700>var</span> a <span style=color:#333>=</span> <span style=color:#007020>document</span>.createElement(<span style=background-color:#fff0f0>&#34;a&#34;</span>);
-      a.target <span style=color:#333>=</span> <span style=background-color:#fff0f0>&#34;_blank&#34;</span>;
-      a.href <span style=color:#333>=</span> url;
-      a.download <span style=color:#333>=</span> filename;
-      a.onclick <span style=color:#333>=</span> <span style=color:#080;font-weight:700>function</span>(e) {
-        setTimeout( () =&gt; {
-          <span style=color:#007020>window</span>.URL.revokeObjectURL(url);
-        }, <span style=color:#00d;font-weight:700>100</span>);
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-javascript data-lang=javascript><span style=color:#a6e22e>saveBlob</span> <span style=color:#f92672>:</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>blob</span>, <span style=color:#a6e22e>filename</span>) {
+      <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>url</span> <span style=color:#f92672>=</span> window.<span style=color:#a6e22e>URL</span>.<span style=color:#a6e22e>createObjectURL</span>(<span style=color:#a6e22e>blob</span>);
+      <span style=color:#66d9ef>var</span> <span style=color:#a6e22e>a</span> <span style=color:#f92672>=</span> document.<span style=color:#a6e22e>createElement</span>(<span style=color:#e6db74>&#34;a&#34;</span>);
+      <span style=color:#a6e22e>a</span>.<span style=color:#a6e22e>target</span> <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;_blank&#34;</span>;
+      <span style=color:#a6e22e>a</span>.<span style=color:#a6e22e>href</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>url</span>;
+      <span style=color:#a6e22e>a</span>.<span style=color:#a6e22e>download</span> <span style=color:#f92672>=</span> <span style=color:#a6e22e>filename</span>;
+      <span style=color:#a6e22e>a</span>.<span style=color:#a6e22e>onclick</span> <span style=color:#f92672>=</span> <span style=color:#66d9ef>function</span>(<span style=color:#a6e22e>e</span>) {
+        <span style=color:#a6e22e>setTimeout</span>( () =&gt; {
+          window.<span style=color:#a6e22e>URL</span>.<span style=color:#a6e22e>revokeObjectURL</span>(<span style=color:#a6e22e>url</span>);
+        }, <span style=color:#ae81ff>100</span>);
       };
-      a.click();
-      a.remove();
+      <span style=color:#a6e22e>a</span>.<span style=color:#a6e22e>click</span>();
+      <span style=color:#a6e22e>a</span>.<span style=color:#a6e22e>remove</span>();
 },
 </code></pre></div>
 </div>

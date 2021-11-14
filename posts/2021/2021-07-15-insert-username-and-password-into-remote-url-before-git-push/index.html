@@ -27,7 +27,7 @@ Here is a small script that acts as a wrapper around git push. It modifies the r
 <meta itemprop=description content="You are on a remote server. You don&rsquo;t want to store your credentials on that machine. You can temporary export your credentials as environment variable e.g. export GITHUB_USER=dilawar and export GITHUB_PASSWORD=ladidadadad.
 Here is a small script that acts as a wrapper around git push. It modifies the remote url and insert username and password (read from env). No need to store ssh keys on remote server or git clone with https credentials."><meta itemprop=datePublished content="2021-07-15T00:00:00+00:00">
 <meta itemprop=dateModified content="2021-07-15T00:00:00+00:00">
-<meta itemprop=wordCount content="410">
+<meta itemprop=wordCount content="411">
 <meta itemprop=keywords content="git,script,">
 </head>
 <body>
@@ -89,82 +89,82 @@ then <code>USER</code> environment variable. Similarly it looks for <code>GITHUB
 For example <code>git push https://github.com/dilawar/Scripts</code> will become <code>git push https://dilawar:mytoken@github.com/dilawar/Scritps</code>.</p>
 <p>You can find the script
 <a href=https://raw.githubusercontent.com/dilawar/Scripts/master/%2Cgit_push target=_blank>here</a>.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#888>#!/usr/bin/env python3</span>
-<span style=color:#888># pip3 install typer --user  # only dependency</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#75715e>#!/usr/bin/env python3</span>
+<span style=color:#75715e># pip3 install typer --user  # only dependency</span>
 
-<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>sys</span>
-<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>typing</span> <span style=color:#080;font-weight:700>as</span> <span style=color:#0e84b5;font-weight:700>T</span>
-<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>subprocess</span>
-<span style=color:#080;font-weight:700>from</span> <span style=color:#0e84b5;font-weight:700>urllib.parse</span> <span style=color:#080;font-weight:700>import</span> urlparse
-<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>os</span>
+<span style=color:#f92672>import</span> sys
+<span style=color:#f92672>import</span> typing <span style=color:#66d9ef>as</span> T
+<span style=color:#f92672>import</span> subprocess
+<span style=color:#f92672>from</span> urllib.parse <span style=color:#f92672>import</span> urlparse
+<span style=color:#f92672>import</span> os
 
-<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>typer</span>
+<span style=color:#f92672>import</span> typer
 
-app <span style=color:#333>=</span> typer<span style=color:#333>.</span>Typer()
+app <span style=color:#f92672>=</span> typer<span style=color:#f92672>.</span>Typer()
 
-git <span style=color:#333>=</span> <span style=background-color:#fff0f0>&#34;git&#34;</span>
-
-
-<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>env</span>(key:<span style=color:#007020>str</span>, default<span style=color:#333>=</span><span style=color:#080;font-weight:700>None</span>) <span style=color:#333>-&gt;</span> T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>]:
-    <span style=color:#080;font-weight:700>return</span> os<span style=color:#333>.</span>environ<span style=color:#333>.</span>get(key, default)
-
-<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>find_remote</span>() <span style=color:#333>-&gt;</span> <span style=color:#007020>str</span>:
-    remote <span style=color:#333>=</span> subprocess<span style=color:#333>.</span>check_output([git, <span style=background-color:#fff0f0>&#34;remote&#34;</span>, <span style=background-color:#fff0f0>&#34;-v&#34;</span>], text<span style=color:#333>=</span><span style=color:#080;font-weight:700>True</span>)
-    remote <span style=color:#333>=</span> [x <span style=color:#080;font-weight:700>for</span> x <span style=color:#000;font-weight:700>in</span> remote<span style=color:#333>.</span>split(<span style=background-color:#fff0f0>&#34;</span><span style=color:#666;background-color:#fff0f0;font-weight:700>\n</span><span style=background-color:#fff0f0>&#34;</span>) <span style=color:#080;font-weight:700>if</span> <span style=background-color:#fff0f0>&#34;(push)&#34;</span> <span style=color:#000;font-weight:700>in</span> x<span style=color:#333>.</span>strip()][<span style=color:#00d;font-weight:700>0</span>]
-    remote <span style=color:#333>=</span> remote<span style=color:#333>.</span>split()[<span style=color:#00d;font-weight:700>1</span>]
-    <span style=color:#080;font-weight:700>return</span> remote
+git <span style=color:#f92672>=</span> <span style=color:#e6db74>&#34;git&#34;</span>
 
 
-<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>get_user</span>(domain) <span style=color:#333>-&gt;</span> T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>]:
-    <span style=color:#080;font-weight:700>if</span> domain <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;github.com&#34;</span>:
-        <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GITHUB_USER&#34;</span>, env(<span style=background-color:#fff0f0>&#34;GIT_USER&#34;</span>, <span style=color:#080;font-weight:700>None</span>))
-    <span style=color:#080;font-weight:700>if</span> domain <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;gitlab.com&#34;</span>:
-        <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GITLAB_USER&#34;</span>, env(<span style=background-color:#fff0f0>&#34;GIT_USER&#34;</span>, <span style=color:#080;font-weight:700>None</span>))
-    <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#39;GIT_USER&#39;</span>, env(<span style=background-color:#fff0f0>&#39;USER&#39;</span>, <span style=color:#080;font-weight:700>None</span>))
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>env</span>(key:str, default<span style=color:#f92672>=</span><span style=color:#66d9ef>None</span>) <span style=color:#f92672>-&gt;</span> T<span style=color:#f92672>.</span>Optional[str]:
+    <span style=color:#66d9ef>return</span> os<span style=color:#f92672>.</span>environ<span style=color:#f92672>.</span>get(key, default)
 
-<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>get_token</span>(domain) <span style=color:#333>-&gt;</span> T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>]:
-    <span style=color:#080;font-weight:700>if</span> domain <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;github.com&#34;</span>:
-        <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GITHUB_TOKEN&#34;</span>, env(<span style=background-color:#fff0f0>&#34;GIT_TOKEN&#34;</span>, <span style=color:#080;font-weight:700>None</span>))
-    <span style=color:#080;font-weight:700>if</span> domain <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;gitlab.com&#34;</span>:
-        <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GITLAB_TOKEN&#34;</span>, env(<span style=background-color:#fff0f0>&#34;GIT_TOKEN&#34;</span>, <span style=color:#080;font-weight:700>None</span>))
-    <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GIT_TOKEN&#34;</span>, <span style=color:#080;font-weight:700>None</span>)
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>find_remote</span>() <span style=color:#f92672>-&gt;</span> str:
+    remote <span style=color:#f92672>=</span> subprocess<span style=color:#f92672>.</span>check_output([git, <span style=color:#e6db74>&#34;remote&#34;</span>, <span style=color:#e6db74>&#34;-v&#34;</span>], text<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)
+    remote <span style=color:#f92672>=</span> [x <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> remote<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>) <span style=color:#66d9ef>if</span> <span style=color:#e6db74>&#34;(push)&#34;</span> <span style=color:#f92672>in</span> x<span style=color:#f92672>.</span>strip()][<span style=color:#ae81ff>0</span>]
+    remote <span style=color:#f92672>=</span> remote<span style=color:#f92672>.</span>split()[<span style=color:#ae81ff>1</span>]
+    <span style=color:#66d9ef>return</span> remote
 
 
-<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>find_branch</span>() <span style=color:#333>-&gt;</span> <span style=color:#007020>str</span>:
-    branches <span style=color:#333>=</span> (
-        subprocess<span style=color:#333>.</span>check_output([git, <span style=background-color:#fff0f0>&#34;branch&#34;</span>, <span style=background-color:#fff0f0>&#34;-a&#34;</span>], text<span style=color:#333>=</span><span style=color:#080;font-weight:700>True</span>)<span style=color:#333>.</span>strip()<span style=color:#333>.</span>split(<span style=background-color:#fff0f0>&#34;</span><span style=color:#666;background-color:#fff0f0;font-weight:700>\n</span><span style=background-color:#fff0f0>&#34;</span>)
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_user</span>(domain) <span style=color:#f92672>-&gt;</span> T<span style=color:#f92672>.</span>Optional[str]:
+    <span style=color:#66d9ef>if</span> domain <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;github.com&#34;</span>:
+        <span style=color:#66d9ef>return</span> env(<span style=color:#e6db74>&#34;GITHUB_USER&#34;</span>, env(<span style=color:#e6db74>&#34;GIT_USER&#34;</span>, <span style=color:#66d9ef>None</span>))
+    <span style=color:#66d9ef>if</span> domain <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;gitlab.com&#34;</span>:
+        <span style=color:#66d9ef>return</span> env(<span style=color:#e6db74>&#34;GITLAB_USER&#34;</span>, env(<span style=color:#e6db74>&#34;GIT_USER&#34;</span>, <span style=color:#66d9ef>None</span>))
+    <span style=color:#66d9ef>return</span> env(<span style=color:#e6db74>&#39;GIT_USER&#39;</span>, env(<span style=color:#e6db74>&#39;USER&#39;</span>, <span style=color:#66d9ef>None</span>))
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>get_token</span>(domain) <span style=color:#f92672>-&gt;</span> T<span style=color:#f92672>.</span>Optional[str]:
+    <span style=color:#66d9ef>if</span> domain <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;github.com&#34;</span>:
+        <span style=color:#66d9ef>return</span> env(<span style=color:#e6db74>&#34;GITHUB_TOKEN&#34;</span>, env(<span style=color:#e6db74>&#34;GIT_TOKEN&#34;</span>, <span style=color:#66d9ef>None</span>))
+    <span style=color:#66d9ef>if</span> domain <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;gitlab.com&#34;</span>:
+        <span style=color:#66d9ef>return</span> env(<span style=color:#e6db74>&#34;GITLAB_TOKEN&#34;</span>, env(<span style=color:#e6db74>&#34;GIT_TOKEN&#34;</span>, <span style=color:#66d9ef>None</span>))
+    <span style=color:#66d9ef>return</span> env(<span style=color:#e6db74>&#34;GIT_TOKEN&#34;</span>, <span style=color:#66d9ef>None</span>)
+
+
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>find_branch</span>() <span style=color:#f92672>-&gt;</span> str:
+    branches <span style=color:#f92672>=</span> (
+        subprocess<span style=color:#f92672>.</span>check_output([git, <span style=color:#e6db74>&#34;branch&#34;</span>, <span style=color:#e6db74>&#34;-a&#34;</span>], text<span style=color:#f92672>=</span><span style=color:#66d9ef>True</span>)<span style=color:#f92672>.</span>strip()<span style=color:#f92672>.</span>split(<span style=color:#e6db74>&#34;</span><span style=color:#ae81ff>\n</span><span style=color:#e6db74>&#34;</span>)
     )
-    branch <span style=color:#333>=</span> [x<span style=color:#333>.</span>strip() <span style=color:#080;font-weight:700>for</span> x <span style=color:#000;font-weight:700>in</span> branches <span style=color:#080;font-weight:700>if</span> x<span style=color:#333>.</span>strip()[<span style=color:#00d;font-weight:700>0</span>] <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;*&#34;</span>][<span style=color:#00d;font-weight:700>0</span>]
-    <span style=color:#080;font-weight:700>return</span> branch[<span style=color:#00d;font-weight:700>1</span>:]<span style=color:#333>.</span>strip()  <span style=color:#888># remote leading *</span>
+    branch <span style=color:#f92672>=</span> [x<span style=color:#f92672>.</span>strip() <span style=color:#66d9ef>for</span> x <span style=color:#f92672>in</span> branches <span style=color:#66d9ef>if</span> x<span style=color:#f92672>.</span>strip()[<span style=color:#ae81ff>0</span>] <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;*&#34;</span>][<span style=color:#ae81ff>0</span>]
+    <span style=color:#66d9ef>return</span> branch[<span style=color:#ae81ff>1</span>:]<span style=color:#f92672>.</span>strip()  <span style=color:#75715e># remote leading *</span>
 
 
-<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>rewrite_remote</span>(remote: <span style=color:#007020>str</span>) <span style=color:#333>-&gt;</span> <span style=color:#007020>str</span>:
-    o <span style=color:#333>=</span> urlparse(remote)
-    <span style=color:#080;font-weight:700>assert</span> o<span style=color:#333>.</span>scheme <span style=color:#000;font-weight:700>in</span> [<span style=background-color:#fff0f0>&#34;https&#34;</span>, <span style=background-color:#fff0f0>&#34;http&#34;</span>]
-    U, P <span style=color:#333>=</span> get_user(o<span style=color:#333>.</span>netloc), get_token(o<span style=color:#333>.</span>netloc)
-    <span style=color:#080;font-weight:700>assert</span> U <span style=color:#000;font-weight:700>is</span> <span style=color:#000;font-weight:700>not</span> <span style=color:#080;font-weight:700>None</span>, <span style=background-color:#fff0f0>&#34;Could not determine user&#34;</span>
-    <span style=color:#080;font-weight:700>assert</span> P <span style=color:#000;font-weight:700>is</span> <span style=color:#000;font-weight:700>not</span> <span style=color:#080;font-weight:700>None</span>, <span style=background-color:#fff0f0>&#34;Could not determine token&#34;</span>
-    <span style=color:#080;font-weight:700>return</span> o<span style=color:#333>.</span>geturl()<span style=color:#333>.</span>replace(<span style=background-color:#fff0f0>f</span><span style=background-color:#fff0f0>&#34;</span><span style=background-color:#eee>{</span>o<span style=color:#333>.</span>scheme<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>://&#34;</span>, <span style=background-color:#fff0f0>f</span><span style=background-color:#fff0f0>&#34;</span><span style=background-color:#eee>{</span>o<span style=color:#333>.</span>scheme<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>://</span><span style=background-color:#eee>{</span>U<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>:</span><span style=background-color:#eee>{</span>P<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>@&#34;</span>)
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>rewrite_remote</span>(remote: str) <span style=color:#f92672>-&gt;</span> str:
+    o <span style=color:#f92672>=</span> urlparse(remote)
+    <span style=color:#66d9ef>assert</span> o<span style=color:#f92672>.</span>scheme <span style=color:#f92672>in</span> [<span style=color:#e6db74>&#34;https&#34;</span>, <span style=color:#e6db74>&#34;http&#34;</span>]
+    U, P <span style=color:#f92672>=</span> get_user(o<span style=color:#f92672>.</span>netloc), get_token(o<span style=color:#f92672>.</span>netloc)
+    <span style=color:#66d9ef>assert</span> U <span style=color:#f92672>is</span> <span style=color:#f92672>not</span> <span style=color:#66d9ef>None</span>, <span style=color:#e6db74>&#34;Could not determine user&#34;</span>
+    <span style=color:#66d9ef>assert</span> P <span style=color:#f92672>is</span> <span style=color:#f92672>not</span> <span style=color:#66d9ef>None</span>, <span style=color:#e6db74>&#34;Could not determine token&#34;</span>
+    <span style=color:#66d9ef>return</span> o<span style=color:#f92672>.</span>geturl()<span style=color:#f92672>.</span>replace(<span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>o<span style=color:#f92672>.</span>scheme<span style=color:#e6db74>}</span><span style=color:#e6db74>://&#34;</span>, <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;</span><span style=color:#e6db74>{</span>o<span style=color:#f92672>.</span>scheme<span style=color:#e6db74>}</span><span style=color:#e6db74>://</span><span style=color:#e6db74>{</span>U<span style=color:#e6db74>}</span><span style=color:#e6db74>:</span><span style=color:#e6db74>{</span>P<span style=color:#e6db74>}</span><span style=color:#e6db74>@&#34;</span>)
 
-<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>git_push</span>(url, branch):
-    cmd <span style=color:#333>=</span> <span style=background-color:#fff0f0>f</span><span style=background-color:#fff0f0>&#34;git push </span><span style=background-color:#eee>{</span>url<span style=background-color:#eee>}</span><span style=background-color:#fff0f0> </span><span style=background-color:#eee>{</span>branch<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>&#34;</span>
-    subprocess<span style=color:#333>.</span>run(cmd<span style=color:#333>.</span>split())
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>git_push</span>(url, branch):
+    cmd <span style=color:#f92672>=</span> <span style=color:#e6db74>f</span><span style=color:#e6db74>&#34;git push </span><span style=color:#e6db74>{</span>url<span style=color:#e6db74>}</span><span style=color:#e6db74> </span><span style=color:#e6db74>{</span>branch<span style=color:#e6db74>}</span><span style=color:#e6db74>&#34;</span>
+    subprocess<span style=color:#f92672>.</span>run(cmd<span style=color:#f92672>.</span>split())
 
-<span style=color:#555;font-weight:700>@app</span><span style=color:#333>.</span>command()
-<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>main</span>(remote: T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>] <span style=color:#333>=</span> <span style=color:#080;font-weight:700>None</span>, branch: T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>] <span style=color:#333>=</span> <span style=color:#080;font-weight:700>None</span>):
-    <span style=color:#888># get the remote</span>
-    remote <span style=color:#333>=</span> find_remote() <span style=color:#080;font-weight:700>if</span> remote <span style=color:#000;font-weight:700>is</span> <span style=color:#080;font-weight:700>None</span> <span style=color:#080;font-weight:700>else</span> remote
-    branch <span style=color:#333>=</span> find_branch() <span style=color:#080;font-weight:700>if</span> branch <span style=color:#000;font-weight:700>is</span> <span style=color:#080;font-weight:700>None</span> <span style=color:#080;font-weight:700>else</span> branch
-    url <span style=color:#333>=</span> rewrite_remote(remote)
+<span style=color:#a6e22e>@app</span><span style=color:#f92672>.</span>command()
+<span style=color:#66d9ef>def</span> <span style=color:#a6e22e>main</span>(remote: T<span style=color:#f92672>.</span>Optional[str] <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>, branch: T<span style=color:#f92672>.</span>Optional[str] <span style=color:#f92672>=</span> <span style=color:#66d9ef>None</span>):
+    <span style=color:#75715e># get the remote</span>
+    remote <span style=color:#f92672>=</span> find_remote() <span style=color:#66d9ef>if</span> remote <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span> <span style=color:#66d9ef>else</span> remote
+    branch <span style=color:#f92672>=</span> find_branch() <span style=color:#66d9ef>if</span> branch <span style=color:#f92672>is</span> <span style=color:#66d9ef>None</span> <span style=color:#66d9ef>else</span> branch
+    url <span style=color:#f92672>=</span> rewrite_remote(remote)
     git_push(url, branch)
 
 
-<span style=color:#080;font-weight:700>if</span> __name__ <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;__main__&#34;</span>:
+<span style=color:#66d9ef>if</span> __name__ <span style=color:#f92672>==</span> <span style=color:#e6db74>&#34;__main__&#34;</span>:
     app()
 </code></pre></div><h3 id=usage>Usage</h3>
 <p>Save it as <code>gh_push.py</code> somewhere in <code>$PATH</code> and make it executable. Export
 <code>GITHUB_USER</code> and <code>GITHUB_TOKEN</code>. And instead of <code>git push</code>. do</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>gh_push.py
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gh_push.py
 </code></pre></div>
 </div>
 <div class=tags>

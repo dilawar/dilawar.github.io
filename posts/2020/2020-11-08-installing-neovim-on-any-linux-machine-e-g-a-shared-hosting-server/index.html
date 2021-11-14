@@ -80,32 +80,32 @@ I wrote this script to automate the process."><meta itemprop=datePublished conte
 <p>Once in while, I need to edit files on a shared hosting server. I have ssh access but no permission to install anything (dah! it&rsquo;s shared hosting.). The bare-bone <code>vi</code> doesn&rsquo;t cut it for me, and I am never going to use cpanel web-editor like a cave-dude!</p>
 <p>Fortunately there is way to install neovim on sharing hosting servers. The official instructions are <a href=https://github.com/neovim/neovim/wiki/Installing-Neovim#appimage-universal-linux-package target=_blank>here</a>.</p>
 <p>I wrote this script to automate the process.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#579>#!/usr/bin/env bash
-</span><span style=color:#579></span><span style=color:#333>(</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#75715e>#!/usr/bin/env bash
+</span><span style=color:#75715e></span><span style=color:#f92672>(</span>
     mkdir -p ~/.cache
-    <span style=color:#007020>cd</span> ~/.cache
-    <span style=color:#080;font-weight:700>if</span> <span style=color:#333>[</span> ! -f ./nvim.appimage <span style=color:#333>]</span>; <span style=color:#080;font-weight:700>then</span>
+    cd ~/.cache
+    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> ! -f ./nvim.appimage <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
         curl -LO https://github.com/neovim/neovim/releases/latest/download/nvim.appimage 
         chmod u+x nvim.appimage
-    <span style=color:#080;font-weight:700>fi</span>
+    <span style=color:#66d9ef>fi</span>
 
     chmod a+x nvim.appimage
     ./nvim.appimage --appimage-extract 
     mv squashfs-root ~/
 
-    <span style=color:#888># skip this if you want your own configuration.</span>
-    <span style=color:#080;font-weight:700>if</span> <span style=color:#333>[</span> ! -d ~/.config/nvim <span style=color:#333>]</span>; <span style=color:#080;font-weight:700>then</span>
-        <span style=color:#007020>cd</span> ~/.config <span style=color:#333>&amp;&amp;</span> git clone https://github.com/dilawar/nvim --recursive
-    <span style=color:#080;font-weight:700>fi</span>
-    <span style=color:#007020>echo</span> <span style=background-color:#fff0f0>&#34;Make sure ~/squashfs-root/usr/bin is in path&#34;</span>
+    <span style=color:#75715e># skip this if you want your own configuration.</span>
+    <span style=color:#66d9ef>if</span> <span style=color:#f92672>[</span> ! -d ~/.config/nvim <span style=color:#f92672>]</span>; <span style=color:#66d9ef>then</span>
+        cd ~/.config <span style=color:#f92672>&amp;&amp;</span> git clone https://github.com/dilawar/nvim --recursive
+    <span style=color:#66d9ef>fi</span>
+    echo <span style=color:#e6db74>&#34;Make sure ~/squashfs-root/usr/bin is in path&#34;</span>
 
-    <span style=color:#888># From https://stackoverflow.com/a/28021305/1805129</span>
-    <span style=color:#963>LINE</span><span style=color:#333>=</span><span style=background-color:#fff0f0>&#39;alias vim=$HOME/squashfs-root/usr/bin/nvim&#39;</span>
-    <span style=color:#963>FILE</span><span style=color:#333>=</span><span style=color:#963>$HOME</span>/.bashrc
-    grep -qF -- <span style=background-color:#fff0f0>&#34;</span><span style=color:#963>$LINE</span><span style=background-color:#fff0f0>&#34;</span> <span style=background-color:#fff0f0>&#34;</span><span style=color:#963>$FILE</span><span style=background-color:#fff0f0>&#34;</span> <span style=color:#333>||</span> <span style=color:#007020>echo</span> <span style=background-color:#fff0f0>&#34;</span><span style=color:#963>$LINE</span><span style=background-color:#fff0f0>&#34;</span> &gt;&gt; <span style=background-color:#fff0f0>&#34;</span><span style=color:#963>$FILE</span><span style=background-color:#fff0f0>&#34;</span>
+    <span style=color:#75715e># From https://stackoverflow.com/a/28021305/1805129</span>
+    LINE<span style=color:#f92672>=</span><span style=color:#e6db74>&#39;alias vim=$HOME/squashfs-root/usr/bin/nvim&#39;</span>
+    FILE<span style=color:#f92672>=</span>$HOME/.bashrc
+    grep -qF -- <span style=color:#e6db74>&#34;</span>$LINE<span style=color:#e6db74>&#34;</span> <span style=color:#e6db74>&#34;</span>$FILE<span style=color:#e6db74>&#34;</span> <span style=color:#f92672>||</span> echo <span style=color:#e6db74>&#34;</span>$LINE<span style=color:#e6db74>&#34;</span> &gt;&gt; <span style=color:#e6db74>&#34;</span>$FILE<span style=color:#e6db74>&#34;</span>
 
-    <span style=color:#007020>source</span> ~/.bashrc
-<span style=color:#333>)</span>
+    source ~/.bashrc
+<span style=color:#f92672>)</span>
 </code></pre></div><p>You can get this script from <a href=https://github.com/dilawar/Scripts/blob/master/install_neovim_appimage.sh target=_blank>https://github.com/dilawar/Scripts/blob/master/install_neovim_appimage.sh</a></p>
 </div>
 <div class=tags>

@@ -76,34 +76,34 @@ $ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can'
 <p>I use <a href=https://jekyllrb.com/ target=_blank>Jekyll</a> to build this site. Recently, I switched
 to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll
 successfully using <code>pacman</code> but could not run it.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ jekyll --help
-/usr/lib/ruby/3.0.0/rubygems.rb:281:in <span style=background-color:#fff0f0>`</span>find_spec_for_exe<span style=background-color:#fff0f0>&#39;: can&#39;</span>t find gem jekyll <span style=color:#333>(</span>&gt;<span style=color:#333>=</span> 0.a<span style=color:#333>)</span> with executable jekyll <span style=color:#333>(</span>Gem::GemNotFoundException<span style=color:#333>)</span>
-	from /usr/lib/ruby/3.0.0/rubygems.rb:300:in <span style=background-color:#fff0f0>`</span>activate_bin_path<span style=background-color:#fff0f0>&#39;
-</span><span style=background-color:#fff0f0>	from /usr/bin/jekyll:23:in `&lt;main&gt;&#39;</span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ jekyll --help
+/usr/lib/ruby/3.0.0/rubygems.rb:281:in <span style=color:#e6db74>`</span>find_spec_for_exe<span style=color:#e6db74>&#39;: can&#39;</span>t find gem jekyll <span style=color:#f92672>(</span>&gt;<span style=color:#f92672>=</span> 0.a<span style=color:#f92672>)</span> with executable jekyll <span style=color:#f92672>(</span>Gem::GemNotFoundException<span style=color:#f92672>)</span>
+	from /usr/lib/ruby/3.0.0/rubygems.rb:300:in <span style=color:#e6db74>`</span>activate_bin_path<span style=color:#e6db74>&#39;
+</span><span style=color:#e6db74>	from /usr/bin/jekyll:23:in `&lt;main&gt;&#39;</span>
 </code></pre></div><p>I don&rsquo;t like to fight with installation process. And also I know very little
 about ruby. So I turned to docker which I have used in the past.</p>
 <p>TLDR: Here is my <code>Makefile</code>. I execute the command <code>make</code> in the Github
 repository of this site to build and test this site.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-make data-lang=make><span style=color:#963>JEKYLL_VERSION</span> <span style=color:#333>:=</span> 3.8
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-make data-lang=make>JEKYLL_VERSION <span style=color:#f92672>:=</span> 3.8
 
-<span style=color:#963>JEKYLL</span> <span style=color:#333>:=</span> docker run --rm <span style=color:#666;background-color:#fff0f0;font-weight:700>\
-</span><span style=color:#666;background-color:#fff0f0;font-weight:700></span>	--volume<span style=color:#333>=</span><span style=background-color:#fff0f0>&#34;</span><span style=color:#080;font-weight:700>$(</span>PWD<span style=color:#080;font-weight:700>)</span><span style=background-color:#fff0f0>:/srv/jekyll&#34;</span> <span style=color:#666;background-color:#fff0f0;font-weight:700>\
-</span><span style=color:#666;background-color:#fff0f0;font-weight:700></span>	--volume<span style=color:#333>=</span><span style=background-color:#fff0f0>&#34;</span><span style=color:#080;font-weight:700>$(</span>PWD<span style=color:#080;font-weight:700>)</span><span style=background-color:#fff0f0>/vendor/bundle:/usr/local/bundle&#34;</span> <span style=color:#666;background-color:#fff0f0;font-weight:700>\
-</span><span style=color:#666;background-color:#fff0f0;font-weight:700></span>	-p 4000:4000 <span style=color:#666;background-color:#fff0f0;font-weight:700>\
-</span><span style=color:#666;background-color:#fff0f0;font-weight:700></span>	-it jekyll/jekyll:<span style=color:#080;font-weight:700>$(</span>JEKYLL_VERSION<span style=color:#080;font-weight:700>)</span> jekyll
+JEKYLL <span style=color:#f92672>:=</span> docker run --rm <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>	--volume<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>PWD<span style=color:#66d9ef>)</span><span style=color:#e6db74>:/srv/jekyll&#34;</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>	--volume<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span><span style=color:#66d9ef>$(</span>PWD<span style=color:#66d9ef>)</span><span style=color:#e6db74>/vendor/bundle:/usr/local/bundle&#34;</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>	-p 4000:4000 <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>	-it jekyll/jekyll:<span style=color:#66d9ef>$(</span>JEKYLL_VERSION<span style=color:#66d9ef>)</span> jekyll
 
-<span style=color:#06b;font-weight:700>all </span><span style=color:#333>:</span>
-	<span style=color:#080;font-weight:700>$(</span>JEKYLL<span style=color:#080;font-weight:700>)</span> serve
+<span style=color:#a6e22e>all </span><span style=color:#f92672>:</span>
+	<span style=color:#66d9ef>$(</span>JEKYLL<span style=color:#66d9ef>)</span> serve
 
 </code></pre></div><p>If you are familiar with makefiles, you would notice the core command. You can
 directly run this command in bash. Note the small tweak since <code>bash</code> and <code>make</code>
 has different syntax for expanding variable: <code>$(FOO)</code> in Makefile is equivalent
 to <code>$FOO</code> or <code>${FOO}</code> in bash.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ docker run --rm <span style=color:#666;background-color:#fff0f0;font-weight:700>\
-</span><span style=color:#666;background-color:#fff0f0;font-weight:700></span>	--volume<span style=color:#333>=</span><span style=background-color:#fff0f0>&#34;</span><span style=color:#963>$PWD</span><span style=background-color:#fff0f0>:/srv/jekyll&#34;</span> <span style=color:#666;background-color:#fff0f0;font-weight:700>\
-</span><span style=color:#666;background-color:#fff0f0;font-weight:700></span>	--volume<span style=color:#333>=</span><span style=background-color:#fff0f0>&#34;</span><span style=color:#963>$PWD</span><span style=background-color:#fff0f0>/vendor/bundle:/usr/local/bundle&#34;</span> <span style=color:#666;background-color:#fff0f0;font-weight:700>\
-</span><span style=color:#666;background-color:#fff0f0;font-weight:700></span>	-p 4000:4000 <span style=color:#666;background-color:#fff0f0;font-weight:700>\
-</span><span style=color:#666;background-color:#fff0f0;font-weight:700></span>	-it jekyll/jekyll:3.8 jekyll serve
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ docker run --rm <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>	--volume<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$PWD<span style=color:#e6db74>:/srv/jekyll&#34;</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>	--volume<span style=color:#f92672>=</span><span style=color:#e6db74>&#34;</span>$PWD<span style=color:#e6db74>/vendor/bundle:/usr/local/bundle&#34;</span> <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>	-p 4000:4000 <span style=color:#ae81ff>\
+</span><span style=color:#ae81ff></span>	-it jekyll/jekyll:3.8 jekyll serve
 </code></pre></div><p>Option <code>-p 4000:4000</code> binds port 4000 of docker container to localhost:4000.
 Without this option, <code>http://localhost:4000</code> in your browser will not show any
 content. Option <code>--volume="$(PWD)/vendor/bundle:/usr/local/bundle"</code> to make

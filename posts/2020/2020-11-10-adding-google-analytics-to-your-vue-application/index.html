@@ -79,10 +79,10 @@
 <li>install vue-gtag <code>npm install vue-gtag</code></li>
 <li>Add following to your vue app. Usually you have to edit <code>src/js/app.js</code> file or equivalent file where vue is being initialized.</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#888>// Init google analytics
-</span><span style=color:#888></span><span style=color:#080;font-weight:700>import</span> VueGtag from <span style=background-color:#fff0f0>&#34;vue-gtag&#34;</span>;
-Vue.use(VueGtag, {
-   config<span style=color:#333>:</span> { id<span style=color:#333>:</span> <span style=background-color:#fff0f0>&#34;UA-180198765-1&#34;</span> }
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-js data-lang=js><span style=color:#75715e>// Init google analytics
+</span><span style=color:#75715e></span><span style=color:#66d9ef>import</span> <span style=color:#a6e22e>VueGtag</span> <span style=color:#a6e22e>from</span> <span style=color:#e6db74>&#34;vue-gtag&#34;</span>;
+<span style=color:#a6e22e>Vue</span>.<span style=color:#a6e22e>use</span>(<span style=color:#a6e22e>VueGtag</span>, {
+   <span style=color:#a6e22e>config</span><span style=color:#f92672>:</span> { <span style=color:#a6e22e>id</span><span style=color:#f92672>:</span> <span style=color:#e6db74>&#34;UA-180198765-1&#34;</span> }
 });
 </code></pre></div><p>where <code>id</code> key in <code>config</code> dictionary is your tracking id.</p>
 <p>Official documentation here <a href=https://matteo-gabriele.gitbook.io/vue-gtag/ target=_blank>https://matteo-gabriele.gitbook.io/vue-gtag/</a></p>

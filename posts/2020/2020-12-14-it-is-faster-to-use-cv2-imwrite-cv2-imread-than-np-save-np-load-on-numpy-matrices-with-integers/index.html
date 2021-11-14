@@ -79,25 +79,25 @@ The standard way is numpy.save and numpy.load which works fine. My experience wi
 <p>Here are some benchmarks using <code>%timeit</code>.</p>
 <h2 id=only-saving-matrices>Only saving matrices</h2>
 <p>I generate a random matrix of 400 entries and save it to a png file using OpenCV and also using numpy. OpenCV is roughly 3.6 times faster.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>In [8]: %timeit cv2.imwrite(&#39;/tmp/a.png&#39;, np.random.randint(0, 255, (20,20)))                                                                                     
+<pre tabindex=0><code>In [8]: %timeit cv2.imwrite('/tmp/a.png', np.random.randint(0, 255, (20,20)))                                                                                     
 142 µs ± 1.05 µs per loop (mean ± std. dev. of 7 runs, 10000 loops each)
 
-In [10]: %timeit np.save(&#39;/tmp/a.npy&#39;, np.random.randint(0, 255, (20,20)))                                                                                        
+In [10]: %timeit np.save('/tmp/a.npy', np.random.randint(0, 255, (20,20)))                                                                                        
 517 µs ± 96.7 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-</code></pre></div><p>The trend continues (OpenCV is ever so slightly faster here) for matrices with 900 entries. I did not test with larger matrices.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>In [14]: %timeit cv2.imwrite(&#39;/tmp/a.png&#39;, np.random.randint(0, 255, (30,30))); a = cv2.imread(&#39;/tmp/a.png&#39;)                                                      
+</code></pre><p>The trend continues (OpenCV is ever so slightly faster here) for matrices with 900 entries. I did not test with larger matrices.</p>
+<pre tabindex=0><code>In [14]: %timeit cv2.imwrite('/tmp/a.png', np.random.randint(0, 255, (30,30))); a = cv2.imread('/tmp/a.png')                                                      
 215 µs ± 2.93 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 
-In [15]: %timeit np.save(&#39;/tmp/a.npy&#39;, np.random.randint(0, 255, (30,30))); np.load(&#39;/tmp/a.npy&#39;)                                                                 
+In [15]: %timeit np.save('/tmp/a.npy', np.random.randint(0, 255, (30,30))); np.load('/tmp/a.npy')                                                                 
 791 µs ± 29.7 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-</code></pre></div><h2 id=saving-and-reading-matrices>Saving and reading matrices</h2>
+</code></pre><h2 id=saving-and-reading-matrices>Saving and reading matrices</h2>
 <p>Reading back into matrices is also faster with OpenCV. Following micro-benchmarks write and read a randomly generated matrix using OpenCV and numpy.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>In [12]: %timeit cv2.imwrite(&#39;/tmp/a.png&#39;, np.random.randint(0, 255, (20,20))); a = cv2.imread(&#39;/tmp/a.png&#39;)                                                      
+<pre tabindex=0><code>In [12]: %timeit cv2.imwrite('/tmp/a.png', np.random.randint(0, 255, (20,20))); a = cv2.imread('/tmp/a.png')                                                      
 192 µs ± 2.1 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
 
-In [13]: %timeit np.save(&#39;/tmp/a.npy&#39;, np.random.randint(0, 255, (20,20))); np.load(&#39;/tmp/a.npy&#39;)                                                                 
+In [13]: %timeit np.save('/tmp/a.npy', np.random.randint(0, 255, (20,20))); np.load('/tmp/a.npy')                                                                 
 770 µs ± 23.9 µs per loop (mean ± std. dev. of 7 runs, 1000 loops each)
-</code></pre></div><p>I guess I&rsquo;ll be using OpenCV to save data whenever I have integer matrices.</p>
+</code></pre><p>I guess I&rsquo;ll be using OpenCV to save data whenever I have integer matrices.</p>
 <p>I used Python3.6 on OpenSUSE-15.1 server.</p>
 </div>
 <div class=tags>

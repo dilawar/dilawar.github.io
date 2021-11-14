@@ -80,11 +80,11 @@ $ gdb -ex r --args bash python myscript.py "><meta itemprop=datePublished conten
 </div>
 </div>
 <div class=markdown>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ gdb -ex r --args python myscript.py
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ gdb -ex r --args python myscript.py
 </code></pre></div><p>If you are using virtual environment then you are likely to run into the following error.</p>
 <p><code>/home/dilawars/PY38/shims/python": not in executable format: File format not recognized</code></p>
 <p>Because, in virtualenv, the command <code>python</code> is a bash script wrapping the real python executable. To bypass this, just do the following:</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ gdb -ex r --args bash python myscript.py
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash>$ gdb -ex r --args bash python myscript.py
 </code></pre></div>
 </div>
 <div class=tags>

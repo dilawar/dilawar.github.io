@@ -82,11 +82,11 @@ cordova build android --release -- --keystore=~/keystore/dilawar.jks --storePass
 <div class=markdown>
 <p>Cordova 8.1+ supports generating Android Bundle (<code>.aab</code> file). Usually cordova generates an <code>.apk</code> file for your app. Playstore often warns about <code>.apk</code> file about it&rsquo;s bloated size.</p>
 <p>To generate an <code>.aab</code> file, add <code>--packageType=bundle</code> option to your <code>cordova build</code> command.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>cordova build android --release -- --packageType=bundle
-</code></pre></div><h2 id=signed-bundles>Signed bundles</h2>
+<pre tabindex=0><code>cordova build android --release -- --packageType=bundle
+</code></pre><h2 id=signed-bundles>Signed bundles</h2>
 <p>Here is the command I use to generate a singed bundle.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>cordova build android --release  -- --keystore=~/keystore/dilawar.jks --storePassword=$(KEYSTORE_PASSWORD)  --alias=dilawar --password=$(KEYSTORE_PASSWORD)  --packageType=bundle --webpack.mode=production
-</code></pre></div><h1 id=the-old-way-to-generate-bundle>The old way to generate bundle</h1>
+<pre tabindex=0><code>cordova build android --release  -- --keystore=~/keystore/dilawar.jks --storePassword=$(KEYSTORE_PASSWORD)  --alias=dilawar --password=$(KEYSTORE_PASSWORD)  --packageType=bundle --webpack.mode=production
+</code></pre><h1 id=the-old-way-to-generate-bundle>The old way to generate bundle</h1>
 <blockquote>
 <p>See the discussion <a href=https://github.com/apache/cordova-android/issues/610 target=_blank>here</a>. And feature request here <a href=https://github.com/apache/cordova-android/issues/729 target=_blank>https://github.com/apache/cordova-android/issues/729</a> .</p>
 </blockquote>

@@ -77,10 +77,10 @@ $ sudo yum install -y cmake libarchive "><meta itemprop=datePublished content="2
 </div>
 <div class=markdown>
 <p>I get the following error during build. I think it is specific to CentOS-8.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ cmake -DCMAKE_BUILD_TYPE<span style=color:#333>=</span>Release .. <span style=color:#333>&amp;&amp;</span> make
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ cmake -DCMAKE_BUILD_TYPE<span style=color:#f92672>=</span>Release .. <span style=color:#f92672>&amp;&amp;</span> make
 cmake: symbol lookup error: cmake: undefined symbol: archive_write_add_filter_zstd
 </code></pre></div><p>It can be fixed easily by installing/updating <code>libarchive</code>.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ sudo yum install -y cmake libarchive
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ sudo yum install -y cmake libarchive
 </code></pre></div>
 </div>
 </div>

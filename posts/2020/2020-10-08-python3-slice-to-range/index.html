@@ -75,22 +75,22 @@ def __getitem__(self, key): x = [1,2,3,4,5,6] # fixed data if isinstance(key, sl
 </div>
 <div class=markdown>
 <p>If you want to override <code>[]</code> operator in Python, you may need to handle <code>slice</code> as well. For example in the following <code>__getindex__</code> method which implements <code>[]</code>, argument <code>key</code> could be a single <code>int</code>, for example, <code>a[1]</code> or <code>a[-3]</code>; or it could be a <code>slice</code> e.g., <code>a[1:4]</code> is a slice.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#080;font-weight:700>def</span> __getitem__(self, key): 
-    x <span style=color:#333>=</span> [<span style=color:#00d;font-weight:700>1</span>,<span style=color:#00d;font-weight:700>2</span>,<span style=color:#00d;font-weight:700>3</span>,<span style=color:#00d;font-weight:700>4</span>,<span style=color:#00d;font-weight:700>5</span>,<span style=color:#00d;font-weight:700>6</span>]  <span style=color:#888># fixed data</span>
-    <span style=color:#080;font-weight:700>if</span> <span style=color:#007020>isinstance</span>(key, <span style=color:#007020>slice</span>): 
-        <span style=color:#080;font-weight:700>return</span> [x[i] <span style=color:#080;font-weight:700>for</span> i <span style=color:#000;font-weight:700>in</span> slice2range(<span style=color:#007020>slice</span>, <span style=color:#007020>len</span>(x)]    
-    <span style=color:#080;font-weight:700>return</span> x[key]
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> __getitem__(self, key): 
+    x <span style=color:#f92672>=</span> [<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>5</span>,<span style=color:#ae81ff>6</span>]  <span style=color:#75715e># fixed data</span>
+    <span style=color:#66d9ef>if</span> isinstance(key, slice): 
+        <span style=color:#66d9ef>return</span> [x[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> slice2range(slice, len(x)]    
+    <span style=color:#66d9ef>return</span> x[key]
 </code></pre></div><p>Ideally, I\&rsquo;d have loved if <code>range(key)</code> would automatically turn/cast a <code>slice</code> to the equivalent <code>range</code>. See this <a href=https://stackoverflow.com/questions/13855288/turn-slice-into-range target=_blank>question on SO</a>.</p>
 <p>The simplest solution, IMO, is the following.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>slice2range</span>(<span style=color:#007020>slice</span>, N): 
-    <span style=color:#080;font-weight:700>return</span> <span style=color:#007020>range</span>(<span style=color:#007020>slice</span><span style=color:#333>.</span>start <span style=color:#000;font-weight:700>or</span> <span style=color:#00d;font-weight:700>0</span>, <span style=color:#007020>slice</span><span style=color:#333>.</span>stop <span style=color:#000;font-weight:700>or</span> N, <span style=color:#007020>slice</span><span style=color:#333>.</span>step <span style=color:#000;font-weight:700>or</span> <span style=color:#00d;font-weight:700>1</span>) 
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> <span style=color:#a6e22e>slice2range</span>(slice, N): 
+    <span style=color:#66d9ef>return</span> range(slice<span style=color:#f92672>.</span>start <span style=color:#f92672>or</span> <span style=color:#ae81ff>0</span>, slice<span style=color:#f92672>.</span>stop <span style=color:#f92672>or</span> N, slice<span style=color:#f92672>.</span>step <span style=color:#f92672>or</span> <span style=color:#ae81ff>1</span>) 
 </code></pre></div><p>You can use it inline.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#080;font-weight:700>def</span> __getitem__(self, key)
-    x <span style=color:#333>=</span> [<span style=color:#00d;font-weight:700>1</span>,<span style=color:#00d;font-weight:700>2</span>,<span style=color:#00d;font-weight:700>3</span>,<span style=color:#00d;font-weight:700>4</span>,<span style=color:#00d;font-weight:700>5</span>,<span style=color:#00d;font-weight:700>6</span>] 
-    <span style=color:#080;font-weight:700>if</span> <span style=color:#007020>isinstance</span>(key, <span style=color:#007020>slice</span>): 
-        <span style=color:#888># return a list of values. </span>
-        <span style=color:#080;font-weight:700>return</span> [x[i] <span style=color:#080;font-weight:700>for</span> i <span style=color:#000;font-weight:700>in</span> <span style=color:#007020>range</span>(key<span style=color:#333>.</span>start <span style=color:#000;font-weight:700>or</span> <span style=color:#00d;font-weight:700>0</span>, key<span style=color:#333>.</span>stop <span style=color:#000;font-weight:700>or</span> <span style=color:#007020>len</span>(x), key<span style=color:#333>.</span>step <span style=color:#000;font-weight:700>or</span> <span style=color:#00d;font-weight:700>1</span>)] 
-    <span style=color:#080;font-weight:700>return</span> x[key] <span style=color:#888># return a value </span>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#66d9ef>def</span> __getitem__(self, key)
+    x <span style=color:#f92672>=</span> [<span style=color:#ae81ff>1</span>,<span style=color:#ae81ff>2</span>,<span style=color:#ae81ff>3</span>,<span style=color:#ae81ff>4</span>,<span style=color:#ae81ff>5</span>,<span style=color:#ae81ff>6</span>] 
+    <span style=color:#66d9ef>if</span> isinstance(key, slice): 
+        <span style=color:#75715e># return a list of values. </span>
+        <span style=color:#66d9ef>return</span> [x[i] <span style=color:#66d9ef>for</span> i <span style=color:#f92672>in</span> range(key<span style=color:#f92672>.</span>start <span style=color:#f92672>or</span> <span style=color:#ae81ff>0</span>, key<span style=color:#f92672>.</span>stop <span style=color:#f92672>or</span> len(x), key<span style=color:#f92672>.</span>step <span style=color:#f92672>or</span> <span style=color:#ae81ff>1</span>)] 
+    <span style=color:#66d9ef>return</span> x[key] <span style=color:#75715e># return a value </span>
 </code></pre></div>
 </div>
 <div class=tags>

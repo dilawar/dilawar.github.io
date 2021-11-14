@@ -79,7 +79,7 @@ Usually I login to this machine (named strudel) from my Linux workstation using 
 <p>I installed <code>xquartz</code> following <a href=https://www.embird.net/sw/embird/tutorial/wine/xquartz.htm target=_blank>these instructions</a>. Rebooted and logged in over ssh. Still I couldn&rsquo;t launch <code>xeyes</code>. I keep getting <code>Error: Can't open display:</code> error. Note that <code>DISPLAY</code> is not set.</p>
 <p>The solution is straightforward if one reads the <a href=https://www.xquartz.org/FAQs.html target=_blank>XQuartz FAQ</a> carefully which I didn&rsquo;t :-(.</p>
 <p>One my OSX machine <code>strudel</code>, I needed to make sure that <code>/etc/ssh/sshd_config</code> has following two lines.</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash> X11Forwarding yes                                                               
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash> X11Forwarding yes                                                               
  X11UseLocalhost yes   
 </code></pre></div><p>And that&rsquo;s it. You probably need to reboot after mcking these changes.</p>
 </div>
