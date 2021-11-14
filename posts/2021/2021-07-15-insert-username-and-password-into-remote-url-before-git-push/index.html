@@ -1,34 +1,34 @@
 <!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<title>Insert username and password into remote url before git push | Dilawar's Blog</title>
+<title>Insert credentials from environment into remote url when `git push` | Dilawar's Blog</title>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=generator content="Hugo 0.89.2">
 <meta name=viewport content="width=device-width,initial-scale=1">
-<meta name=keywords content="git,script,python3">
+<meta name=keywords content="git,script">
 <link rel=stylesheet type=text/css media=screen href=/css/normalize.css>
 <link rel=stylesheet type=text/css media=screen href=/css/main.css>
 <link rel=stylesheet type=text/css media=screen href=/css/all.css><link rel=stylesheet href=/css/katex.css crossorigin=anonymous>
 <script defer src=/js/katex.js integrity=sha384-PFWG8XW41D5NzhNv5FegM1CUkw9nNLdWug8DuwnUoNEVop9n5frjcnbtsZtxTNjw crossorigin=anonymous></script>
 <script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
 <script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
-<meta property="og:title" content="Insert username and password into remote url before git push">
-<meta property="og:description" content="I wrote a small script that is a wrapper around git push. It modifies the remote url and insert username and password (read from env) from it. No need to store ssh keys on remote server or git clone with https credentials.
-For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then USER environment variable. Similarly it looks for GITHUB_TOKEN, GIT_TOKEN for tokens. Fot gitlab.com repo, it looks for GITLAB_USER or GIT_USER or USER for username, and GITLAB_TOKEN, GIT_TOKEN for password.">
+<meta property="og:title" content="Insert credentials from environment into remote url when `git push`">
+<meta property="og:description" content="You are on a remote server. You don&rsquo;t want to store your credentials on that machine. You can temporary export your credentials as environment variable e.g. export GITHUB_USER=dilawar and export GITHUB_PASSWORD=ladidadadad.
+Here is a small script that acts as a wrapper around git push. It modifies the remote url and insert username and password (read from env). No need to store ssh keys on remote server or git clone with https credentials.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dilawar.github.io/posts/2021/2021-07-15-insert-username-and-password-into-remote-url-before-git-push/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-07-15T00:00:00+00:00">
 <meta property="article:modified_time" content="2021-07-15T00:00:00+00:00">
 <meta name=twitter:card content="summary">
-<meta name=twitter:title content="Insert username and password into remote url before git push">
-<meta name=twitter:description content="I wrote a small script that is a wrapper around git push. It modifies the remote url and insert username and password (read from env) from it. No need to store ssh keys on remote server or git clone with https credentials.
-For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then USER environment variable. Similarly it looks for GITHUB_TOKEN, GIT_TOKEN for tokens. Fot gitlab.com repo, it looks for GITLAB_USER or GIT_USER or USER for username, and GITLAB_TOKEN, GIT_TOKEN for password.">
-<meta itemprop=name content="Insert username and password into remote url before git push">
-<meta itemprop=description content="I wrote a small script that is a wrapper around git push. It modifies the remote url and insert username and password (read from env) from it. No need to store ssh keys on remote server or git clone with https credentials.
-For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then USER environment variable. Similarly it looks for GITHUB_TOKEN, GIT_TOKEN for tokens. Fot gitlab.com repo, it looks for GITLAB_USER or GIT_USER or USER for username, and GITLAB_TOKEN, GIT_TOKEN for password."><meta itemprop=datePublished content="2021-07-15T00:00:00+00:00">
+<meta name=twitter:title content="Insert credentials from environment into remote url when `git push`">
+<meta name=twitter:description content="You are on a remote server. You don&rsquo;t want to store your credentials on that machine. You can temporary export your credentials as environment variable e.g. export GITHUB_USER=dilawar and export GITHUB_PASSWORD=ladidadadad.
+Here is a small script that acts as a wrapper around git push. It modifies the remote url and insert username and password (read from env). No need to store ssh keys on remote server or git clone with https credentials.">
+<meta itemprop=name content="Insert credentials from environment into remote url when `git push`">
+<meta itemprop=description content="You are on a remote server. You don&rsquo;t want to store your credentials on that machine. You can temporary export your credentials as environment variable e.g. export GITHUB_USER=dilawar and export GITHUB_PASSWORD=ladidadadad.
+Here is a small script that acts as a wrapper around git push. It modifies the remote url and insert username and password (read from env). No need to store ssh keys on remote server or git clone with https credentials."><meta itemprop=datePublished content="2021-07-15T00:00:00+00:00">
 <meta itemprop=dateModified content="2021-07-15T00:00:00+00:00">
 <meta itemprop=wordCount content="410">
-<meta itemprop=keywords content="git,script,python3,">
+<meta itemprop=keywords content="git,script,">
 </head>
 <body>
 <header>
@@ -66,7 +66,7 @@ For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then
 </div>
 </div>
 <div class=matter>
-<h1 class=title>Insert username and password into remote url before git push</h1>
+<h1 class=title>Insert credentials from environment into remote url when `git push`</h1>
 <p class=post-meta>
 <span class=post-meta>
 </span>
@@ -74,19 +74,21 @@ For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then
 </div>
 </div>
 <div class=markdown>
-<p>I wrote a small script that is a wrapper around <code>git push</code>. It modifies the
-<code>remote</code> url and insert username and password (read from <code>env</code>) from it. No need
-to store ssh keys on remote server or git clone with https credentials.</p>
-<p>For <code>github.com</code> repo, It looks for <code>GITHUB_USER</code> first, then for <code>GIT_USER</code>,
-and then <code>USER</code> environment variable. Similarly it looks for <code>GITHUB_TOKEN</code>,
-<code>GIT_TOKEN</code> for tokens. Fot <code>gitlab.com</code> repo, it looks for <code>GITLAB_USER</code> or
-<code>GIT_USER</code> or <code>USER</code> for username, and <code>GITLAB_TOKEN</code>, <code>GIT_TOKEN</code> for password.
-If the script can&rsquo;t determine the username and password, it raises an exception.</p>
-<p>Then it calls <code>git push</code> on new url that has username and password. For example
-<code>git push https://github.com/dilawar/Scripts</code> will become <code>git push https://dilawar:mytoken@github.com/dilawar/Scritps</code>.</p>
+<p>You are on a remote server. You don&rsquo;t want to store your credentials on that
+machine. You can temporary export your credentials as environment variable e.g.
+<code>export GITHUB_USER=dilawar</code> and <code>export GITHUB_PASSWORD=ladidadadad</code>.</p>
+<p>Here is a small script that acts as a wrapper around <code>git push</code>. It modifies the
+<code>remote</code> url and insert username and password (read from <code>env</code>). No need to
+store ssh keys on remote server or git clone with https credentials.</p>
+<p>For <code>github.com</code>, it looks for <code>GITHUB_USER</code> first, then for <code>GIT_USER</code>, and
+then <code>USER</code> environment variable. Similarly it looks for <code>GITHUB_TOKEN</code>,
+<code>GIT_TOKEN</code> for tokens. For <code>gitlab.com</code>, it looks for <code>GITLAB_USER</code> or
+<code>GIT_USER</code> or <code>USER</code> for username, and <code>GITLAB_TOKEN</code>, <code>GIT_TOKEN</code> for password.</p>
+<p>If the script can&rsquo;t determine the username and password, it throws an exception.</p>
+<p>On success, it calls <code>git push</code> with new url (that has username and password).
+For example <code>git push https://github.com/dilawar/Scripts</code> will become <code>git push https://dilawar:mytoken@github.com/dilawar/Scritps</code>.</p>
 <p>You can find the script
-<a href=https://raw.githubusercontent.com/dilawar/Scripts/master/%2Cgit_push target=_blank>here</a>.
-Here is the fully reproduced one.</p>
+<a href=https://raw.githubusercontent.com/dilawar/Scripts/master/%2Cgit_push target=_blank>here</a>.</p>
 <div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#888>#!/usr/bin/env python3</span>
 <span style=color:#888># pip3 install typer --user  # only dependency</span>
 
@@ -161,10 +163,9 @@ git <span style=color:#333>=</span> <span style=background-color:#fff0f0>&#34;gi
     app()
 </code></pre></div><h3 id=usage>Usage</h3>
 <p>Save it as <code>gh_push.py</code> somewhere in <code>$PATH</code> and make it executable. Export
-<code>GITHUB_USER</code> and <code>GITHUB_TOKEN</code> and,</p>
-<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gh_push.py
-</code></pre></div><p>Its very handly when you don&rsquo;t want to copy your ssh keys to a remote server or
-don&rsquo;t want to clone with credentials e.g. <code>git clone https://dilawar:mytoken@github.com/dilawar/Scripts</code>.</p>
+<code>GITHUB_USER</code> and <code>GITHUB_TOKEN</code>. And instead of <code>git push</code>. do</p>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>gh_push.py
+</code></pre></div>
 </div>
 <div class=tags>
 <div class=taxosfloating_left>
@@ -173,7 +174,6 @@ don&rsquo;t want to clone with credentials e.g. <code>git clone https://dilawar:
 <div class=termsfloating_right>
 <p>
 <a href=/tags/git/>git</a>
-<a href=/tags/python3/>python3</a>
 <a href=/tags/script/>script</a>
 </p>
 </div>
