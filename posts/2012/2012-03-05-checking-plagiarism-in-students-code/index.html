@@ -1,7 +1,17 @@
-<!doctype html><html>
+<!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge"><title>Checking plagiarism in assignment (tested with VHDL language) - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<title>Checking plagiarism in assignment (tested with VHDL language) | Dilawar's Blog</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Hugo 0.89.2">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content="graph-tool-python,moodle,plagiarism-detection,python-scripts,python-moodle,similarity-checking-in-vhdl-codes,similarity-in-codes">
+<link rel=stylesheet type=text/css media=screen href=/css/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=/css/main.css>
+<link rel=stylesheet type=text/css media=screen href=/css/all.css><link rel=stylesheet href=/css/katex.css crossorigin=anonymous>
+<script defer src=/js/katex.js integrity=sha384-PFWG8XW41D5NzhNv5FegM1CUkw9nNLdWug8DuwnUoNEVop9n5frjcnbtsZtxTNjw crossorigin=anonymous></script>
+<script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
 <meta property="og:title" content="Checking plagiarism in assignment (tested with VHDL language)">
 <meta property="og:description" content="I have developed some python scripts available here. I have used them in EE705 (VHDL, verilog) and found them very useful. It generates detailed log (which file matches which file) and sent emails to offenders with an archive of all file which were matched. It is integrated with my moodle-application (automatic download, extract, compare, sending-emails.) It also generates graphs (using python graph-tool) which shows the level of copying in the assignments.">
 <meta property="og:type" content="article">
@@ -11,77 +21,96 @@
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Checking plagiarism in assignment (tested with VHDL language)">
 <meta name=twitter:description content="I have developed some python scripts available here. I have used them in EE705 (VHDL, verilog) and found them very useful. It generates detailed log (which file matches which file) and sent emails to offenders with an archive of all file which were matched. It is integrated with my moodle-application (automatic download, extract, compare, sending-emails.) It also generates graphs (using python graph-tool) which shows the level of copying in the assignments.">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
-<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
-<script src=https://dilawar.github.iojs/main.js></script>
-<script src=https://dilawar.github.iojs/abc.js></script>
-<script src=https://dilawar.github.iojs/xyz.js></script>
-<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+<meta itemprop=name content="Checking plagiarism in assignment (tested with VHDL language)">
+<meta itemprop=description content="I have developed some python scripts available here. I have used them in EE705 (VHDL, verilog) and found them very useful. It generates detailed log (which file matches which file) and sent emails to offenders with an archive of all file which were matched. It is integrated with my moodle-application (automatic download, extract, compare, sending-emails.) It also generates graphs (using python graph-tool) which shows the level of copying in the assignments."><meta itemprop=datePublished content="2012-03-05T00:00:00+00:00">
+<meta itemprop=dateModified content="2012-03-05T00:00:00+00:00">
+<meta itemprop=wordCount content="201">
+<meta itemprop=keywords content="graph-tool-python,moodle,plagiarism-detection,python-scripts,python-moodle,similarity-checking-in-vhdl-codes,similarity-in-codes,">
 </head>
 <body>
-<div class="container wrapper post">
-<div class=header>
-<base href=https://dilawar.github.io>
-<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
-<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
-<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
-</nav>
+<header>
+<div id=titletext>
+<h2 id=title><a href=https://dilawar.github.io>Dilawar's Blog</a></h2>
 </div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/>Home</a>
-</li>
-<li>
-<a href=/posts>All posts</a>
-</li>
-<li>
-<a href=/about>About</a>
-</li>
-<li>
-<a href=/tags>Tags</a>
-</li>
+<div id=title-description>
+<p id=subtitle>watch -n 1 /dev/null</p>
+<div id=social>
+<nav><ul>
+<li><a href=https://github.com/dilawar><i title=Github class="icons fab fa-github"></i></a></li>
+<li><a><i title="Switch Dark Mode" class="dark-mode icons fas fa-moon"></i></a></li>
+</ul></nav>
+</div>
+</div>
+<div id=mainmenu>
+<nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>All posts</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=/tags>Tags</a></li>
 </ul>
 </nav>
 </div>
+</header>
+<main>
+<div class=post>
+<article>
 <div class=post-header>
+<div class=meta>
+<div class=date>
+<span class=day>05</span>
+<span class=rest>Mar 2012</span>
+</div>
+</div>
+<div class=matter>
 <h1 class=title>Checking plagiarism in assignment (tested with VHDL language)</h1>
-<div class=meta>Posted at &mdash; Mar 5, 2012</div>
+<p class=post-meta>
+<span class=post-meta>
+</span>
+</p>
+</div>
 </div>
 <div class=markdown>
-<p>I have developed some python scripts available <a href=https://github.com/dilawar/MyPublic/tree/master/MoodleIITB>here</a>. I have used them in EE705 (VHDL, verilog) and found them very useful. It generates detailed log (which file matches which file) and sent emails to offenders with an archive of all file which were matched. It is integrated with my moodle-application (automatic download, extract, compare, sending-emails.) It also generates graphs (using python graph-tool) which shows the level of copying in the assignments. Few graphs are attached in this post. Thickness of edge (and hotness of edge color) shows the level of similarity. This gives a quite a picture of the class. [caption id=&ldquo;attachment_559&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;522&rdquo; caption=&ldquo;Graph shows suspects of plagiarism. Each edge represent a pair of files containing significant matching. Edge thickness (and hotness of color) is the amount of similarity.<a href=http://dilawarnotes.files.wordpress.com/2012/03/copy_all.png><img src=http://dilawarnotes.files.wordpress.com/2012/03/copy_all.png alt title=copy_all></a>Similar to previous one. But it shows the the level of interaction among students. As usually heavy and red - edges shows significant copying while light blue edges shows that fragments of text was similar (which may shows the level of discussion).<a href=http://dilawarnotes.files.wordpress.com/2012/03/detailed.png><img src=http://dilawarnotes.files.wordpress.com/2012/03/detailed.png alt title=detailed></a>This is the dirty and detailed graph. It shows a overall interaction between codes submitted by student. Many students have more than 1 file which mathces (parallel edge)"]<a href=http://dilawarnotes.files.wordpress.com/2012/03/copy_suspect.png><img src=images/copy_suspect.png alt title=copy_suspect></a>[/caption]</p>
+<p>I have developed some python scripts available <a href=https://github.com/dilawar/MyPublic/tree/master/MoodleIITB target=_blank>here</a>. I have used them in EE705 (VHDL, verilog) and found them very useful. It generates detailed log (which file matches which file) and sent emails to offenders with an archive of all file which were matched. It is integrated with my moodle-application (automatic download, extract, compare, sending-emails.) It also generates graphs (using python graph-tool) which shows the level of copying in the assignments. Few graphs are attached in this post. Thickness of edge (and hotness of edge color) shows the level of similarity. This gives a quite a picture of the class. [caption id=&ldquo;attachment_559&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;522&rdquo; caption=&ldquo;Graph shows suspects of plagiarism. Each edge represent a pair of files containing significant matching. Edge thickness (and hotness of color) is the amount of similarity.<a href=http://dilawarnotes.files.wordpress.com/2012/03/copy_all.png target=_blank><figure>
+<img src=http://dilawarnotes.files.wordpress.com/2012/03/copy_all.png alt title=copy_all>
+</figure></a>Similar to previous one. But it shows the the level of interaction among students. As usually heavy and red - edges shows significant copying while light blue edges shows that fragments of text was similar (which may shows the level of discussion).<a href=http://dilawarnotes.files.wordpress.com/2012/03/detailed.png target=_blank><figure>
+<img src=http://dilawarnotes.files.wordpress.com/2012/03/detailed.png alt title=detailed>
+</figure></a>This is the dirty and detailed graph. It shows a overall interaction between codes submitted by student. Many students have more than 1 file which mathces (parallel edge)"]<a href=http://dilawarnotes.files.wordpress.com/2012/03/copy_suspect.png target=_blank><figure>
+<img src=images/copy_suspect.png alt title=copy_suspect>
+</figure></a>[/caption]</p>
 </div>
-<div class=post-tags>
-<nav class="nav tags">
-<ul class=flat>
-<li><a href=/tags/graph-tool-python>graph-tool-python</a></li>
-<li><a href=/tags/moodle>moodle</a></li>
-<li><a href=/tags/plagiarism-detection>plagiarism-detection</a></li>
-<li><a href=/tags/python-scripts>python-scripts</a></li>
-<li><a href=/tags/python-moodle>python-moodle</a></li>
-<li><a href=/tags/similarity-checking-in-vhdl-codes>similarity-checking-in-vhdl-codes</a></li>
-<li><a href=/tags/similarity-in-codes>similarity-in-codes</a></li>
-</ul>
-</nav>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Categories</p>
 </div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<div class=termsfloating_right>
+<p>
+<a href=/categories/graph-theory/>graph-theory</a>
+</p>
 </div>
-<div class="footer wrapper">
-<nav class=nav>
-<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
+<div class=clearit></div>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Tags</p>
 </div>
+<div class=termsfloating_right>
+<p>
+<a href=/tags/graph-tool-python/>graph-tool-python</a>
+<a href=/tags/moodle/>moodle</a>
+<a href=/tags/plagiarism-detection/>plagiarism-detection</a>
+<a href=/tags/python-moodle/>python-moodle</a>
+<a href=/tags/python-scripts/>python-scripts</a>
+<a href=/tags/similarity-checking-in-vhdl-codes/>similarity-checking-in-vhdl-codes</a>
+<a href=/tags/similarity-in-codes/>similarity-in-codes</a>
+</p>
+</div>
+<div class=clearit></div>
+</div>
+</article>
+</div>
+</main>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
-<script>feather.replace()</script>
+<script src=/js/dark-mode.js></script>
 </body>
 </html>

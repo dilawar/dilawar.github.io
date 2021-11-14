@@ -1,7 +1,16 @@
-<!doctype html><html>
+<!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge"><title>Overview of Faults in VLSI - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<title>Overview of Faults in VLSI | Dilawar's Blog</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Hugo 0.89.2">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=stylesheet type=text/css media=screen href=/css/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=/css/main.css>
+<link rel=stylesheet type=text/css media=screen href=/css/all.css><link rel=stylesheet href=/css/katex.css crossorigin=anonymous>
+<script defer src=/js/katex.js integrity=sha384-PFWG8XW41D5NzhNv5FegM1CUkw9nNLdWug8DuwnUoNEVop9n5frjcnbtsZtxTNjw crossorigin=anonymous></script>
+<script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
 <meta property="og:title" content="Overview of Faults in VLSI">
 <meta property="og:description" content="Someone who has access to market and someone who has access to capital came up with an evil plan. They want to make a VLSI circuit and then they will fabricate it and sell it to puny humans to make money [Evil laugh]. What they want to create will surely depend on what their consumers will find useful. So they hire someone who has expertise in consumer electronics and pays her to figure out what they can sell to them with some good profit.">
 <meta property="og:type" content="article">
@@ -11,47 +20,54 @@
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Overview of Faults in VLSI">
 <meta name=twitter:description content="Someone who has access to market and someone who has access to capital came up with an evil plan. They want to make a VLSI circuit and then they will fabricate it and sell it to puny humans to make money [Evil laugh]. What they want to create will surely depend on what their consumers will find useful. So they hire someone who has expertise in consumer electronics and pays her to figure out what they can sell to them with some good profit.">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
-<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
-<script src=https://dilawar.github.iojs/main.js></script>
-<script src=https://dilawar.github.iojs/abc.js></script>
-<script src=https://dilawar.github.iojs/xyz.js></script>
-<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+<meta itemprop=name content="Overview of Faults in VLSI">
+<meta itemprop=description content="Someone who has access to market and someone who has access to capital came up with an evil plan. They want to make a VLSI circuit and then they will fabricate it and sell it to puny humans to make money [Evil laugh]. What they want to create will surely depend on what their consumers will find useful. So they hire someone who has expertise in consumer electronics and pays her to figure out what they can sell to them with some good profit."><meta itemprop=datePublished content="2010-09-12T00:00:00+00:00">
+<meta itemprop=dateModified content="2010-09-12T00:00:00+00:00">
+<meta itemprop=wordCount content="1333">
+<meta itemprop=keywords content>
 </head>
 <body>
-<div class="container wrapper post">
-<div class=header>
-<base href=https://dilawar.github.io>
-<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
-<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
-<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
-</nav>
+<header>
+<div id=titletext>
+<h2 id=title><a href=https://dilawar.github.io>Dilawar's Blog</a></h2>
 </div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/>Home</a>
-</li>
-<li>
-<a href=/posts>All posts</a>
-</li>
-<li>
-<a href=/about>About</a>
-</li>
-<li>
-<a href=/tags>Tags</a>
-</li>
+<div id=title-description>
+<p id=subtitle>watch -n 1 /dev/null</p>
+<div id=social>
+<nav><ul>
+<li><a href=https://github.com/dilawar><i title=Github class="icons fab fa-github"></i></a></li>
+<li><a><i title="Switch Dark Mode" class="dark-mode icons fas fa-moon"></i></a></li>
+</ul></nav>
+</div>
+</div>
+<div id=mainmenu>
+<nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>All posts</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=/tags>Tags</a></li>
 </ul>
 </nav>
 </div>
+</header>
+<main>
+<div class=post>
+<article>
 <div class=post-header>
+<div class=meta>
+<div class=date>
+<span class=day>12</span>
+<span class=rest>Sep 2010</span>
+</div>
+</div>
+<div class=matter>
 <h1 class=title>Overview of Faults in VLSI</h1>
-<div class=meta>Posted at &mdash; Sep 12, 2010</div>
+<p class=post-meta>
+<span class=post-meta>
+</span>
+</p>
+</div>
 </div>
 <div class=markdown>
 <p>Someone who has access to market and someone who has access to capital came up
@@ -60,13 +76,13 @@ fabricate it and sell it to puny humans to make money [Evil laugh]. What they
 want to create will surely depend on what their consumers will find useful. So
 they hire someone who has expertise in consumer electronics and pays her to
 figure out what they can sell to them with some good profit. After doing her
-tricks, she gives them certain <strong><a href=http://en.wikipedia.org/wiki/Product_requirements_document>product
+tricks, she gives them certain <strong><a href=http://en.wikipedia.org/wiki/Product_requirements_document target=_blank>product
 requirements</a>.</strong>
 Now these product requirements are sent to us - the engineers. We try very hard
 to concentrate on them and after some time under the influence of burnt-out
-neurons, we are able to draw up <strong><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=04644754">specifications of VLSI
+neurons, we are able to draw up <strong><a href="http://ieeexplore.ieee.org/stamp/stamp.jsp?arnumber=04644754" target=_blank>specifications of VLSI
 circuit</a>.</strong> These
-specification usually describes the <a href=http://www.people.vcu.edu/~rhklenke/tutorials/vhdl/modules/m12_23/sld006.htm>behaviour of the circuit (e.g. in VHDL,
+specification usually describes the <a href=http://www.people.vcu.edu/~rhklenke/tutorials/vhdl/modules/m12_23/sld006.htm target=_blank>behaviour of the circuit (e.g. in VHDL,
 Verilog).</a>
 Moreover, this specifications are embedded inside the model of the environment
 in which this circuit suppose to work. For example, a chip designed to work
@@ -78,16 +94,16 @@ to come up with a design. Depending on the level of my experiences and
 expertise in design, I refine my design over the time mostly by trial and
 error, and educated guesses. During all these trials, errors, and educated
 guesses, I &rsquo;ll have my moment of genius which even I can not control. 
-Normally, all these testing and designing are done with <a href=http://www.gnu.org/software/electric/>T-CAD
+Normally, all these testing and designing are done with <a href=http://www.gnu.org/software/electric/ target=_blank>T-CAD
 tools</a>. Ultimately I&rsquo;ll produce a
-<a href=http://opencircuitdesign.com/magic/><strong>layout</strong></a> of the circuit which is to be
-manufactured. The layout then converted into <a href="http://www.google.com/url?sa=t&source=web&cd=2&ved=0CBcQFjAB&url=http%3A%2F%2Fwww-micro.deis.unibo.it%2F~masetti%2FDida01%2FtecCMOS.pdf&ei=tcKMTPeQEcL98AbA1Nm2Cw&usg=AFQjCNE_uwbDnnSLEtz17dpKB0TF5ZeCxQ&sig2=rcBxcuCWfQ4df57MsPE0Vw">masks which are used to
+<a href=http://opencircuitdesign.com/magic/ target=_blank><strong>layout</strong></a> of the circuit which is to be
+manufactured. The layout then converted into <a href="http://www.google.com/url?sa=t&source=web&cd=2&ved=0CBcQFjAB&url=http%3A%2F%2Fwww-micro.deis.unibo.it%2F~masetti%2FDida01%2FtecCMOS.pdf&ei=tcKMTPeQEcL98AbA1Nm2Cw&usg=AFQjCNE_uwbDnnSLEtz17dpKB0TF5ZeCxQ&sig2=rcBxcuCWfQ4df57MsPE0Vw" target=_blank>masks which are used to
 fabricate</a>
 this circuit in a fabrication facility.</p>
 <h1 id=testing-verification-and-validation>Testing, Verification and Validation</h1>
 <p>I do have trouble making distinction among these words but there are few things
 which are different in them and are easy to see. Here, I define these terms as
-defined by our Professor, <a href=http://www.ee.iitb.ac.in/wiki/faculty/madhav>Madhav P.
+defined by our Professor, <a href=http://www.ee.iitb.ac.in/wiki/faculty/madhav target=_blank>Madhav P.
 Desai</a> during the course on
 <em>Verification and Testing of VLSI Circuits</em>.</p>
 <ul>
@@ -110,7 +126,7 @@ setup which mimics reality to the <strong>maximum extent possible</strong>.</li>
 <h1 id=faults-in-vlsi>Faults in VLSI</h1>
 <p>Faults in VLSI can occur due to various reasons. Most prominent among them is
 due to flaws and variation fabrication processes (when engineer is competent).
-These causes of faults are discussed in <a href="http://portal.acm.org/citation.cfm?id=37888.37914">[Mally,
+These causes of faults are discussed in <a href="http://portal.acm.org/citation.cfm?id=37888.37914" target=_blank>[Mally,
 1987]</a>. Break in metal
 lines, over and under deposition of material, alien particles in fabrication
 process are the major sources of faults. As a designer, we need to test these
@@ -119,9 +135,13 @@ order of magnitude (I do not have exact numbers here). Following figure 1 shows
 a messed-up device fabricated by me with the help of lab-staff during my M.
 Tech. Though it was useless for us then, it is useful for us for our present
 discussion. [caption id=&ldquo;attachment_85&rdquo; align=&ldquo;alignleft&rdquo;
-width=&ldquo;570&rdquo;]<a href=http://dilawarnotes.files.wordpress.com/2010/09/it_faults1.jpg><img src=images/it_faults1.jpg alt="Faults in Fabrication" title=it_faults></a>
+width=&ldquo;570&rdquo;]<a href=http://dilawarnotes.files.wordpress.com/2010/09/it_faults1.jpg target=_blank><figure>
+<img src=images/it_faults1.jpg alt="Faults in Fabrication" title=it_faults>
+</figure></a>
 Figure 1 : Faults in fabrication[/caption] [caption id=&ldquo;attachment_77&rdquo;
-align=&ldquo;alignright&rdquo; width=&ldquo;364&rdquo;]<img src=images/alien_particle_short.jpg alt title=alien_particle_short> Figure 2 : Alien particles during fabrication. Short of
+align=&ldquo;alignright&rdquo; width=&ldquo;364&rdquo;]<figure>
+<img src=images/alien_particle_short.jpg alt title=alien_particle_short>
+</figure> Figure 2 : Alien particles during fabrication. Short of
 tacks.[/caption] Figure 2 shows the alien particles causing the short. Extra
 deposition and less deposition of materials cause most of the shorts and open
 circuits problem. Figure 3 shows the less deposition of material causing a
@@ -129,15 +149,20 @@ track to be less conductive. Any logic propagated through this track will be
 weaker than the perfect track. Figure 4 shows that in spite of material
 deposition was sufficient, part of the track may still come off due to less
 adhesion between the deposited material and the substance. [caption
-id=&ldquo;attachment_88&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;289&rdquo;]<a href=http://dilawarnotes.files.wordpress.com/2010/09/lift_off_gold_dot_on_si.png><img src=images/lift_off_gold_dot_on_si.png alt="Gold liftoff fromSi" title=lift_off_gold_dot_on_si></a>
+id=&ldquo;attachment_88&rdquo; align=&ldquo;alignleft&rdquo; width=&ldquo;289&rdquo;]<a href=http://dilawarnotes.files.wordpress.com/2010/09/lift_off_gold_dot_on_si.png target=_blank><figure>
+<img src=images/lift_off_gold_dot_on_si.png alt="Gold liftoff from
+Si" title=lift_off_gold_dot_on_si>
+</figure></a>
 Figure 4 : SEM image shows that gold may not stick very well to the Si
 substrate. Same thing can happen with other pairs of material.[/caption]
 [caption id=&ldquo;attachment_78&rdquo; align=&ldquo;alignleft&rdquo;
-width=&ldquo;50&rdquo;]<a href=http://dilawarnotes.files.wordpress.com/2010/09/partial_broken_track.jpg><img src=images/partial_broken_track.jpg alt title=partial_broken_track></a>
+width=&ldquo;50&rdquo;]<a href=http://dilawarnotes.files.wordpress.com/2010/09/partial_broken_track.jpg target=_blank><figure>
+<img src=images/partial_broken_track.jpg alt title=partial_broken_track>
+</figure></a>
 Figure 3 : Less materical deposition causing partial break in
 track.[/caption] These faults, among others, are classified as spot defects.
 Geometrically, these are randomly distributed over the entire fabrication area.
-For more details on these faults we refer to <a href="http://portal.acm.org/citation.cfm?id=37888.37914">[Mally,
+For more details on these faults we refer to <a href="http://portal.acm.org/citation.cfm?id=37888.37914" target=_blank>[Mally,
 1987]</a>. To summarize,</p>
 <ul>
 <li>Spot defects are regions of missing or extra material, (or drastically
@@ -173,7 +198,7 @@ $latex n_e$ are the faults which I can NOT detect during my test. Then,
 $\frac{n_f-n_e}{n_f}$ represent traditional fault coverage and, of
 course, $latex n > n_f$. Hence an ultimate fault model must list out all the
 possible faults with their probability of occurrence. Practically, these faults
-model are based on the experience of an Institute or company. <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=784281&tag=1">[Birolini,
+model are based on the experience of an Institute or company. <a href="http://ieeexplore.ieee.org/xpls/abs_all.jsp?arnumber=784281&tag=1" target=_blank>[Birolini,
 1994]</a>
 gives details about fault occurrence in VLSI circuits. Some figures are given
 below.</p>
@@ -184,21 +209,22 @@ permanent state. TODO : Give a brief overview. Meanwhile readers can refer to a
 book by Kohavi. Naturally, one uses probabilistic models while
 studying them.</p>
 </div>
-<div class=post-tags>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Categories</p>
 </div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<div class=termsfloating_right>
+<p>
+<a href=/categories/technology-and-engineering/>technology-and-engineering</a>
+</p>
 </div>
-<div class="footer wrapper">
-<nav class=nav>
-<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
+<div class=clearit></div>
 </div>
+</article>
+</div>
+</main>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
-<script>feather.replace()</script>
+<script src=/js/dark-mode.js></script>
 </body>
 </html>

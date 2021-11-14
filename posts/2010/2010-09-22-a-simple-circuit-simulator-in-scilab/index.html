@@ -1,7 +1,17 @@
-<!doctype html><html>
+<!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge"><title>A Simple Circuit Simulator in Scilab - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<title>A Simple Circuit Simulator in Scilab | Dilawar's Blog</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Hugo 0.89.2">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content="electrical-circuits,modified-nodal-analysis,scilab,simulation">
+<link rel=stylesheet type=text/css media=screen href=/css/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=/css/main.css>
+<link rel=stylesheet type=text/css media=screen href=/css/all.css><link rel=stylesheet href=/css/katex.css crossorigin=anonymous>
+<script defer src=/js/katex.js integrity=sha384-PFWG8XW41D5NzhNv5FegM1CUkw9nNLdWug8DuwnUoNEVop9n5frjcnbtsZtxTNjw crossorigin=anonymous></script>
+<script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
 <meta property="og:title" content="A Simple Circuit Simulator in Scilab">
 <meta property="og:description" content="Version 0.9 [Do not trust anything less than Version 1.0 even if it is made by me.] Report bugs to dilawar@ee.iitb.ac.in
 1. Modified Nodal Analysis We implemented modified nodal analysis (MNA) in Scilab even though I do not like this method. It is very bad for circuits having more than few thousand nodes. It is implemented mostly for my understanding purpose. Anyway, please make sure your circuit description file defined in Sec 2.">
@@ -13,52 +23,60 @@
 <meta name=twitter:title content="A Simple Circuit Simulator in Scilab">
 <meta name=twitter:description content="Version 0.9 [Do not trust anything less than Version 1.0 even if it is made by me.] Report bugs to dilawar@ee.iitb.ac.in
 1. Modified Nodal Analysis We implemented modified nodal analysis (MNA) in Scilab even though I do not like this method. It is very bad for circuits having more than few thousand nodes. It is implemented mostly for my understanding purpose. Anyway, please make sure your circuit description file defined in Sec 2.">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
-<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
-<script src=https://dilawar.github.iojs/main.js></script>
-<script src=https://dilawar.github.iojs/abc.js></script>
-<script src=https://dilawar.github.iojs/xyz.js></script>
-<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+<meta itemprop=name content="A Simple Circuit Simulator in Scilab">
+<meta itemprop=description content="Version 0.9 [Do not trust anything less than Version 1.0 even if it is made by me.] Report bugs to dilawar@ee.iitb.ac.in
+1. Modified Nodal Analysis We implemented modified nodal analysis (MNA) in Scilab even though I do not like this method. It is very bad for circuits having more than few thousand nodes. It is implemented mostly for my understanding purpose. Anyway, please make sure your circuit description file defined in Sec 2."><meta itemprop=datePublished content="2010-09-22T00:00:00+00:00">
+<meta itemprop=dateModified content="2010-09-22T00:00:00+00:00">
+<meta itemprop=wordCount content="3184">
+<meta itemprop=keywords content="electrical-circuits,modified-nodal-analysis,scilab,simulation,">
 </head>
 <body>
-<div class="container wrapper post">
-<div class=header>
-<base href=https://dilawar.github.io>
-<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
-<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
-<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
-</nav>
+<header>
+<div id=titletext>
+<h2 id=title><a href=https://dilawar.github.io>Dilawar's Blog</a></h2>
 </div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/>Home</a>
-</li>
-<li>
-<a href=/posts>All posts</a>
-</li>
-<li>
-<a href=/about>About</a>
-</li>
-<li>
-<a href=/tags>Tags</a>
-</li>
+<div id=title-description>
+<p id=subtitle>watch -n 1 /dev/null</p>
+<div id=social>
+<nav><ul>
+<li><a href=https://github.com/dilawar><i title=Github class="icons fab fa-github"></i></a></li>
+<li><a><i title="Switch Dark Mode" class="dark-mode icons fas fa-moon"></i></a></li>
+</ul></nav>
+</div>
+</div>
+<div id=mainmenu>
+<nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>All posts</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=/tags>Tags</a></li>
 </ul>
 </nav>
 </div>
+</header>
+<main>
+<div class=post>
+<article>
 <div class=post-header>
+<div class=meta>
+<div class=date>
+<span class=day>22</span>
+<span class=rest>Sep 2010</span>
+</div>
+</div>
+<div class=matter>
 <h1 class=title>A Simple Circuit Simulator in Scilab</h1>
-<div class=meta>Posted at &mdash; Sep 22, 2010</div>
+<p class=post-meta>
+<span class=post-meta>
+</span>
+</p>
+</div>
 </div>
 <div class=markdown>
 <p>Version 0.9 [Do not trust anything less than Version 1.0 even if it is made by me.] Report bugs to <strong><a href=mailto:dilawar@ee.iitb.ac.in>dilawar@ee.iitb.ac.in</a></strong></p>
 <h1 id=1-modified-nodal-analysis>1. Modified Nodal Analysis</h1>
-<p>We implemented <a href=http://www.swarthmore.edu/NatSci/echeeve1/Ref/mna/MNA2.html title=MNA>modified nodal analysis (MNA)</a> in Scilab even though I do not like this method. It is very bad for circuits having more than few thousand nodes. It is implemented mostly for my understanding purpose. Anyway, please make sure your circuit description file defined in Sec 2.1 does not have current sources in parallel with any of the voltage sources. This is a bug in this implementation and we probably will not remove it in near future unless I get excited about it or you pay me for it [wink, wink].You read about MNA on wikipedia or somewhere else. If the version of this implementation is higher than 0.9, then it is assured that this bug has been removed.</p>
+<p>We implemented <a href=http://www.swarthmore.edu/NatSci/echeeve1/Ref/mna/MNA2.html title=MNA target=_blank>modified nodal analysis (MNA)</a> in Scilab even though I do not like this method. It is very bad for circuits having more than few thousand nodes. It is implemented mostly for my understanding purpose. Anyway, please make sure your circuit description file defined in Sec 2.1 does not have current sources in parallel with any of the voltage sources. This is a bug in this implementation and we probably will not remove it in near future unless I get excited about it or you pay me for it [wink, wink].You read about MNA on wikipedia or somewhere else. If the version of this implementation is higher than 0.9, then it is assured that this bug has been removed.</p>
 <h1 id=2-scilab-implementation>2. Scilab Implementation</h1>
 <h2 id=21-circuit-description-file>2.1 Circuit Description file</h2>
 <ul>
@@ -78,32 +96,38 @@
 <h2 id=23-generate-coefficient-matrix>2.3 Generate coefficient matrix</h2>
 <p>Well this part should have a better documentation. matM is the matrix which will contain all the coefficients. Matrix matB got all the coefficient matrix. It is better that you work out a simple example for MNA and understand the structure of these matrices. [sourcecode language=&ldquo;matlab&rdquo;] // Scilab file. // Funtion // Dilawar Singh, Sepp 19, 2010. // // This script will compute the matrices required to solve the electric circuit // as described in a text file. To generate the matrix we will use data // structure returned by a function defined in parseCircuitFile.sce file. // // matM : coefficient matrix. // matB : source matrix. // listNodes : list having distince nodes at which equations are written. // nodeV : nodes where voltage sources are attached. // etc. function [matM, matB, listNodes, nodeV] = generateMatrix(myFileName) exec(&rsquo;./parseCircuitFile.sci&rsquo;); // open file and parse the file. [vS, iS, rS, numS] = parseCircuitFile(myFileName); // We got all the sources. // Build the matrix. // calculate the no of voltage sources. nV = numS(1); // no of current source. nI = numS(2); // no of resistors nR = numS(3); ////////////////////////////////////////////////// //To do : Extract the topology of the network here. // First get the node lists. nodeV = []; nodeI = []; nodeR = []; // node with voltage source. for j = 1 : nV, nodeV = [nodeV, vS((j-1)*7 + 4), vS((j-1)*7 + 5)]; end; //nodes with current sources. for j = 1 : nI, nodeI = [nodeI, iS((j-1)*7 + 4), iS((j-1)*7 + 5)]; end; // nodes with resistance for j = 1 : nR, nodeR = [nodeR, rS((j-1)*7 + 4), rS((j-1)*7 + 5)]; end; // We can now have some sort of circuit topology. // Extract nodes on which we need to write the nodal equations. This is // neccessary since a node mostly have repeated entry due to more than one // element incident to it. // diffNodes store all such nodes. // TODO : This is not an efficient implementation. tempNodes = [nodeV, nodeI, nodeR]; diffNodes = []; // Different node n = length(length(tempNodes)); i = 1; allMatch = []; while i &lt; n then j = i +1; while j &lt; n then if tempNodes(i) ~= tempNodes(j) then //disp(&lsquo;Dont Match&rsquo;); j = j + 1; else //disp(&lsquo;Match.'); allMatch = [allMatch, j]; tempNodes(j) = []; //Delete it. j = j; n = length(length(tempNodes)); end; end; if length(allMatch) == 0 then diffNodes = [diffNodes, tempNodes(i)]; i = i + 1; else for p = 1 : length(allMatch), tempNodes(j) = []; end; diffNodes = [diffNodes, tempNodes(i)]; i = i + 1; end; n = length(length(tempNodes)); end; // Discard n0 since by constrain this is our ground node. // Now we can use any method to solve it. Either MNA or NAL-NBK methods. // Here we use MNA since it will take less time to implement now. // Now we will have numNodes + nV variables. // Add all the resistance incident on one node. They will form the diagonal // entries for matrix for node equations. Non-diagonal entries can also be // generated inside this part only. But we give another block of code to make it // look more straigtforward. Both of these loops should be merged into one for // less time consumption. matM = []; diagM = []; // Remove n0 from the diff nodes and use it to build the conducatance matrices. // This way it is more natural. We could have ignored this node previously but // we keep it, just in case if we need it in future. listNodes = []; for i = 1 : length(length(diffNodes)), if diffNodes(i) ~= &lsquo;n0&rsquo; then listNodes = [listNodes, diffNodes(i)]; end; end; numNodes = length(length(listNodes)); // total nodes excluding ground &lsquo;n0&rsquo;. for i = 1 : numNodes, diagR = 0; for p = 1 : (lstsize(rS)/7), if listNodes(i) == rS((p-1)*7 + 4) then diagR = diagR + 1/evstr(rS((p-1)*7 + 6)); // get the conductance. elseif listNodes(i) == rS((p-1)*7 + 5) then diagR = diagR + 1/evstr(rS((p-1)*7 + 6)); end; end; matM(i, i) = diagR; end; // Here we extract non-diagonal entries. Since matM should be symetrical about // its diagonal. Life is slightly easy. for i = 1 : numNodes, nonDiagR = 0; for j = i+1 : numNodes, for p = 1 : lstsize(rS)/7, if listNodes(i) == rS((p-1)*7 + 4) then if listNodes(j) == rS((p-1)*7 + 5) then nonDiagR = nonDiagR + 1/evstr(rS((p-1)*7 + 6)); // conductance. end; // it might happen that we have reversed the order of nodes while writing R. // Though, the way we are extracting the nodes, it should never happen. But // anyway if someone modifies a part, we should not have any bug here. elseif listNodes(i) == rS((p-1)*7 + 5) then if listNodes(j) == rS((p-1)*7 + 4) then // Following is conductance. nonDiagR = nonDiagR + 1/evstr(rS((p-1)*7 +6)); end; end; end; matM(i, j) = -nonDiagR; matM(j, i) = -nonDiagR; end; end; // Now we need to extend this matM with entries which came from voltage sources. // Generate a column to be appended to matM for each voltage entry. // Same time we push these values into matrix B which contains sources. Its // dimenstion is listNodes+nV by 1. matB = zeros(numNodes+nV, 1); // mat to hold sources. for i = 1 : numNodes, // for each node check if there is a voltage source. colVoltS = zeros(numNodes,1); for j = i+1 : numNodes, for p = 1 : lstsize(vS)/7, if listNodes(i) == vS((p-1)*7 + 4) then // i is the first node. //disp(&lsquo;A voltage source node.'); if listNodes(j) == vS((p-1)*7 + 5) then // j is the second node. colVoltS(i, 1) = 1; colVoltS(j, 1) = -1; matB(numNodes+i, 1) = evstr(vS((p-1)*7 + 6)); // value V. //disp(colVoltS, &lsquo;A&rsquo;); else // the second node is n0 colVoltS(i, 1) = 1; //disp(colVoltS, &lsquo;B&rsquo;); matB(numNodes+i, 1) = evstr(vS((p-1)*7 + 6)); // value V. end; end; end; end; //disp(colVoltS, &lsquo;D&rsquo;); // If this vector is non zero. Push it into matM. if rank(colVoltS) ~= 0 then n = length(matM(1,:)); for i = 1 : length(colVoltS), //disp(length(colVoltS, &lsquo;A&rsquo;)); matM(i, n + 1) = colVoltS(i); matM(n + 1, i) = colVoltS(i); end; end; // our matrix is ready. end; // Final step. We have to push current source into source matrix (vector). for i = 1 : numNodes, // for each node check if there is a current. curS = 0; // to hold current source values. for j = i+1 : numNodes, for p = 1 : lstsize(iS)/7, if listNodes(i) == iS((p-1)*7 + 4) then // i is the first node. //disp(&lsquo;A current source node.'); if listNodes(j) == iS((p-1)*7 + 5) then // j is the second node. curS = curS + evstr(iS((p-1)*7 + 6)); // value i. matB(i, 1) = curS; matB(j, 1) = -curS else // the second node is n0 curS = curS + evstr(iS((p-1)*7 + 6)); // value i. matB(i, 1) = curS; end; end; end; end; end; // matM is our coefficient matrix. matB contains sources. Solve it. msprintf(&ldquo;Your circuit contains %d current sources, %d voltage sources, and &mldr; %d resistance. PLEASE NOTE THAT at this point we do not check topology of &mldr; the circuit. Make sure your file describing your circuit is error free.&rdquo;, &mldr; nI, nV, nR); endfunction; [/sourcecode]</p>
 <h2 id=24-top-most-level-script-and-its-result>2.4 Top most level script and its result</h2>
-<p>[sourcecode language=&ldquo;matlab&rdquo;] // Scilab file // Top level script file to solve a circuit using MNA method which I do not like // very much. // See respective function files for more details. // Algorithm implemented is standard MNA method. // Execute file to load function definition. exec(&rsquo;./generateMatrix.sci&rsquo;); // Make sure following file exists. [matCoeff, matSource, listNodes, nV] = generateMatrix(&rsquo;./myCircuit&rsquo;); //disp(matCoeff); //disp(matSource); //disp(listNodes); // solve these equations. matCoeff*x= matSource. [ansNodes] = linsolve(matCoeff, -matSource); disp(&lsquo;Node potentials.') // Display the results. n = length(length(listNodes)); for i = 1 : n mprintf(&ldquo;Node %s votage is : %f\n&rdquo;, listNodes(i), ansNodes(i)); end; disp(&lsquo;Current through voltage sources.'); for i = n+1 : length(ansNodes), mprintf("\nCurrent through voltage source (%s, %s) is : %f&rdquo;, nV(i-n),&mldr; nV(i-n+1), ansNodes(i)); end; // This ends our endeavor. exit(); [/sourcecode] Results for the file 2.1. [sourcecode] Node potentials. Node n1 votage is : 5.000000 Node n3 votage is : 3.000000 Node n2 votage is : 3.200000 Current through voltage sources. Current through voltage source (n1, n0) is : -18.000000 Current through voltage source (n0, n3) is : 4.320000 [/sourcecode] RESOURCES : <a href=http://dilawarnotes.files.wordpress.com/2010/09/mna_scilab1.pdf>mna_scilab_ver0.9</a></p>
+<p>[sourcecode language=&ldquo;matlab&rdquo;] // Scilab file // Top level script file to solve a circuit using MNA method which I do not like // very much. // See respective function files for more details. // Algorithm implemented is standard MNA method. // Execute file to load function definition. exec(&rsquo;./generateMatrix.sci&rsquo;); // Make sure following file exists. [matCoeff, matSource, listNodes, nV] = generateMatrix(&rsquo;./myCircuit&rsquo;); //disp(matCoeff); //disp(matSource); //disp(listNodes); // solve these equations. matCoeff*x= matSource. [ansNodes] = linsolve(matCoeff, -matSource); disp(&lsquo;Node potentials.') // Display the results. n = length(length(listNodes)); for i = 1 : n mprintf(&ldquo;Node %s votage is : %f\n&rdquo;, listNodes(i), ansNodes(i)); end; disp(&lsquo;Current through voltage sources.'); for i = n+1 : length(ansNodes), mprintf("\nCurrent through voltage source (%s, %s) is : %f&rdquo;, nV(i-n),&mldr; nV(i-n+1), ansNodes(i)); end; // This ends our endeavor. exit(); [/sourcecode] Results for the file 2.1. [sourcecode] Node potentials. Node n1 votage is : 5.000000 Node n3 votage is : 3.000000 Node n2 votage is : 3.200000 Current through voltage sources. Current through voltage source (n1, n0) is : -18.000000 Current through voltage source (n0, n3) is : 4.320000 [/sourcecode] RESOURCES : <a href=http://dilawarnotes.files.wordpress.com/2010/09/mna_scilab1.pdf target=_blank>mna_scilab_ver0.9</a></p>
 <p>[soucecode language=&ldquo;matlab&rdquo;]</p>
 </div>
-<div class=post-tags>
-<nav class="nav tags">
-<ul class=flat>
-<li><a href=/tags/electrical-circuits>electrical-circuits</a></li>
-<li><a href=/tags/modified-nodal-analysis>modified-nodal-analysis</a></li>
-<li><a href=/tags/scilab>scilab</a></li>
-<li><a href=/tags/simulation>simulation</a></li>
-</ul>
-</nav>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Categories</p>
 </div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<div class=termsfloating_right>
+<p>
+<a href=/categories/technology-and-engineering/>technology-and-engineering</a>
+</p>
 </div>
-<div class="footer wrapper">
-<nav class=nav>
-<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
+<div class=clearit></div>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Tags</p>
 </div>
+<div class=termsfloating_right>
+<p>
+<a href=/tags/electrical-circuits/>electrical-circuits</a>
+<a href=/tags/modified-nodal-analysis/>modified-nodal-analysis</a>
+<a href=/tags/scilab/>scilab</a>
+<a href=/tags/simulation/>simulation</a>
+</p>
+</div>
+<div class=clearit></div>
+</div>
+</article>
+</div>
+</main>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
-<script>feather.replace()</script>
+<script src=/js/dark-mode.js></script>
 </body>
 </html>

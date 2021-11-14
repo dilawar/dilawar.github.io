@@ -1,7 +1,17 @@
-<!doctype html><html>
+<!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge"><title>Python front-end for Noweb literate tool - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<title>Python front-end for Noweb literate tool | Dilawar's Blog</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Hugo 0.89.2">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content="literate-programming,literate-programming-tool">
+<link rel=stylesheet type=text/css media=screen href=/css/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=/css/main.css>
+<link rel=stylesheet type=text/css media=screen href=/css/all.css><link rel=stylesheet href=/css/katex.css crossorigin=anonymous>
+<script defer src=/js/katex.js integrity=sha384-PFWG8XW41D5NzhNv5FegM1CUkw9nNLdWug8DuwnUoNEVop9n5frjcnbtsZtxTNjw crossorigin=anonymous></script>
+<script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
 <meta property="og:title" content="Python front-end for Noweb literate tool">
 <meta property="og:description" content="The idea behind literate programming, that a program can be a piece of literature, is due to Donald E. Knuth. Knuth is an extremely respected figure in programming community (and also among combinatorics and computer science people). In this paradigm, one does not write a program based on how computer would reason about it but rather follows a human like flow. It is the job of literate programming tool to convert this human-readable program into something which make sense to a computer.">
 <meta property="og:type" content="article">
@@ -11,85 +21,88 @@
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Python front-end for Noweb literate tool">
 <meta name=twitter:description content="The idea behind literate programming, that a program can be a piece of literature, is due to Donald E. Knuth. Knuth is an extremely respected figure in programming community (and also among combinatorics and computer science people). In this paradigm, one does not write a program based on how computer would reason about it but rather follows a human like flow. It is the job of literate programming tool to convert this human-readable program into something which make sense to a computer.">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
-<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
-<script src=https://dilawar.github.iojs/main.js></script>
-<script src=https://dilawar.github.iojs/abc.js></script>
-<script src=https://dilawar.github.iojs/xyz.js></script>
-<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+<meta itemprop=name content="Python front-end for Noweb literate tool">
+<meta itemprop=description content="The idea behind literate programming, that a program can be a piece of literature, is due to Donald E. Knuth. Knuth is an extremely respected figure in programming community (and also among combinatorics and computer science people). In this paradigm, one does not write a program based on how computer would reason about it but rather follows a human like flow. It is the job of literate programming tool to convert this human-readable program into something which make sense to a computer."><meta itemprop=datePublished content="2013-10-30T00:00:00+00:00">
+<meta itemprop=dateModified content="2013-10-30T00:00:00+00:00">
+<meta itemprop=wordCount content="538">
+<meta itemprop=keywords content="literate-programming,literate-programming-tool,">
 </head>
 <body>
-<div class="container wrapper post">
-<div class=header>
-<base href=https://dilawar.github.io>
-<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
-<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
-<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
-</nav>
+<header>
+<div id=titletext>
+<h2 id=title><a href=https://dilawar.github.io>Dilawar's Blog</a></h2>
 </div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/>Home</a>
-</li>
-<li>
-<a href=/posts>All posts</a>
-</li>
-<li>
-<a href=/about>About</a>
-</li>
-<li>
-<a href=/tags>Tags</a>
-</li>
+<div id=title-description>
+<p id=subtitle>watch -n 1 /dev/null</p>
+<div id=social>
+<nav><ul>
+<li><a href=https://github.com/dilawar><i title=Github class="icons fab fa-github"></i></a></li>
+<li><a><i title="Switch Dark Mode" class="dark-mode icons fas fa-moon"></i></a></li>
+</ul></nav>
+</div>
+</div>
+<div id=mainmenu>
+<nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>All posts</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=/tags>Tags</a></li>
 </ul>
 </nav>
 </div>
+</header>
+<main>
+<div class=post>
+<article>
 <div class=post-header>
+<div class=meta>
+<div class=date>
+<span class=day>30</span>
+<span class=rest>Oct 2013</span>
+</div>
+</div>
+<div class=matter>
 <h1 class=title>Python front-end for Noweb literate tool</h1>
-<div class=meta>Posted at &mdash; Oct 30, 2013</div>
+<p class=post-meta>
+<span class=post-meta>
+</span>
+</p>
+</div>
 </div>
 <div class=markdown>
-<p>The idea behind literate programming, that a program can be a piece of literature, is due to <a href=http://www-cs-faculty.stanford.edu/%7Euno/>Donald E. Knuth</a>. Knuth is an extremely respected figure in programming community (and also among combinatorics and computer science people). In this paradigm, one does not write a program based on how computer would reason about it but rather follows a human like flow. It is the job of literate programming tool to convert this human-readable program into something which make sense to a computer. There is much freedom for a programmer to write his code the way he likes it but since the translation process is governed by a computer program, there are specific constraints on how to write a program in literate way. Best way to understand the difference between a normally commented and literate program is to have a look at a literate program. One can easily find many on Knuth’s home page. A program is written like an essay, and one then uses a tool to extract code (this process was called <code>tangling</code> by Knuth) or documentation (process called <code>weaving</code>) out of it. Knuth, true to his nature, wrote <code>cweb</code> for his personal use. Some other tools cropped up on these lines and many of them were written for pacific languages. Noweb, written by Roman Ramsay, is language agnostic. There are some other tools like it e.g. funnel-web, nuweb etc but none is as simple to use as this one. <a href=http://www.lyx.org title=LyX>Lyx</a> also have support for <a href=http://www.cs.tufts.edu/~nr/noweb/ title=Noweb>noweb</a>. And if my memory serves me write, IIT Madras, offered (or still offering) a course in literate programming to its students using Lyx. Literate programming did not really catch up (who wants to write documentation in the first place). But some people have used it extensively. To my knowledge, apart from Knuth, Columbia Esterel Compiler (cec) is written as literate program using noweb and its really easy to understand (well, not really but relatively). I was able to make changes to it for my personal <strong>fun</strong>.</p>
+<p>The idea behind literate programming, that a program can be a piece of literature, is due to <a href=http://www-cs-faculty.stanford.edu/%7Euno/ target=_blank>Donald E. Knuth</a>. Knuth is an extremely respected figure in programming community (and also among combinatorics and computer science people). In this paradigm, one does not write a program based on how computer would reason about it but rather follows a human like flow. It is the job of literate programming tool to convert this human-readable program into something which make sense to a computer. There is much freedom for a programmer to write his code the way he likes it but since the translation process is governed by a computer program, there are specific constraints on how to write a program in literate way. Best way to understand the difference between a normally commented and literate program is to have a look at a literate program. One can easily find many on Knuth’s home page. A program is written like an essay, and one then uses a tool to extract code (this process was called <code>tangling</code> by Knuth) or documentation (process called <code>weaving</code>) out of it. Knuth, true to his nature, wrote <code>cweb</code> for his personal use. Some other tools cropped up on these lines and many of them were written for pacific languages. Noweb, written by Roman Ramsay, is language agnostic. There are some other tools like it e.g. funnel-web, nuweb etc but none is as simple to use as this one. <a href=http://www.lyx.org title=LyX target=_blank>Lyx</a> also have support for <a href=http://www.cs.tufts.edu/~nr/noweb/ title=Noweb target=_blank>noweb</a>. And if my memory serves me write, IIT Madras, offered (or still offering) a course in literate programming to its students using Lyx. Literate programming did not really catch up (who wants to write documentation in the first place). But some people have used it extensively. To my knowledge, apart from Knuth, Columbia Esterel Compiler (cec) is written as literate program using noweb and its really easy to understand (well, not really but relatively). I was able to make changes to it for my personal <strong>fun</strong>.</p>
 <h3 id=a-python-front-end-for-noweb>A python front-end for noweb</h3>
-<p><a href=https://github.com/dilawar/Scripts/blob/master/pynoweb.py>Script is here</a> I found one thing lacking in noweb that I have to write full program in one file or use makefiles to automate the process. This is OK but I was not happy. I wrote a python script to do the following,</p>
+<p><a href=https://github.com/dilawar/Scripts/blob/master/pynoweb.py target=_blank>Script is here</a> I found one thing lacking in noweb that I have to write full program in one file or use makefiles to automate the process. This is OK but I was not happy. I wrote a python script to do the following,</p>
 <ul>
 <li>There is one main file which include other files using <code>%\include{file.nw}</code> macro. Notice that this approach is like tex. Our macro will be treated as comment by normal tex program but not by this python front-end.</li>
 <li>Write as many noweb files as you like and using <code>%\include</code> macro to include other literate files.</li>
 <li>Pass the main file to python script with optional command (tangling or weaving)</li>
 <li>You can attach a line over chunk name to tell this script that you want to write this chunk to some specific file. Write over the chunk something like <code>%file:src/file.c</code>. For example, if a chunk named <code>gloabal.h</code> is to be written to file <code>include/global.h</code> then, just above the chunk <code>&lt;&lt;global.h>></code>, you must have</li>
 </ul>
-<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>   %file:include/global.h
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>   %file:include/global.h
    &lt;&gt;=
    // whatver is there in global
    @ %def global.h 
 </code></pre></div><p>Download the script and run it without any argument to see the possible commands. Report an issue on its github repo if you locate a bug.</p>
 </div>
-<div class=post-tags>
-<nav class="nav tags">
-<ul class=flat>
-<li><a href=/tags/literate-programming>literate-programming</a></li>
-<li><a href=/tags/literate-programming-tool>literate-programming-tool</a></li>
-</ul>
-</nav>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Tags</p>
 </div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<div class=termsfloating_right>
+<p>
+<a href=/tags/literate-programming/>literate-programming</a>
+<a href=/tags/literate-programming-tool/>literate-programming-tool</a>
+</p>
 </div>
-<div class="footer wrapper">
-<nav class=nav>
-<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
+<div class=clearit></div>
 </div>
+</article>
+</div>
+</main>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
-<script>feather.replace()</script>
+<script src=/js/dark-mode.js></script>
 </body>
 </html>

@@ -1,7 +1,17 @@
-<!doctype html><html>
+<!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge"><title>Dense Associative Memory - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<title>Dense Associative Memory | Dilawar's Blog</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Hugo 0.89.2">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content="dense-associative-memory,hopfield-network">
+<link rel=stylesheet type=text/css media=screen href=/css/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=/css/main.css>
+<link rel=stylesheet type=text/css media=screen href=/css/all.css><link rel=stylesheet href=/css/katex.css crossorigin=anonymous>
+<script defer src=/js/katex.js integrity=sha384-PFWG8XW41D5NzhNv5FegM1CUkw9nNLdWug8DuwnUoNEVop9n5frjcnbtsZtxTNjw crossorigin=anonymous></script>
+<script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
 <meta property="og:title" content="Dense Associative Memory">
 <meta property="og:description" content="John Hopfield in 1982 proposed a neat idea. It was a network that could store memories and recall them when presented with a partial cue. There are many tutorials out there on Hopfield network (my personal favourite is https://neuronaldynamics.epfl.ch/online/Ch17.S1.html, the original paper is a great read as well.).
 These networks are highly studied. Despite their limitations and non-biological nature, they are still very popular among neuroscientits for their simplicity and tractability.">
@@ -13,83 +23,97 @@ These networks are highly studied. Despite their limitations and non-biological 
 <meta name=twitter:title content="Dense Associative Memory">
 <meta name=twitter:description content="John Hopfield in 1982 proposed a neat idea. It was a network that could store memories and recall them when presented with a partial cue. There are many tutorials out there on Hopfield network (my personal favourite is https://neuronaldynamics.epfl.ch/online/Ch17.S1.html, the original paper is a great read as well.).
 These networks are highly studied. Despite their limitations and non-biological nature, they are still very popular among neuroscientits for their simplicity and tractability.">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
-<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
-<script src=https://dilawar.github.iojs/main.js></script>
-<script src=https://dilawar.github.iojs/abc.js></script>
-<script src=https://dilawar.github.iojs/xyz.js></script>
-<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+<meta itemprop=name content="Dense Associative Memory">
+<meta itemprop=description content="John Hopfield in 1982 proposed a neat idea. It was a network that could store memories and recall them when presented with a partial cue. There are many tutorials out there on Hopfield network (my personal favourite is https://neuronaldynamics.epfl.ch/online/Ch17.S1.html, the original paper is a great read as well.).
+These networks are highly studied. Despite their limitations and non-biological nature, they are still very popular among neuroscientits for their simplicity and tractability."><meta itemprop=datePublished content="2020-10-06T00:00:00+00:00">
+<meta itemprop=dateModified content="2020-10-06T00:00:00+00:00">
+<meta itemprop=wordCount content="412">
+<meta itemprop=keywords content="dense-associative-memory,hopfield-network,">
 </head>
 <body>
-<div class="container wrapper post">
-<div class=header>
-<base href=https://dilawar.github.io>
-<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
-<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
-<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
-</nav>
+<header>
+<div id=titletext>
+<h2 id=title><a href=https://dilawar.github.io>Dilawar's Blog</a></h2>
 </div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/>Home</a>
-</li>
-<li>
-<a href=/posts>All posts</a>
-</li>
-<li>
-<a href=/about>About</a>
-</li>
-<li>
-<a href=/tags>Tags</a>
-</li>
+<div id=title-description>
+<p id=subtitle>watch -n 1 /dev/null</p>
+<div id=social>
+<nav><ul>
+<li><a href=https://github.com/dilawar><i title=Github class="icons fab fa-github"></i></a></li>
+<li><a><i title="Switch Dark Mode" class="dark-mode icons fas fa-moon"></i></a></li>
+</ul></nav>
+</div>
+</div>
+<div id=mainmenu>
+<nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>All posts</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=/tags>Tags</a></li>
 </ul>
 </nav>
 </div>
+</header>
+<main>
+<div class=post>
+<article>
 <div class=post-header>
+<div class=meta>
+<div class=date>
+<span class=day>06</span>
+<span class=rest>Oct 2020</span>
+</div>
+</div>
+<div class=matter>
 <h1 class=title>Dense Associative Memory</h1>
-<div class=meta>Posted at &mdash; Oct 6, 2020</div>
+<p class=post-meta>
+<span class=post-meta>
+</span>
+</p>
+</div>
 </div>
 <div class=markdown>
-<p><a href="https://www.youtube.com/watch?v=DKyzcbNr8WE">John Hopfield</a> in 1982 proposed a neat idea. It was a network that could store memories and recall them when presented with a partial cue. There are many tutorials out there on Hopfield network (my personal favourite is <a href="https://www.google.com/url?q=https%3A%2F%2Fneuronaldynamics.epfl.ch%2Fonline%2FCh17.S1.html&sa=D&sntz=1&usg=AFQjCNGkguSyzf2wqjGnE43Vb2ZgK-bAFg">https://neuronaldynamics.epfl.ch/online/Ch17.S1.html</a>, the <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.pnas.org%2Fcontent%2F79%2F8%2F2554&sa=D&sntz=1&usg=AFQjCNH9Hx14XDoV7ImQ5QRiGlapmqyQag">original paper</a> is a great read as well.).</p>
+<p><a href="https://www.youtube.com/watch?v=DKyzcbNr8WE" target=_blank>John Hopfield</a> in 1982 proposed a neat idea. It was a network that could store memories and recall them when presented with a partial cue. There are many tutorials out there on Hopfield network (my personal favourite is <a href="https://www.google.com/url?q=https%3A%2F%2Fneuronaldynamics.epfl.ch%2Fonline%2FCh17.S1.html&sa=D&sntz=1&usg=AFQjCNGkguSyzf2wqjGnE43Vb2ZgK-bAFg" target=_blank>https://neuronaldynamics.epfl.ch/online/Ch17.S1.html</a>, the <a href="https://www.google.com/url?q=https%3A%2F%2Fwww.pnas.org%2Fcontent%2F79%2F8%2F2554&sa=D&sntz=1&usg=AFQjCNH9Hx14XDoV7ImQ5QRiGlapmqyQag" target=_blank>original paper</a> is a great read as well.).</p>
 <p>These networks are highly studied. Despite their limitations and non-biological nature, they are still very popular among neuroscientits for their simplicity and tractability. Their storage capacity is barely enough: a network with N neurons stores roughly 0.14N memories (still linear though).</p>
-<p>This note is about recent progress on these networks proposed by <a href="https://www.google.com/url?q=https%3A%2F%2Farxiv.org%2Fabs%2F1606.01164&sa=D&sntz=1&usg=AFQjCNH3UjDPbTBmt30tPHiAjmysi92lfw">Krotov and Hopfield in 2016</a> which has shown great promise in practice e.g. <a href="https://www.google.com/url?q=https%3A%2F%2Farxiv.org%2Fabs%2F2008.02217&sa=D&sntz=1&usg=AFQjCNFz8IpDC5_hxJpKkf-Be76e47Mb9g">Hopfield Networks is All You Need</a> (vis-à-vis <a href="https://www.google.com/url?q=https%3A%2F%2Fpapers.nips.cc%2Fpaper%2F7181-attention-is-all-you-need.pdf&sa=D&sntz=1&usg=AFQjCNH56HZZSxCt5XFFNJ9vJ66EUsHXNA">Attention is all you need</a>).</p>
+<p>This note is about recent progress on these networks proposed by <a href="https://www.google.com/url?q=https%3A%2F%2Farxiv.org%2Fabs%2F1606.01164&sa=D&sntz=1&usg=AFQjCNH3UjDPbTBmt30tPHiAjmysi92lfw" target=_blank>Krotov and Hopfield in 2016</a> which has shown great promise in practice e.g. <a href="https://www.google.com/url?q=https%3A%2F%2Farxiv.org%2Fabs%2F2008.02217&sa=D&sntz=1&usg=AFQjCNFz8IpDC5_hxJpKkf-Be76e47Mb9g" target=_blank>Hopfield Networks is All You Need</a> (vis-à-vis <a href="https://www.google.com/url?q=https%3A%2F%2Fpapers.nips.cc%2Fpaper%2F7181-attention-is-all-you-need.pdf&sa=D&sntz=1&usg=AFQjCNH56HZZSxCt5XFFNJ9vJ66EUsHXNA" target=_blank>Attention is all you need</a>).</p>
 <p>There are two major feats achieved in this work.</p>
 <ul>
-<li>Dense networks can store many more memories than the number of neurons using rectified polynomials (ee note: a polynomial signal generator and a diode in series) in the update rule. Probably because higher order polynomials can easily tease apart two patterns which looks tightly correlated to the traditional update rule. These are <a href="https://www.google.com/url?q=https%3A%2F%2Farxiv.org%2Fabs%2F2008.06996&sa=D&sntz=1&usg=AFQjCNFDp-7In65kJP6viqs9cBTiJct89A">very non-biological</a>!</li>
+<li>Dense networks can store many more memories than the number of neurons using rectified polynomials (ee note: a polynomial signal generator and a diode in series) in the update rule. Probably because higher order polynomials can easily tease apart two patterns which looks tightly correlated to the traditional update rule. These are <a href="https://www.google.com/url?q=https%3A%2F%2Farxiv.org%2Fabs%2F2008.06996&sa=D&sntz=1&usg=AFQjCNFDp-7In65kJP6viqs9cBTiJct89A" target=_blank>very non-biological</a>!</li>
 <li>They pointed out a connection or a duality between recurrent networks of Hopfield type and feedforward networks. Specifically, they work out how the activation function of feedforward network is related to update rule in the Hopfield network.</li>
 </ul>
 <p><strong>A sidenote</strong></p>
-<p>Long time ago, a Russian psychologist wrote a book <a href="https://books.google.co.in/books/about/The_Mind_of_a_Mnemonist.html?id=HTsSszl2ogcC&redir_esc=y">The Mind of a Mnemonist</a> about a person who couldn&rsquo;t forget anything. He could recall all the details from any meeting years ago almost flawlessly. The cost of this seemingly endless memory capacity was the inability to generalize or to see patterns. For him there is no difference between these two lists of numbers: [1,2,3,4,5,6,7&mldr;,9] and [9,1,2,4,7,8..]. If he was a deer, he would never be able to learn that &ldquo;all tigers are dangerous&rdquo;; only that particular tiger with that particular stripe patterns who attacked him on that particular day is dangerous!</p>
+<p>Long time ago, a Russian psychologist wrote a book <a href="https://books.google.co.in/books/about/The_Mind_of_a_Mnemonist.html?id=HTsSszl2ogcC&redir_esc=y" target=_blank>The Mind of a Mnemonist</a> about a person who couldn&rsquo;t forget anything. He could recall all the details from any meeting years ago almost flawlessly. The cost of this seemingly endless memory capacity was the inability to generalize or to see patterns. For him there is no difference between these two lists of numbers: [1,2,3,4,5,6,7&mldr;,9] and [9,1,2,4,7,8..]. If he was a deer, he would never be able to learn that &ldquo;all tigers are dangerous&rdquo;; only that particular tiger with that particular stripe patterns who attacked him on that particular day is dangerous!</p>
 <p>The point being that there is a trade off between the ability to generalize (<strong>features</strong> learning) and ability to remember examples (<strong>prototype</strong> learning). Animals with higher cognitive facilities such as mice learn prototypes first, then they quickly learn the features. Flies, on the other hand, learn prototypes but can&rsquo;t generalize well or at all. Today&rsquo;s neural network, AFAIK, seems to take the reverse direction: learn features first, and when overtrained learns prototypes.</p>
-<p><a href="https://www.google.com/url?q=https%3A%2F%2Fgithub.com%2Fdilawar%2Falgorithms%2Ftree%2Fmaster%2FMemoryNetwork%2FDenseAssociativeNetworks&sa=D&sntz=1&usg=AFQjCNEYb598UlkM0LKhmaTDzNemPHN9fw">https://github.com/dilawar/algorithms/tree/master/MemoryNetwork/DenseAssociativeNetworks</a> has a Python3 implementation for this paper for the XOR function.</p>
+<p><a href="https://www.google.com/url?q=https%3A%2F%2Fgithub.com%2Fdilawar%2Falgorithms%2Ftree%2Fmaster%2FMemoryNetwork%2FDenseAssociativeNetworks&sa=D&sntz=1&usg=AFQjCNEYb598UlkM0LKhmaTDzNemPHN9fw" target=_blank>https://github.com/dilawar/algorithms/tree/master/MemoryNetwork/DenseAssociativeNetworks</a> has a Python3 implementation for this paper for the XOR function.</p>
 </div>
-<div class=post-tags>
-<nav class="nav tags">
-<ul class=flat>
-<li><a href=/tags/dense-associative-memory>dense-associative-memory</a></li>
-<li><a href=/tags/hopfield-network>hopfield-network</a></li>
-</ul>
-</nav>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Categories</p>
 </div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<div class=termsfloating_right>
+<p>
+<a href=/categories/biological-systems/>biological-systems</a>
+</p>
 </div>
-<div class="footer wrapper">
-<nav class=nav>
-<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
+<div class=clearit></div>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Tags</p>
 </div>
+<div class=termsfloating_right>
+<p>
+<a href=/tags/dense-associative-memory/>dense-associative-memory</a>
+<a href=/tags/hopfield-network/>hopfield-network</a>
+</p>
+</div>
+<div class=clearit></div>
+</div>
+</article>
+</div>
+</main>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
-<script>feather.replace()</script>
+<script src=/js/dark-mode.js></script>
 </body>
 </html>

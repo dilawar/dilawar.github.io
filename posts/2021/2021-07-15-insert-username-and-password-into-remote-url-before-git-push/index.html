@@ -1,7 +1,17 @@
-<!doctype html><html>
+<!doctype html><html lang=en>
 <head>
 <meta charset=utf-8>
-<meta http-equiv=x-ua-compatible content="IE=edge"><title>Insert username and password into remote url before git push - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<title>Insert username and password into remote url before git push | Dilawar's Blog</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Hugo 0.89.2">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=keywords content="git,script,python3">
+<link rel=stylesheet type=text/css media=screen href=/css/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=/css/main.css>
+<link rel=stylesheet type=text/css media=screen href=/css/all.css><link rel=stylesheet href=/css/katex.css crossorigin=anonymous>
+<script defer src=/js/katex.js integrity=sha384-PFWG8XW41D5NzhNv5FegM1CUkw9nNLdWug8DuwnUoNEVop9n5frjcnbtsZtxTNjw crossorigin=anonymous></script>
+<script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
 <meta property="og:title" content="Insert username and password into remote url before git push">
 <meta property="og:description" content="I wrote a small script that is a wrapper around git push. It modifies the remote url and insert username and password (read from env) from it. No need to store ssh keys on remote server or git clone with https credentials.
 For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then USER environment variable. Similarly it looks for GITHUB_TOKEN, GIT_TOKEN for tokens. Fot gitlab.com repo, it looks for GITLAB_USER or GIT_USER or USER for username, and GITLAB_TOKEN, GIT_TOKEN for password.">
@@ -13,47 +23,55 @@ For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then
 <meta name=twitter:title content="Insert username and password into remote url before git push">
 <meta name=twitter:description content="I wrote a small script that is a wrapper around git push. It modifies the remote url and insert username and password (read from env) from it. No need to store ssh keys on remote server or git clone with https credentials.
 For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then USER environment variable. Similarly it looks for GITHUB_TOKEN, GIT_TOKEN for tokens. Fot gitlab.com repo, it looks for GITLAB_USER or GIT_USER or USER for username, and GITLAB_TOKEN, GIT_TOKEN for password.">
-<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
-<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
-<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
-<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
-<script src=https://dilawar.github.iojs/main.js></script>
-<script src=https://dilawar.github.iojs/abc.js></script>
-<script src=https://dilawar.github.iojs/xyz.js></script>
-<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+<meta itemprop=name content="Insert username and password into remote url before git push">
+<meta itemprop=description content="I wrote a small script that is a wrapper around git push. It modifies the remote url and insert username and password (read from env) from it. No need to store ssh keys on remote server or git clone with https credentials.
+For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then USER environment variable. Similarly it looks for GITHUB_TOKEN, GIT_TOKEN for tokens. Fot gitlab.com repo, it looks for GITLAB_USER or GIT_USER or USER for username, and GITLAB_TOKEN, GIT_TOKEN for password."><meta itemprop=datePublished content="2021-07-15T00:00:00+00:00">
+<meta itemprop=dateModified content="2021-07-15T00:00:00+00:00">
+<meta itemprop=wordCount content="410">
+<meta itemprop=keywords content="git,script,python3,">
 </head>
 <body>
-<div class="container wrapper post">
-<div class=header>
-<base href=https://dilawar.github.io>
-<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
-<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
-<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
-</nav>
+<header>
+<div id=titletext>
+<h2 id=title><a href=https://dilawar.github.io>Dilawar's Blog</a></h2>
 </div>
-<nav class=nav>
-<ul class=flat>
-<li>
-<a href=/>Home</a>
-</li>
-<li>
-<a href=/posts>All posts</a>
-</li>
-<li>
-<a href=/about>About</a>
-</li>
-<li>
-<a href=/tags>Tags</a>
-</li>
+<div id=title-description>
+<p id=subtitle>watch -n 1 /dev/null</p>
+<div id=social>
+<nav><ul>
+<li><a href=https://github.com/dilawar><i title=Github class="icons fab fa-github"></i></a></li>
+<li><a><i title="Switch Dark Mode" class="dark-mode icons fas fa-moon"></i></a></li>
+</ul></nav>
+</div>
+</div>
+<div id=mainmenu>
+<nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>All posts</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=/tags>Tags</a></li>
 </ul>
 </nav>
 </div>
+</header>
+<main>
+<div class=post>
+<article>
 <div class=post-header>
+<div class=meta>
+<div class=date>
+<span class=day>15</span>
+<span class=rest>Jul 2021</span>
+</div>
+</div>
+<div class=matter>
 <h1 class=title>Insert username and password into remote url before git push</h1>
-<div class=meta>Posted at &mdash; Jul 15, 2021</div>
+<p class=post-meta>
+<span class=post-meta>
+</span>
+</p>
+</div>
 </div>
 <div class=markdown>
 <p>I wrote a small script that is a wrapper around <code>git push</code>. It modifies the
@@ -67,109 +85,105 @@ If the script can&rsquo;t determine the username and password, it raises an exce
 <p>Then it calls <code>git push</code> on new url that has username and password. For example
 <code>git push https://github.com/dilawar/Scripts</code> will become <code>git push https://dilawar:mytoken@github.com/dilawar/Scritps</code>.</p>
 <p>You can find the script
-<a href=https://raw.githubusercontent.com/dilawar/Scripts/master/%2Cgit_push>here</a>.
+<a href=https://raw.githubusercontent.com/dilawar/Scripts/master/%2Cgit_push target=_blank>here</a>.
 Here is the fully reproduced one.</p>
-<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#007f7f>#!/usr/bin/env python3</span>
-<span style=color:#007f7f># pip3 install typer --user  # only dependency</span>
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-python data-lang=python><span style=color:#888>#!/usr/bin/env python3</span>
+<span style=color:#888># pip3 install typer --user  # only dependency</span>
 
-<span style=color:#fff;font-weight:700>import</span> sys
-<span style=color:#fff;font-weight:700>import</span> typing <span style=color:#fff;font-weight:700>as</span> T
-<span style=color:#fff;font-weight:700>import</span> subprocess
-<span style=color:#fff;font-weight:700>from</span> urllib.parse <span style=color:#fff;font-weight:700>import</span> urlparse
-<span style=color:#fff;font-weight:700>import</span> os
+<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>sys</span>
+<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>typing</span> <span style=color:#080;font-weight:700>as</span> <span style=color:#0e84b5;font-weight:700>T</span>
+<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>subprocess</span>
+<span style=color:#080;font-weight:700>from</span> <span style=color:#0e84b5;font-weight:700>urllib.parse</span> <span style=color:#080;font-weight:700>import</span> urlparse
+<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>os</span>
 
-<span style=color:#fff;font-weight:700>import</span> typer
+<span style=color:#080;font-weight:700>import</span> <span style=color:#0e84b5;font-weight:700>typer</span>
 
-app = typer.Typer()
+app <span style=color:#333>=</span> typer<span style=color:#333>.</span>Typer()
 
-git = <span style=color:#0ff;font-weight:700>&#34;git&#34;</span>
-
-
-<span style=color:#fff;font-weight:700>def</span> env(key:<span style=color:#fff;font-weight:700>str</span>, default=<span style=color:#fff;font-weight:700>None</span>) -&gt; T.Optional[<span style=color:#fff;font-weight:700>str</span>]:
-    <span style=color:#fff;font-weight:700>return</span> os.environ.get(key, default)
-
-<span style=color:#fff;font-weight:700>def</span> find_remote() -&gt; <span style=color:#fff;font-weight:700>str</span>:
-    remote = subprocess.check_output([git, <span style=color:#0ff;font-weight:700>&#34;remote&#34;</span>, <span style=color:#0ff;font-weight:700>&#34;-v&#34;</span>], text=<span style=color:#fff;font-weight:700>True</span>)
-    remote = [x <span style=color:#fff;font-weight:700>for</span> x in remote.split(<span style=color:#0ff;font-weight:700>&#34;</span><span style=color:#0ff;font-weight:700>\n</span><span style=color:#0ff;font-weight:700>&#34;</span>) <span style=color:#fff;font-weight:700>if</span> <span style=color:#0ff;font-weight:700>&#34;(push)&#34;</span> in x.strip()][<span style=color:#ff0;font-weight:700>0</span>]
-    remote = remote.split()[<span style=color:#ff0;font-weight:700>1</span>]
-    <span style=color:#fff;font-weight:700>return</span> remote
+git <span style=color:#333>=</span> <span style=background-color:#fff0f0>&#34;git&#34;</span>
 
 
-<span style=color:#fff;font-weight:700>def</span> get_user(domain) -&gt; T.Optional[<span style=color:#fff;font-weight:700>str</span>]:
-    <span style=color:#fff;font-weight:700>if</span> domain == <span style=color:#0ff;font-weight:700>&#34;github.com&#34;</span>:
-        <span style=color:#fff;font-weight:700>return</span> env(<span style=color:#0ff;font-weight:700>&#34;GITHUB_USER&#34;</span>, env(<span style=color:#0ff;font-weight:700>&#34;GIT_USER&#34;</span>, <span style=color:#fff;font-weight:700>None</span>))
-    <span style=color:#fff;font-weight:700>if</span> domain == <span style=color:#0ff;font-weight:700>&#34;gitlab.com&#34;</span>:
-        <span style=color:#fff;font-weight:700>return</span> env(<span style=color:#0ff;font-weight:700>&#34;GITLAB_USER&#34;</span>, env(<span style=color:#0ff;font-weight:700>&#34;GIT_USER&#34;</span>, <span style=color:#fff;font-weight:700>None</span>))
-    <span style=color:#fff;font-weight:700>return</span> env(<span style=color:#0ff;font-weight:700>&#39;GIT_USER&#39;</span>, env(<span style=color:#0ff;font-weight:700>&#39;USER&#39;</span>, <span style=color:#fff;font-weight:700>None</span>))
+<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>env</span>(key:<span style=color:#007020>str</span>, default<span style=color:#333>=</span><span style=color:#080;font-weight:700>None</span>) <span style=color:#333>-&gt;</span> T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>]:
+    <span style=color:#080;font-weight:700>return</span> os<span style=color:#333>.</span>environ<span style=color:#333>.</span>get(key, default)
 
-<span style=color:#fff;font-weight:700>def</span> get_token(domain) -&gt; T.Optional[<span style=color:#fff;font-weight:700>str</span>]:
-    <span style=color:#fff;font-weight:700>if</span> domain == <span style=color:#0ff;font-weight:700>&#34;github.com&#34;</span>:
-        <span style=color:#fff;font-weight:700>return</span> env(<span style=color:#0ff;font-weight:700>&#34;GITHUB_TOKEN&#34;</span>, env(<span style=color:#0ff;font-weight:700>&#34;GIT_TOKEN&#34;</span>, <span style=color:#fff;font-weight:700>None</span>))
-    <span style=color:#fff;font-weight:700>if</span> domain == <span style=color:#0ff;font-weight:700>&#34;gitlab.com&#34;</span>:
-        <span style=color:#fff;font-weight:700>return</span> env(<span style=color:#0ff;font-weight:700>&#34;GITLAB_TOKEN&#34;</span>, env(<span style=color:#0ff;font-weight:700>&#34;GIT_TOKEN&#34;</span>, <span style=color:#fff;font-weight:700>None</span>))
-    <span style=color:#fff;font-weight:700>return</span> env(<span style=color:#0ff;font-weight:700>&#34;GIT_TOKEN&#34;</span>, <span style=color:#fff;font-weight:700>None</span>)
+<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>find_remote</span>() <span style=color:#333>-&gt;</span> <span style=color:#007020>str</span>:
+    remote <span style=color:#333>=</span> subprocess<span style=color:#333>.</span>check_output([git, <span style=background-color:#fff0f0>&#34;remote&#34;</span>, <span style=background-color:#fff0f0>&#34;-v&#34;</span>], text<span style=color:#333>=</span><span style=color:#080;font-weight:700>True</span>)
+    remote <span style=color:#333>=</span> [x <span style=color:#080;font-weight:700>for</span> x <span style=color:#000;font-weight:700>in</span> remote<span style=color:#333>.</span>split(<span style=background-color:#fff0f0>&#34;</span><span style=color:#666;background-color:#fff0f0;font-weight:700>\n</span><span style=background-color:#fff0f0>&#34;</span>) <span style=color:#080;font-weight:700>if</span> <span style=background-color:#fff0f0>&#34;(push)&#34;</span> <span style=color:#000;font-weight:700>in</span> x<span style=color:#333>.</span>strip()][<span style=color:#00d;font-weight:700>0</span>]
+    remote <span style=color:#333>=</span> remote<span style=color:#333>.</span>split()[<span style=color:#00d;font-weight:700>1</span>]
+    <span style=color:#080;font-weight:700>return</span> remote
 
 
-<span style=color:#fff;font-weight:700>def</span> find_branch() -&gt; <span style=color:#fff;font-weight:700>str</span>:
-    branches = (
-        subprocess.check_output([git, <span style=color:#0ff;font-weight:700>&#34;branch&#34;</span>, <span style=color:#0ff;font-weight:700>&#34;-a&#34;</span>], text=<span style=color:#fff;font-weight:700>True</span>).strip().split(<span style=color:#0ff;font-weight:700>&#34;</span><span style=color:#0ff;font-weight:700>\n</span><span style=color:#0ff;font-weight:700>&#34;</span>)
+<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>get_user</span>(domain) <span style=color:#333>-&gt;</span> T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>]:
+    <span style=color:#080;font-weight:700>if</span> domain <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;github.com&#34;</span>:
+        <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GITHUB_USER&#34;</span>, env(<span style=background-color:#fff0f0>&#34;GIT_USER&#34;</span>, <span style=color:#080;font-weight:700>None</span>))
+    <span style=color:#080;font-weight:700>if</span> domain <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;gitlab.com&#34;</span>:
+        <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GITLAB_USER&#34;</span>, env(<span style=background-color:#fff0f0>&#34;GIT_USER&#34;</span>, <span style=color:#080;font-weight:700>None</span>))
+    <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#39;GIT_USER&#39;</span>, env(<span style=background-color:#fff0f0>&#39;USER&#39;</span>, <span style=color:#080;font-weight:700>None</span>))
+
+<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>get_token</span>(domain) <span style=color:#333>-&gt;</span> T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>]:
+    <span style=color:#080;font-weight:700>if</span> domain <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;github.com&#34;</span>:
+        <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GITHUB_TOKEN&#34;</span>, env(<span style=background-color:#fff0f0>&#34;GIT_TOKEN&#34;</span>, <span style=color:#080;font-weight:700>None</span>))
+    <span style=color:#080;font-weight:700>if</span> domain <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;gitlab.com&#34;</span>:
+        <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GITLAB_TOKEN&#34;</span>, env(<span style=background-color:#fff0f0>&#34;GIT_TOKEN&#34;</span>, <span style=color:#080;font-weight:700>None</span>))
+    <span style=color:#080;font-weight:700>return</span> env(<span style=background-color:#fff0f0>&#34;GIT_TOKEN&#34;</span>, <span style=color:#080;font-weight:700>None</span>)
+
+
+<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>find_branch</span>() <span style=color:#333>-&gt;</span> <span style=color:#007020>str</span>:
+    branches <span style=color:#333>=</span> (
+        subprocess<span style=color:#333>.</span>check_output([git, <span style=background-color:#fff0f0>&#34;branch&#34;</span>, <span style=background-color:#fff0f0>&#34;-a&#34;</span>], text<span style=color:#333>=</span><span style=color:#080;font-weight:700>True</span>)<span style=color:#333>.</span>strip()<span style=color:#333>.</span>split(<span style=background-color:#fff0f0>&#34;</span><span style=color:#666;background-color:#fff0f0;font-weight:700>\n</span><span style=background-color:#fff0f0>&#34;</span>)
     )
-    branch = [x.strip() <span style=color:#fff;font-weight:700>for</span> x in branches <span style=color:#fff;font-weight:700>if</span> x.strip()[<span style=color:#ff0;font-weight:700>0</span>] == <span style=color:#0ff;font-weight:700>&#34;*&#34;</span>][<span style=color:#ff0;font-weight:700>0</span>]
-    <span style=color:#fff;font-weight:700>return</span> branch[<span style=color:#ff0;font-weight:700>1</span>:].strip()  <span style=color:#007f7f># remote leading *</span>
+    branch <span style=color:#333>=</span> [x<span style=color:#333>.</span>strip() <span style=color:#080;font-weight:700>for</span> x <span style=color:#000;font-weight:700>in</span> branches <span style=color:#080;font-weight:700>if</span> x<span style=color:#333>.</span>strip()[<span style=color:#00d;font-weight:700>0</span>] <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;*&#34;</span>][<span style=color:#00d;font-weight:700>0</span>]
+    <span style=color:#080;font-weight:700>return</span> branch[<span style=color:#00d;font-weight:700>1</span>:]<span style=color:#333>.</span>strip()  <span style=color:#888># remote leading *</span>
 
 
-<span style=color:#fff;font-weight:700>def</span> rewrite_remote(remote: <span style=color:#fff;font-weight:700>str</span>) -&gt; <span style=color:#fff;font-weight:700>str</span>:
-    o = urlparse(remote)
-    <span style=color:#fff;font-weight:700>assert</span> o.scheme in [<span style=color:#0ff;font-weight:700>&#34;https&#34;</span>, <span style=color:#0ff;font-weight:700>&#34;http&#34;</span>]
-    U, P = get_user(o.netloc), get_token(o.netloc)
-    <span style=color:#fff;font-weight:700>assert</span> U is not <span style=color:#fff;font-weight:700>None</span>, <span style=color:#0ff;font-weight:700>&#34;Could not determine user&#34;</span>
-    <span style=color:#fff;font-weight:700>assert</span> P is not <span style=color:#fff;font-weight:700>None</span>, <span style=color:#0ff;font-weight:700>&#34;Could not determine token&#34;</span>
-    <span style=color:#fff;font-weight:700>return</span> o.geturl().replace(<span style=color:#0ff;font-weight:700>f</span><span style=color:#0ff;font-weight:700>&#34;</span><span style=color:#0ff;font-weight:700>{</span>o.scheme<span style=color:#0ff;font-weight:700>}</span><span style=color:#0ff;font-weight:700>://&#34;</span>, <span style=color:#0ff;font-weight:700>f</span><span style=color:#0ff;font-weight:700>&#34;</span><span style=color:#0ff;font-weight:700>{</span>o.scheme<span style=color:#0ff;font-weight:700>}</span><span style=color:#0ff;font-weight:700>://</span><span style=color:#0ff;font-weight:700>{</span>U<span style=color:#0ff;font-weight:700>}</span><span style=color:#0ff;font-weight:700>:</span><span style=color:#0ff;font-weight:700>{</span>P<span style=color:#0ff;font-weight:700>}</span><span style=color:#0ff;font-weight:700>@&#34;</span>)
+<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>rewrite_remote</span>(remote: <span style=color:#007020>str</span>) <span style=color:#333>-&gt;</span> <span style=color:#007020>str</span>:
+    o <span style=color:#333>=</span> urlparse(remote)
+    <span style=color:#080;font-weight:700>assert</span> o<span style=color:#333>.</span>scheme <span style=color:#000;font-weight:700>in</span> [<span style=background-color:#fff0f0>&#34;https&#34;</span>, <span style=background-color:#fff0f0>&#34;http&#34;</span>]
+    U, P <span style=color:#333>=</span> get_user(o<span style=color:#333>.</span>netloc), get_token(o<span style=color:#333>.</span>netloc)
+    <span style=color:#080;font-weight:700>assert</span> U <span style=color:#000;font-weight:700>is</span> <span style=color:#000;font-weight:700>not</span> <span style=color:#080;font-weight:700>None</span>, <span style=background-color:#fff0f0>&#34;Could not determine user&#34;</span>
+    <span style=color:#080;font-weight:700>assert</span> P <span style=color:#000;font-weight:700>is</span> <span style=color:#000;font-weight:700>not</span> <span style=color:#080;font-weight:700>None</span>, <span style=background-color:#fff0f0>&#34;Could not determine token&#34;</span>
+    <span style=color:#080;font-weight:700>return</span> o<span style=color:#333>.</span>geturl()<span style=color:#333>.</span>replace(<span style=background-color:#fff0f0>f</span><span style=background-color:#fff0f0>&#34;</span><span style=background-color:#eee>{</span>o<span style=color:#333>.</span>scheme<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>://&#34;</span>, <span style=background-color:#fff0f0>f</span><span style=background-color:#fff0f0>&#34;</span><span style=background-color:#eee>{</span>o<span style=color:#333>.</span>scheme<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>://</span><span style=background-color:#eee>{</span>U<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>:</span><span style=background-color:#eee>{</span>P<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>@&#34;</span>)
 
-<span style=color:#fff;font-weight:700>def</span> git_push(url, branch):
-    cmd = <span style=color:#0ff;font-weight:700>f</span><span style=color:#0ff;font-weight:700>&#34;git push </span><span style=color:#0ff;font-weight:700>{</span>url<span style=color:#0ff;font-weight:700>}</span><span style=color:#0ff;font-weight:700> </span><span style=color:#0ff;font-weight:700>{</span>branch<span style=color:#0ff;font-weight:700>}</span><span style=color:#0ff;font-weight:700>&#34;</span>
-    subprocess.run(cmd.split())
+<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>git_push</span>(url, branch):
+    cmd <span style=color:#333>=</span> <span style=background-color:#fff0f0>f</span><span style=background-color:#fff0f0>&#34;git push </span><span style=background-color:#eee>{</span>url<span style=background-color:#eee>}</span><span style=background-color:#fff0f0> </span><span style=background-color:#eee>{</span>branch<span style=background-color:#eee>}</span><span style=background-color:#fff0f0>&#34;</span>
+    subprocess<span style=color:#333>.</span>run(cmd<span style=color:#333>.</span>split())
 
-@app.command()
-<span style=color:#fff;font-weight:700>def</span> main(remote: T.Optional[<span style=color:#fff;font-weight:700>str</span>] = <span style=color:#fff;font-weight:700>None</span>, branch: T.Optional[<span style=color:#fff;font-weight:700>str</span>] = <span style=color:#fff;font-weight:700>None</span>):
-    <span style=color:#007f7f># get the remote</span>
-    remote = find_remote() <span style=color:#fff;font-weight:700>if</span> remote is <span style=color:#fff;font-weight:700>None</span> <span style=color:#fff;font-weight:700>else</span> remote
-    branch = find_branch() <span style=color:#fff;font-weight:700>if</span> branch is <span style=color:#fff;font-weight:700>None</span> <span style=color:#fff;font-weight:700>else</span> branch
-    url = rewrite_remote(remote)
+<span style=color:#555;font-weight:700>@app</span><span style=color:#333>.</span>command()
+<span style=color:#080;font-weight:700>def</span> <span style=color:#06b;font-weight:700>main</span>(remote: T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>] <span style=color:#333>=</span> <span style=color:#080;font-weight:700>None</span>, branch: T<span style=color:#333>.</span>Optional[<span style=color:#007020>str</span>] <span style=color:#333>=</span> <span style=color:#080;font-weight:700>None</span>):
+    <span style=color:#888># get the remote</span>
+    remote <span style=color:#333>=</span> find_remote() <span style=color:#080;font-weight:700>if</span> remote <span style=color:#000;font-weight:700>is</span> <span style=color:#080;font-weight:700>None</span> <span style=color:#080;font-weight:700>else</span> remote
+    branch <span style=color:#333>=</span> find_branch() <span style=color:#080;font-weight:700>if</span> branch <span style=color:#000;font-weight:700>is</span> <span style=color:#080;font-weight:700>None</span> <span style=color:#080;font-weight:700>else</span> branch
+    url <span style=color:#333>=</span> rewrite_remote(remote)
     git_push(url, branch)
 
 
-<span style=color:#fff;font-weight:700>if</span> __name__ == <span style=color:#0ff;font-weight:700>&#34;__main__&#34;</span>:
+<span style=color:#080;font-weight:700>if</span> __name__ <span style=color:#333>==</span> <span style=background-color:#fff0f0>&#34;__main__&#34;</span>:
     app()
 </code></pre></div><h3 id=usage>Usage</h3>
 <p>Save it as <code>gh_push.py</code> somewhere in <code>$PATH</code> and make it executable. Export
 <code>GITHUB_USER</code> and <code>GITHUB_TOKEN</code> and,</p>
-<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gh_push.py
+<div class=highlight><pre tabindex=0 style=background-color:#fff;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ gh_push.py
 </code></pre></div><p>Its very handly when you don&rsquo;t want to copy your ssh keys to a remote server or
 don&rsquo;t want to clone with credentials e.g. <code>git clone https://dilawar:mytoken@github.com/dilawar/Scripts</code>.</p>
 </div>
-<div class=post-tags>
-<nav class="nav tags">
-<ul class=flat>
-<li><a href=/tags/git>git</a></li>
-<li><a href=/tags/script>script</a></li>
-<li><a href=/tags/python3>python3</a></li>
-</ul>
-</nav>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Tags</p>
 </div>
-<div id=disqus_thread></div>
-<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
-<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
-Disqus.</a></noscript>
-<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+<div class=termsfloating_right>
+<p>
+<a href=/tags/git/>git</a>
+<a href=/tags/python3/>python3</a>
+<a href=/tags/script/>script</a>
+</p>
 </div>
-<div class="footer wrapper">
-<nav class=nav>
-<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
-</nav>
+<div class=clearit></div>
 </div>
+</article>
+</div>
+</main>
 <script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
 <script async src=https://www.google-analytics.com/analytics.js></script>
-<script>feather.replace()</script>
+<script src=/js/dark-mode.js></script>
 </body>
 </html>
