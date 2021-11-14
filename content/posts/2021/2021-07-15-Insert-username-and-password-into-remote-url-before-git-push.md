@@ -1,30 +1,34 @@
 ---
-title: Insert username and password into remote url before git push
+title: Insert credentials from environment into remote url when `git push`
 date: 2021-07-15
 tags:
     - git
     - script
-    - python3
-comments: true
+comment: true
 ---
 
-I wrote a small script that is a wrapper around `git push`. It modifies the
-`remote` url and insert username and password (read from `env`) from it. No need
-to store ssh keys on remote server or git clone with https credentials.
+You are on a remote server. You don't want to store your credentials on that
+machine. You can temporary export your credentials as environment variable e.g.
+`export GITHUB_USER=dilawar` and `export GITHUB_PASSWORD=ladidadadad`.
 
-For `github.com` repo, It looks for `GITHUB_USER` first, then for `GIT_USER`,
-and then `USER` environment variable. Similarly it looks for `GITHUB_TOKEN`,
-`GIT_TOKEN` for tokens. Fot `gitlab.com` repo, it looks for `GITLAB_USER` or
+Here is a small script that acts as a wrapper around `git push`. It modifies the
+`remote` url and insert username and password (read from `env`). No need to
+store ssh keys on remote server or git clone with https credentials.
+
+For `github.com`, it looks for `GITHUB_USER` first, then for `GIT_USER`, and
+then `USER` environment variable. Similarly it looks for `GITHUB_TOKEN`,
+`GIT_TOKEN` for tokens. For `gitlab.com`, it looks for `GITLAB_USER` or
 `GIT_USER` or `USER` for username, and `GITLAB_TOKEN`, `GIT_TOKEN` for password.
-If the script can't determine the username and password, it raises an exception.
 
-Then it calls `git push` on new url that has username and password. For example
-`git push https://github.com/dilawar/Scripts` will become `git push
+If the script can't determine the username and password, it throws an exception.
+
+On success, it calls `git push` with new url (that has username and password).
+For example `git push https://github.com/dilawar/Scripts` will become `git push
 https://dilawar:mytoken@github.com/dilawar/Scritps`.
 
 You can find the script
 [here](https://raw.githubusercontent.com/dilawar/Scripts/master/%2Cgit_push).
-Here is the fully reproduced one. 
+
 
 ```python
 #!/usr/bin/env python3
@@ -104,14 +108,8 @@ if __name__ == "__main__":
 ### Usage
 
 Save it as `gh_push.py` somewhere in `$PATH` and make it executable. Export
-`GITHUB_USER` and `GITHUB_TOKEN` and,
+`GITHUB_USER` and `GITHUB_TOKEN`. And instead of `git push`. do
 
-
-```sh
-$ gh_push.py
+```shell
+gh_push.py
 ```
-
-Its very handly when you don't want to copy your ssh keys to a remote server or
-don't want to clone with credentials e.g. `git clone
-https://dilawar:mytoken@github.com/dilawar/Scripts`.
-
