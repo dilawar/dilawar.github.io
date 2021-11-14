@@ -1,9 +1,3 @@
 baseURL = ""
 languageCode = "en-us"
 title = "watch -n 1 /dev/null"
-
-[module]
-[[module.imports]]
-path = 'github.com/alex-shpak/hugo-book'
-
-
