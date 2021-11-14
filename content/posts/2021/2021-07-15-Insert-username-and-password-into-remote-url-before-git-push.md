@@ -1,10 +1,10 @@
 ---
 title: Insert credentials from environment into remote url when `git push`
 date: 2021-07-15
-tags:
-    - git
-    - script
-comment: true
+commentable: true
+type: post
+categories: [script]
+tags: [git, script]
 ---
 
 You are on a remote server. You don't want to store your credentials on that
@@ -110,6 +110,6 @@ if __name__ == "__main__":
 Save it as `gh_push.py` somewhere in `$PATH` and make it executable. Export
 `GITHUB_USER` and `GITHUB_TOKEN`. And instead of `git push`. do
 
-```shell
+```sh
 gh_push.py
 ```
