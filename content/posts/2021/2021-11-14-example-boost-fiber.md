@@ -1,8 +1,9 @@
 ---
 title: An Example of Boost Fiber
-author: Dilawar Singh
+date: 2021-11-14
+commentable: true
 categories: [concurrency]
-tags: [c++, concurrency,boost]
+tags: [C++, concurrency, boost]
 ---
 
 A fiber is _just a thread implemented in user space_.
