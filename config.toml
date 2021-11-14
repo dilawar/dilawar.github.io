@@ -6,6 +6,8 @@ theme = "hugo-vitae"
 enableRobotsTXT = true
 googleAnalytics = "UA-180197482-1"
 
+custom_css = ["css/custom.css"]
+
 [params]
     homepage = false
     math = true
@@ -59,3 +61,4 @@ url = "https://github.com/dilawar"
    tag = "tags"
    category = "categories"
    series = "series"
+
