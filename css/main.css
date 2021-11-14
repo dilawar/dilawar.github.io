@@ -497,6 +497,8 @@ table th {
 .tags {
   text-align: center;
   padding: 5px 0 5px 0;
+  margin-top: 10px;
+  font-size: small;
 }
 
 .clearit {
