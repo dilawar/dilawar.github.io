@@ -1,8 +1,6 @@
 ---
 title: Insert credentials from environment into remote url when `git push`
 date: 2021-07-15
-commentable: true
-type: post
 categories: [script]
 tags: [git, script]
 ---
