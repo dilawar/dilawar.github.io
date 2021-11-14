@@ -5,6 +5,7 @@ author = "Dilawar Singh"
 theme = "hugo-vitae"
 enableRobotsTXT = true
 googleAnalytics = "UA-180197482-1"
+copyright = "© 2021, Dilawar Singh"
 
 custom_css = ["css/custom.css"]
 
@@ -18,11 +19,10 @@ custom_css = ["css/custom.css"]
     # Content types which are included in home page recent posts list.
     mainSections = ["posts"]
 
-    readingTime = false
-    wordCount = false
 
 [params.comments]
 enabled = true
+engine = "disqus"
 
 [params.comments.disqus]
 shortname = "dilawarsblog"
@@ -55,6 +55,12 @@ weight = 4
 name = "Github"
 icon = "fab fa-github"
 url = "https://github.com/dilawar"
+
+[[params.social]]
+name = "Email"
+icon = "fab fa-envelope"
+cmd = "mailto:dilawar.s.rajput@gmail.com"
+
 
 # Enable tags.
 [taxonomies]
