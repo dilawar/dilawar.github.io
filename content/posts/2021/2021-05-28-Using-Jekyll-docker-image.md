@@ -4,7 +4,9 @@ date: 2021-05-30
 comments: true
 ---
 
-I use [Jekyll](https://jekyllrb.com/) to build this site. Recently, I switched
+__Update__: I no longer use Jekyll. I use [Hugo](https://gohugo.io) now.
+
+I usa [Jekyll](https://jekyllrb.com/) to build this site. Recently, I switched
 to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll
 successfully using `pacman` but could not run it.
 
