@@ -12,21 +12,24 @@
 <script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
 <script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
 <meta property="og:title" content="Using Jekyll docker image to build your site">
-<meta property="og:description" content="I use Jekyll to build this site. Recently, I switched to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll successfully using pacman but could not run it.
-$ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can't find gem jekyll (>= 0.a) with executable jekyll (Gem::GemNotFoundException) from /usr/lib/ruby/3.0.0/rubygems.rb:300:in `activate_bin_path' from /usr/bin/jekyll:23:in `<main>' I don&rsquo;t like to fight with installation process. And also I know very little about ruby. So I turned to docker which I have used in the past.">
+<meta property="og:description" content="Update: I no longer use Jekyll. I use Hugo now.
+I usa Jekyll to build this site. Recently, I switched to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll successfully using pacman but could not run it.
+$ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can't find gem jekyll (>= 0.a) with executable jekyll (Gem::GemNotFoundException) from /usr/lib/ruby/3.0.0/rubygems.rb:300:in `activate_bin_path' from /usr/bin/jekyll:23:in `<main>' I don&rsquo;t like to fight with installation process. And also I know very little about ruby.">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://dilawar.github.io/posts/2021/2021-05-28-using-jekyll-docker-image/"><meta property="article:section" content="posts">
 <meta property="article:published_time" content="2021-05-30T00:00:00+00:00">
 <meta property="article:modified_time" content="2021-05-30T00:00:00+00:00">
 <meta name=twitter:card content="summary">
 <meta name=twitter:title content="Using Jekyll docker image to build your site">
-<meta name=twitter:description content="I use Jekyll to build this site. Recently, I switched to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll successfully using pacman but could not run it.
-$ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can't find gem jekyll (>= 0.a) with executable jekyll (Gem::GemNotFoundException) from /usr/lib/ruby/3.0.0/rubygems.rb:300:in `activate_bin_path' from /usr/bin/jekyll:23:in `<main>' I don&rsquo;t like to fight with installation process. And also I know very little about ruby. So I turned to docker which I have used in the past.">
+<meta name=twitter:description content="Update: I no longer use Jekyll. I use Hugo now.
+I usa Jekyll to build this site. Recently, I switched to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll successfully using pacman but could not run it.
+$ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can't find gem jekyll (>= 0.a) with executable jekyll (Gem::GemNotFoundException) from /usr/lib/ruby/3.0.0/rubygems.rb:300:in `activate_bin_path' from /usr/bin/jekyll:23:in `<main>' I don&rsquo;t like to fight with installation process. And also I know very little about ruby.">
 <meta itemprop=name content="Using Jekyll docker image to build your site">
-<meta itemprop=description content="I use Jekyll to build this site. Recently, I switched to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll successfully using pacman but could not run it.
-$ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can't find gem jekyll (>= 0.a) with executable jekyll (Gem::GemNotFoundException) from /usr/lib/ruby/3.0.0/rubygems.rb:300:in `activate_bin_path' from /usr/bin/jekyll:23:in `<main>' I don&rsquo;t like to fight with installation process. And also I know very little about ruby. So I turned to docker which I have used in the past."><meta itemprop=datePublished content="2021-05-30T00:00:00+00:00">
+<meta itemprop=description content="Update: I no longer use Jekyll. I use Hugo now.
+I usa Jekyll to build this site. Recently, I switched to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll successfully using pacman but could not run it.
+$ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can't find gem jekyll (>= 0.a) with executable jekyll (Gem::GemNotFoundException) from /usr/lib/ruby/3.0.0/rubygems.rb:300:in `activate_bin_path' from /usr/bin/jekyll:23:in `<main>' I don&rsquo;t like to fight with installation process. And also I know very little about ruby."><meta itemprop=datePublished content="2021-05-30T00:00:00+00:00">
 <meta itemprop=dateModified content="2021-05-30T00:00:00+00:00">
-<meta itemprop=wordCount content="224">
+<meta itemprop=wordCount content="234">
 <meta itemprop=keywords content>
 </head>
 <body>
@@ -73,7 +76,8 @@ $ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can'
 </div>
 </div>
 <div class=markdown>
-<p>I use <a href=https://jekyllrb.com/ target=_blank>Jekyll</a> to build this site. Recently, I switched
+<p><strong>Update</strong>: I no longer use Jekyll. I use <a href=https://gohugo.io target=_blank>Hugo</a> now.</p>
+<p>I usa <a href=https://jekyllrb.com/ target=_blank>Jekyll</a> to build this site. Recently, I switched
 to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll
 successfully using <code>pacman</code> but could not run it.</p>
 <div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-sh data-lang=sh>$ jekyll --help
