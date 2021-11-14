@@ -1,0 +1,197 @@
+<!doctype html><html lang=en>
+<head>
+<meta charset=utf-8>
+<title>An Example of Boost Fiber | Dilawar's Blog</title>
+<meta http-equiv=x-ua-compatible content="IE=edge">
+<meta name=generator content="Hugo 0.89.2">
+<meta name=viewport content="width=device-width,initial-scale=1">
+<meta name=author content="Dilawar Singh">
+<meta name=keywords content="c++,concurrency,boost">
+<link rel=stylesheet type=text/css media=screen href=/css/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=/css/main.css>
+<link rel=stylesheet type=text/css media=screen href=/css/all.css><link rel=stylesheet href=/css/katex.css crossorigin=anonymous>
+<script defer src=/js/katex.js integrity=sha384-PFWG8XW41D5NzhNv5FegM1CUkw9nNLdWug8DuwnUoNEVop9n5frjcnbtsZtxTNjw crossorigin=anonymous></script>
+<script defer src=/js/auto-render.js integrity=sha384-EN2q+JG5/3Z8gD7hT5WZqq+W+9wQR4P3IezfuZmGG5RkNXaaaks85seDJO7WkZlY crossorigin=anonymous onload=renderMathInElement(document.body)></script>
+<script>document.addEventListener("DOMContentLoaded",function(){renderMathInElement(document.body,{delimiters:[{left:"$$",right:"$$",display:!0},{left:"$",right:"$",display:!1}]})})</script>
+<meta property="og:title" content="An Example of Boost Fiber">
+<meta property="og:description" content="A fiber is just a thread implemented in user space.
+Fibers are easier to reason about and have advantages such as much cheaper context switching. Fibers are very well suited for handling concurrent IO operations. In such situations a processor mostly wait for the data to become available and threads usually have pretty big context switching cost. So multiple fibers running in a single thread is an effective solution.
+It is also much easier to reason about concurrency with fibers.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2021/2021-11-14-example-boost-fiber/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="An Example of Boost Fiber">
+<meta name=twitter:description content="A fiber is just a thread implemented in user space.
+Fibers are easier to reason about and have advantages such as much cheaper context switching. Fibers are very well suited for handling concurrent IO operations. In such situations a processor mostly wait for the data to become available and threads usually have pretty big context switching cost. So multiple fibers running in a single thread is an effective solution.
+It is also much easier to reason about concurrency with fibers.">
+<meta itemprop=name content="An Example of Boost Fiber">
+<meta itemprop=description content="A fiber is just a thread implemented in user space.
+Fibers are easier to reason about and have advantages such as much cheaper context switching. Fibers are very well suited for handling concurrent IO operations. In such situations a processor mostly wait for the data to become available and threads usually have pretty big context switching cost. So multiple fibers running in a single thread is an effective solution.
+It is also much easier to reason about concurrency with fibers.">
+<meta itemprop=wordCount content="548">
+<meta itemprop=keywords content="c++,concurrency,boost,">
+</head>
+<body>
+<header>
+<div id=titletext>
+<h2 id=title><a href=https://dilawar.github.io>Dilawar's Blog</a></h2>
+</div>
+<div id=title-description>
+<p id=subtitle>watch -n 1 /dev/null</p>
+<div id=social>
+<nav><ul>
+<li><a href=https://github.com/dilawar><i title=Github class="icons fab fa-github"></i></a></li>
+<li><a href=mailto:dilawar.s.rajput@gmail.com><i title=Email class="icons fab fa-envelope"></i></a></li>
+<li><a><i title="Switch Dark Mode" class="dark-mode icons fas fa-moon"></i></a></li>
+</ul></nav>
+</div>
+</div>
+<div id=mainmenu>
+<nav>
+<ul>
+<li><a href=/>Home</a></li>
+<li><a href=/posts>All posts</a></li>
+<li><a href=/about>About</a></li>
+<li><a href=/tags>Tags</a></li>
+</ul>
+</nav>
+</div>
+</header>
+<main>
+<div class=post>
+<article>
+<div class=post-header>
+<div class=matter>
+<h1 class=title>An Example of Boost Fiber</h1>
+<p class=post-meta>
+<span class=post-meta>
+<i class="fas fa-user"></i>&nbsp;
+Dilawar Singh
+</span>
+</p>
+</div>
+</div>
+<div class=markdown>
+<p>A fiber is <em>just a thread implemented in user space</em>.</p>
+<p>Fibers are easier to reason about and have advantages such as much cheaper
+context switching.  Fibers are very well suited for handling concurrent IO
+operations. In such situations a processor mostly wait for the data to become
+available and threads usually have pretty big context switching cost. So
+multiple fibers running in a single thread is an effective solution.</p>
+<p>It is also much easier to reason about concurrency with fibers. Watch this
+great talk by Nat Goldman on  <a href=https://youtu.be/e-NUmyBou8Q target=_blank>Youtube</a>.</p>
+<p>Here is a simple program I wrote to explore fibers. You can find the full
+example here
+<a href=https://github.com/dilawar/playground/blob/a5fba9f21ff121249c71bff75ee8964c1016aa3f/BOOST/fiber.cpp target=_blank>https://github.com/dilawar/playground/blob/a5fba9f21ff121249c71bff75ee8964c1016aa3f/BOOST/fiber.cpp</a>.</p>
+<p>The program has two functions: <code>print_a</code> prints <code>a</code> and <code>print_b</code> prints <code>b</code>
+and then launches a thread that prints <code>B</code> (in detached mode).</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>void</span> <span style=color:#a6e22e>print_a</span>()
+{
+    cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;a&#34;</span>;
+    boost<span style=color:#f92672>::</span>this_fiber<span style=color:#f92672>::</span>yield();
+}
+
+<span style=color:#66d9ef>void</span> <span style=color:#a6e22e>print_b</span>()
+{
+    cout <span style=color:#f92672>&lt;&lt;</span> <span style=color:#e6db74>&#34;b&#34;</span>;
+    std<span style=color:#f92672>::</span><span style=color:#66d9ef>thread</span> j([]() { printf(<span style=color:#e6db74>&#34;B&#34;</span>); });
+    j.detach();
+    boost<span style=color:#f92672>::</span>this_fiber<span style=color:#f92672>::</span>yield();
+}
+</code></pre></div><p>Following is the <em>main</em> function. We created a shared variable <code>i</code> initialized
+to 0. We use this a global state. We create two <code>detach</code>ed fibers. First one
+keeps calling <code>print_a</code> till <code>i &lt; 20</code>. Similarly, the second one loops on <code>print_b</code> till <code>i &lt; 20</code>. Both increment <code>i</code> by 1. When <code>i = 20</code>, both fibers should be able to <code>join</code>.</p>
+<div class=highlight><pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-cpp data-lang=cpp><span style=color:#66d9ef>int</span> <span style=color:#a6e22e>main</span>()
+{
+    <span style=color:#66d9ef>int</span> i <span style=color:#f92672>=</span> <span style=color:#ae81ff>0</span>;
+    boost<span style=color:#f92672>::</span>fibers<span style=color:#f92672>::</span>fiber([<span style=color:#f92672>&amp;</span>]() {
+        <span style=color:#66d9ef>do</span> {
+            print_a();
+            i<span style=color:#f92672>++</span>;
+        }
+        <span style=color:#66d9ef>while</span> (i <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>20</span>);
+    }).detach();
+
+    boost<span style=color:#f92672>::</span>fibers<span style=color:#f92672>::</span>fiber([<span style=color:#f92672>&amp;</span>]() {
+        <span style=color:#66d9ef>do</span> {
+            i<span style=color:#f92672>++</span>;
+            print_b();
+        } <span style=color:#66d9ef>while</span> (i <span style=color:#f92672>&lt;</span> <span style=color:#ae81ff>20</span>);
+    }).detach();
+
+    printf(<span style=color:#e6db74>&#34;X&#34;</span>);
+    <span style=color:#66d9ef>return</span> <span style=color:#ae81ff>0</span>;
+}
+</code></pre></div><p>Let’s guess the output of this program. It is most likely to be the same as if
+<code>std::thread</code>s were used instead of fiber.</p>
+<p><code>X</code> is printed first? <strong>Yes</strong>. Note that <code>detach()</code> is called on each fibers so
+neither of their functions are called. They are put in the background. Control
+passes to the fiber manager at <code>return 0;</code> when it asks the fibers to <code>join</code>.
+In fact, you can put more computations after the <code>printf("X");</code> statement and
+it would be computed before any fiber is called.</p>
+<p>As soon as we try to return from the <code>main</code>, fiber manager is asked to <code>join</code>
+the fibers. The first fiber <em>awakes</em>, <code>a</code> is printed and the fiber <code>yield</code>s the
+control to the manager. Fiber manager then wakes up the second fiber (who was
+waiting in the queue) that prints <code>b</code> and also launched a thread in the
+background that prints <code>B</code>. We can not be sure if <code>B</code> will be printed
+immediately after the <code>b</code> (it is a <code>std::thread</code>). <code>print_b</code> yields the cotrol and
+goes to sleep . The fiber manager wakes up first fiber again that calls
+<code>print_a</code> again and <code>a</code> is printed and so on. Note that <code>i</code> is also incremented
+every time either of the fibers are called.</p>
+<p>When <code>i</code> hits 20, both fibers terminates and <code>joined</code> and the main function <code>return 0;</code>.</p>
+<p>So we have <code>print_a</code> called 10 times and <code>print_b</code> is also called 10 times. In the output, we should have 10 <code>a</code>s, 10 <code>b</code>s and 10 <code>B</code>s. <code>B</code> may not strictly follow <code>b</code> but <code>b</code> must come after the <code>a</code>.</p>
+<p>Here are few runs of the program. Note that the location of <code>B</code> is not deterministic.</p>
+<ul>
+<li><code>XababBabBabBababBBabBabBabBabBB</code></li>
+<li><code>XababBabBabBabBabBabBabaBbBabBB</code></li>
+<li><code>XababBabBabBabBabBabBabBabBabBB</code></li>
+<li><code>XababBabBabBabBabBabBabBabBabBB</code></li>
+<li><code>XababBabBabBBababBabBabBabBabBB</code></li>
+<li><code>XababBabBabBabBabBabBabBabBabBB</code></li>
+<li><code>XababBabBabBababBBabBabBababBBB</code></li>
+<li><code>XababBabBabBababBBabBabBabBabBB</code></li>
+<li><code>XababBabBabBababBBabBabBabBabBB</code></li>
+<li><code>XababBabBabBabBabBababBBabBabBB</code></li>
+<li><code>XababBabBabBabBabBabBabBabBabBB</code></li>
+</ul>
+<h2 id=references>References</h2>
+<ol>
+<li>A great talk by Nat on Boost fibers <a href=https://youtu.be/e-NUmyBou8Q target=_blank>https://youtu.be/e-NUmyBou8Q</a></li>
+</ol>
+</div>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Categories</p>
+</div>
+<div class=termsfloating_right>
+<p>
+<a href=/categories/concurrency/>concurrency</a>
+</p>
+</div>
+<div class=clearit></div>
+<div class=tags>
+<div class=taxosfloating_left>
+<p>Tags</p>
+</div>
+<div class=termsfloating_right>
+<p>
+<a href=/tags/boost/>boost</a>
+<a href=/tags/c++/>c++</a>
+<a href=/tags/concurrency/>concurrency</a>
+</p>
+</div>
+<div class=clearit></div>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to load the comments.</noscript>
+</article>
+</div>
+</main>
+<footer>
+© 2021, Dilawar Singh
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+</footer><script src=/js/dark-mode.js></script>
+</body>
+</html>
