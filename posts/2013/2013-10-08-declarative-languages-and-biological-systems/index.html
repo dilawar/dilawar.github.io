@@ -1,0 +1,90 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Declarative languages and biological systems - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Declarative languages and biological systems">
+<meta property="og:description" content="A program written in declarative paradigm does not specify &ldquo;how to do it&rdquo;, at best, it tells the computer &ldquo;what to do&rdquo;. The spice-netlist is one such example, here we tell ngspice or some other spice (circuit simulator), what to compute (like .OP, .DC, .AC etc.). To be sure, this distinction is rather based on arguments which are nothing but &ldquo;hand-waving&rdquo;, but too many people use these terms to ignore them.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2013/2013-10-08-declarative-languages-and-biological-systems/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2013-10-08T00:00:00+00:00">
+<meta property="article:modified_time" content="2013-10-08T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Declarative languages and biological systems">
+<meta name=twitter:description content="A program written in declarative paradigm does not specify &ldquo;how to do it&rdquo;, at best, it tells the computer &ldquo;what to do&rdquo;. The spice-netlist is one such example, here we tell ngspice or some other spice (circuit simulator), what to compute (like .OP, .DC, .AC etc.). To be sure, this distinction is rather based on arguments which are nothing but &ldquo;hand-waving&rdquo;, but too many people use these terms to ignore them.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Declarative languages and biological systems</h1>
+<div class=meta>Posted at &mdash; Oct 8, 2013</div>
+</div>
+<div class=markdown>
+<p>A program written in declarative paradigm does not specify &ldquo;how to do it&rdquo;, at best, it tells the computer &ldquo;what to do&rdquo;. The spice-netlist is one such example, here we tell ngspice or some other spice (circuit simulator), what to compute (like .OP, .DC, .AC etc.). To be sure, this distinction is rather based on arguments which are nothing but &ldquo;hand-waving&rdquo;, but too many people use these terms to ignore them. For example, FIFO (First In First Out) is an algorithm, but people often use it as if it is an object (Queue).</p>
+<p>There is no thick-line which strictly separates languages according to these categories. Following example which computes factorial can be classified  &ldquo;somewhat declarative&rdquo; (written in functional programming language haskell). Here, we are not exactly saying how to &ldquo;really&rdquo; compute a factorial of a natural number.</p>
+<p>[code language=&ldquo;erlang&rdquo;] fact 0 = 0 fact 1 = 1 fact n = n * fact (n -1) [/code]</p>
+<p>Following will not be called declarative at all.</p>
+<p>[code language=&ldquo;C&rdquo;] unsigned long factorial(unsigned n) { if(n == 0) return 0; if(n == 1) return 1; unsigned long result n; for(unsigned i = n-1; i &amp;gt; 0; i&ndash;)     result *= i; return result; } [/code]</p>
+<p>(None of these snippets is tested).</p>
+<p>I am not sure if to be &ldquo;declarative&rdquo;, a program must lack  control flow. Or if there is a consistent theoretical category into which a program must fit.</p>
+<p>Till people with neat theoretical mind fix the confusion for us, we can look at where and how to use declarative paradigm. There are many and quick search will reveal some. Let me share one on which currently I have to work (not enjoying it too much) i.e. modeling large scale neural networks.</p>
+<p>A VLSI engineer is trained not to be frightened with numbers of components. But unlike CMOS devices, two neurons even when they belong to same class much like two humans, do not behave in the same way. Fortunately their behavior is not without a pattern, so attempts are being made to model them (as a real biological network) for a computer to answer few questions.</p>
+<p>A lot of work has already been done in the area of neuronal modeling. People have build equivalent &ldquo;models&rdquo; of neurons; these models have been simulated with good success. These models are stored in some format and there are now many such formats. Efforts are on the way to standardize them.</p>
+<p>It is agreed that some declarative paradigm will be most suitable for biologists for they might not prefer to learn a language to tell the computer &ldquo;how to do it&rdquo;. They would rather prefer on &ldquo;what to do&rdquo;. Engineers find it hard to learn a second language; many avoid going thoroughly the first one.</p>
+<p>To store the models one often wants a standard format so that models can be reused by others. Astronomers have been using HDF5 format to store complex data (hierarchical patterns). Now there is XML technology all around. XML looks dirty to human eyes but a computer can easily read them. So why not describe &ldquo;what to do&rdquo; in XML. Imagine, rewriting a ngspice script in XML format and what they wish to do will be clear. The major difference however remains, two neurons belonging to same class do not behave like two capacitors or two transistors.  Much depends on how they are connected and who is doing what near them; and what is happening at different scales. A release of certain chemicals or presence of certain ions can not only change the values of component in equivalent circuit model, it can also change the circuit model itself. The speed of computation not only depends on how fast you can solve electrical circuits, but also how phenomenon at different timescales interact. Often simulators are optimized for certain type of computation and developing &ldquo;jack of all trade&rdquo; simulator would be an ambitious project.</p>
+<p>Modeling phenomenon happening at different scales (time or space) is called multiscale-modeling, ubiquitous in biological systems. How changes in &ldquo;one scale"changes the behaviour in other scale? This is answered/hinted at by experimentalists. They also prepare models to capture behaviour. And how to describe it is usually done by, well, programmers. Now the problem is how to describe a model for multiscale-modelings; if not using some data-base (XML)?</p>
+<p>--</p>
+<p>Dilawar</p>
+</div>
+<div class=post-tags>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

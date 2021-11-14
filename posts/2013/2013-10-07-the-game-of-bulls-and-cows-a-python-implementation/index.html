@@ -1,0 +1,82 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>The game of "Bulls and Cows" : A python implementation - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="The game of &#34;Bulls and Cows&#34; : A python implementation">
+<meta property="og:description" content="Recently, a friend taught me a simple game of bulls and cows. This game goes like this. There are two players, A and B. A thinks of a 4-letter word and asks B to guess it. Assume that A thought of “link” and B guesses “lean”. The bulls are the number of letters which are common to both words at the same location in both words , for example “l” is a bull in &ldquo;link&rdquo; and &ldquo;lean&rdquo;.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2013/2013-10-07-the-game-of-bulls-and-cows-a-python-implementation/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2013-10-07T00:00:00+00:00">
+<meta property="article:modified_time" content="2013-10-07T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="The game of &#34;Bulls and Cows&#34; : A python implementation">
+<meta name=twitter:description content="Recently, a friend taught me a simple game of bulls and cows. This game goes like this. There are two players, A and B. A thinks of a 4-letter word and asks B to guess it. Assume that A thought of “link” and B guesses “lean”. The bulls are the number of letters which are common to both words at the same location in both words , for example “l” is a bull in &ldquo;link&rdquo; and &ldquo;lean&rdquo;.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>The game of "Bulls and Cows" : A python implementation</h1>
+<div class=meta>Posted at &mdash; Oct 7, 2013</div>
+</div>
+<div class=markdown>
+<p>Recently, a friend taught me a simple game of <strong>bulls and cows</strong>. This game goes like this. There are two players, A and B. A thinks of a 4-letter word and asks B to guess it. Assume that A thought of “link” and B guesses “lean”. The <strong>bulls</strong> are the number of letters which are common to both words at the same location in both words , for example “l” is a bull in &ldquo;link&rdquo; and &ldquo;lean&rdquo;. The <strong>cows</strong>  are number of letters which are common to both words but not bull. Letter “l” and “n” are common to both but “l” is the bull, so “n” is the only cow. This guess or &ldquo;lean&rdquo; has one bull and one cow. Player A tells B the number of bulls and cows. This helps B in making the next guess; the process goes on till B finds the word. I wrote a python program to play this game on your computer. I am not sure if it will work on <strong>windows</strong>. It will definitely work on Linux. Check out repository <a href=https://github.com/dilawar/bulls_cows>implementation of the game</a>. I will also write an algorithm which would find the word of A in minimum steps.</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/simple-game>simple-game</a></li>
+<li><a href=/tags/ulls-and-cows>ulls-and-cows</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

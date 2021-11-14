@@ -1,0 +1,84 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>A circuit containing multiplexer drawn using tikz (pgf) - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="A circuit containing multiplexer drawn using tikz (pgf)">
+<meta property="og:description" content="[caption id=&ldquo;attachment_589&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;640&rdquo;] Circuit drawn using tikz[/caption] [sourcecode language=&ldquo;text&rdquo;] \documentclass{article} \usepackage{tikz,pgf} \usetikzlibrary{circuits.logic.US} \usetikzlibrary{arrows} \begin{document} \begin{figure}[h] \begin{tikzpicture}[circuit logic US] %% \draw[help lines, draw, very thin, step=0.5cm, color=gray!20] (0,-10) grid +(10,10); \def\mux { &ndash; ++(0,-1) node [above right] {$1$} &ndash; ++(0.6,0.2) &ndash; ++(0,0.6) &ndash; ++(-0.6,0.2) &ndash; cycle}; \def\muxr { &ndash; node [below left] {$1$} ++(1,0) &ndash; ++(-0.2,-0.6) &ndash; ++(-0.6,0) &ndash; ++(-0.2,0.6) &ndash; cycle}; % This node is data node. \node (data) [draw, dotted, minimum width=1.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2012/2012-07-24-a-circuit-containing-multiplexer-using-tikz-pgf/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2012-07-24T00:00:00+00:00">
+<meta property="article:modified_time" content="2012-07-24T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="A circuit containing multiplexer drawn using tikz (pgf)">
+<meta name=twitter:description content="[caption id=&ldquo;attachment_589&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;640&rdquo;] Circuit drawn using tikz[/caption] [sourcecode language=&ldquo;text&rdquo;] \documentclass{article} \usepackage{tikz,pgf} \usetikzlibrary{circuits.logic.US} \usetikzlibrary{arrows} \begin{document} \begin{figure}[h] \begin{tikzpicture}[circuit logic US] %% \draw[help lines, draw, very thin, step=0.5cm, color=gray!20] (0,-10) grid +(10,10); \def\mux { &ndash; ++(0,-1) node [above right] {$1$} &ndash; ++(0.6,0.2) &ndash; ++(0,0.6) &ndash; ++(-0.6,0.2) &ndash; cycle}; \def\muxr { &ndash; node [below left] {$1$} ++(1,0) &ndash; ++(-0.2,-0.6) &ndash; ++(-0.6,0) &ndash; ++(-0.2,0.6) &ndash; cycle}; % This node is data node. \node (data) [draw, dotted, minimum width=1.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>A circuit containing multiplexer drawn using tikz (pgf)</h1>
+<div class=meta>Posted at &mdash; Jul 24, 2012</div>
+</div>
+<div class=markdown>
+<p>[caption id=&ldquo;attachment_589&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;640&rdquo;]<a href=http://dilawarnotes.files.wordpress.com/2012/07/fig_circuit_mux.jpg><img src=images/fig_circuit_mux.jpg alt title=fig_circuit_mux></a> Circuit drawn using tikz[/caption] [sourcecode language=&ldquo;text&rdquo;] \documentclass{article} \usepackage{tikz,pgf} \usetikzlibrary{circuits.logic.US} \usetikzlibrary{arrows} \begin{document} \begin{figure}[h] \begin{tikzpicture}[circuit logic US] %% \draw[help lines, draw, very thin, step=0.5cm, color=gray!20] (0,-10) grid +(10,10); \def\mux { &ndash; ++(0,-1) node [above right] {$1$} &ndash; ++(0.6,0.2) &ndash; ++(0,0.6) &ndash; ++(-0.6,0.2) &ndash; cycle}; \def\muxr { &ndash; node [below left] {$1$} ++(1,0) &ndash; ++(-0.2,-0.6) &ndash; ++(-0.6,0) &ndash; ++(-0.2,0.6) &ndash; cycle}; % This node is data node. \node (data) [draw, dotted, minimum width=1.8cm, minimum height=4cm, rectangle] at (0,-1.5) {}; \foreach \x / \id in {0/0, 1.5/k, 3/31} { % node represents one row. \node (pb\id) [draw, rectangle] at (0,0-\x) {PB[\id]}; % node represents locationofNonZero element function. \node (lnz\id) [draw, circle] at (2,0-\x) {LNZ}; % node represent and gate. \node (and\id) [and gate] at (3.5,0-\x) {}; % node represents isZero function. \node (isZero\id) [draw, circle] at (5,0-\x) {isZero}; % node represents mux. \node (mux\id) [] at (7,-0.2-\x) {}; \draw[] ($(isZero\id)+(1.5,0.05)$)\mux; \node (zero\id) [] at (6.0,-0.2-\x) {$0$}; \draw[->, style={-&#187;}] (pb\id.east) &ndash; node[above right] {$32$} (lnz\id.west); \draw[->, style={-&#187;}] ($(pb\id.east)+(0.5,0)$) &ndash; ++(0,-0.7) &ndash; ++(5.45,0); \draw[->, style={-&#187;}] (lnz\id.east) &ndash; +(0.1,0) |- node[above right] {} (and\id.input 1); \draw[->, style={-&#187;}] (and\id.output) node [above right] {$32$} &ndash; (isZero\id.west); \draw[->, style={->}] (isZero\id.east) &ndash; ++(0.3,0) &ndash; ++(0.0,0.2) -| ($(mux\id.north)+(-0.2,0.0)$); \draw[->, style={-&#187;}] (zero\id) &ndash; ($(mux\id.west)+(-0.4,0)$); }; \node (e0) [rectangle] at (0,-0.5) {$\vdots$}; \node (e0) [rectangle] at (0,-2.0) {$\vdots$}; \node (xor) [minimum width=2cm, minimum height=4cm , rectangle, draw ] at (9,-1.7) {XOR tree}; \draw[->, style={-&#187;}] ($(mux0.east)+(0,-0.2)$) &ndash; ++(right:3mm) |- ($(xor.west)+(0,1)$); \draw[->, style={-&#187;}] ($(muxk.east)+(0,-0.2)$) &ndash; ++(right:3mm) |- ($(xor.west)+(0,0)$); \draw[->, style={-&#187;}] ($(mux31.east)+(0,-0.2)$ &ndash; ++(0.5,0) |- ($(xor.west)+(0,-1)$); %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %% section two of image %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \node (rcrb) [draw,rectangle] at (0, -4.8) {REDUCED\_CR}; \node (muxb) [rectangle, minimum height=1cm] at ($(rcrb.west)+(2.5,-1.5)$) {}; \draw[] ($(rcrb.west)+(2.0,-1.0)$)\muxr; \node (zerob) [ ] at ($(muxb)+(0.75,0.75)$) {0}; \node (xorb) [draw, circle] at ($(muxb)+(0,-1)$) {$+$}; \node (iszerob) [draw, circle] at ($(muxb)+(-2,0.2)$) {isZero}; \node (andb) [and gate, rotate=90] at ($(iszerob)+(0,-1.5)$) {}; \node (pbk) [draw, rectangle] at ($(xorb)+(1,-1)$) {PB[k]}; \node (lnzb) [draw, circle] at ($(andb)+(-0.1,-1.5)$) {LNZ}; \draw[->, style={-&#187;}] (rcrb.south) &ndash; +(0,-0.5) -| node[below left]{32} ($(muxb.north)+(-.3,0)$); \draw[->, style={-&#187;}] ($(zerob.west)+(0,0)$) ++(-0.1,0) -| ($(muxb.north)+(+.3,0)$); \draw[->, style={-&#187;}] ($(muxb.south)+(-0,0.4)$) &ndash; (xorb.north); \draw[->, style={-&#187;}] (xorb.east) &ndash; ++(0.5,0) -| (pbk.north); \draw[->, style={-}] (xorb.west) &ndash; ++(-0.5,0) |- (pbk.west); \draw[->, style={->}] (iszerob.east) &ndash; ($(muxb.west)+(-0.3,0.2)$); \draw[->, style={-&#187;}] (lnzb.north) &ndash; node[above left] {32} (andb.input 1); \draw[->, style={-&#187;}] (pbk.west) -| node [above right] {32} (andb.input 2); \draw[->, style={-&#187;}] (andb.output) &ndash; (iszerob.south); %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% %% section three of image %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% \node (crc) [rectangle, minimum width=2cm, draw] at ($(rcrb)+(4,0)$) {CR}; \node (xorc) [draw, circle] at ($(crc)+(.5,-1.5)$) {$+$}; \node (rcrc) [draw, rectangle] at ($(xorc)+(0,-1)$) {REDUCED\_CR}; \node (iszeroc) [draw, circle] at ($(rcrc)+(0,-1.5)$) {isZero}; \node (muxc) [ minimum height=1cm, rectangle] at ($(crc)+(3,-.5)$) {}; \draw[] ($(crc)+(2.5,-1)$)\mux; \node (muxc) [ minimum height=1cm, rectangle] at ($(crc)+(3,-.5)$) {}; \node (pbc) [draw,rectangle] at ($(muxc)+(1.7,-1)$) {PB[count+1]}; \node (zeroc) [] at ($(muxc)+(-.9,-0.75)$) {0}; \draw[->, style={-&#187;}] (crc.west) &ndash; ++(-0.2,0) |- (and0.input 2); \draw[->, style={-&#187;}] (crc.west) &ndash; ++(-0.2,0) |- (and31.input 2); \draw[->, style={-&#187;}] (crc.west) &ndash; ++(-0.2,0) |- (andk.input 2); \draw[->, style={-&#187;}] (rcrc.south) +(-1.2,0) |- node[above, near end] {32} (lnzb.east); \draw[->, style={-&#187;}] (crc.south) &ndash; +(0,-0.5) -| node[below right] {32} (xorc.north); \draw[->, style={-&#187;}] (xorc.south) &ndash; (rcrc.north); \draw[->, style={-&#187;}] (rcrc.east) &ndash; ++(0.2,0) |- ($(muxc.west)+(-0.4,-1.2)$); \draw[->, style={-&#187;}] ($(muxc.east)+(0,-1)$) &ndash; ++(0.2,0) |- (pbc.west); \draw[->, style={-&#187;}] (rcrc.south) &ndash; (iszeroc.north); \draw[->, style={->}] (iszeroc.east) -| ($(muxc.west)+(-0.1,-1.4)$); \draw[->, style={-&#187;}] (zeroc.east) &ndash; ++(0.2,0); \draw[->, style={-&#187;}] (xor.south) |- ++(-3.5,-1) |- node[below left] {32} ($(xorc.east)$); \end{tikzpicture} \end{figure} \end{document} [/sourcecode]</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/circuit-drawing-using-pgf-and-tikz>circuit-drawing-using-pgf-and-tikz</a></li>
+<li><a href=/tags/mux-with-tikz>mux-with-tikz</a></li>
+<li><a href=/tags/pgf>pgf</a></li>
+<li><a href=/tags/tikz>tikz</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

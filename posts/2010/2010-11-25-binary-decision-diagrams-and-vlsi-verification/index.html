@@ -1,0 +1,85 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Binary Decision Diagrams and VLSI Verification - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Binary Decision Diagrams and VLSI Verification">
+<meta property="og:description" content="[in progress : I&rsquo;ll put up the solution after Nov 28. I have to submit it as assignment so can not take the risk of being copied or so.] These days simulation is the most prominent technique for verification. However, simulation can only cover a part of all cases possible thus simulation does not guarantee that certain properties will hold everywhere in the system. For example, any complex asynchronous boolean circuit with 100 variables will have 2100 combination.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2010/2010-11-25-binary-decision-diagrams-and-vlsi-verification/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2010-11-25T00:00:00+00:00">
+<meta property="article:modified_time" content="2010-11-25T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Binary Decision Diagrams and VLSI Verification">
+<meta name=twitter:description content="[in progress : I&rsquo;ll put up the solution after Nov 28. I have to submit it as assignment so can not take the risk of being copied or so.] These days simulation is the most prominent technique for verification. However, simulation can only cover a part of all cases possible thus simulation does not guarantee that certain properties will hold everywhere in the system. For example, any complex asynchronous boolean circuit with 100 variables will have 2100 combination.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Binary Decision Diagrams and VLSI Verification</h1>
+<div class=meta>Posted at &mdash; Nov 25, 2010</div>
+</div>
+<div class=markdown>
+<p>[in progress : I&rsquo;ll put up the solution after Nov 28. I have to submit it as assignment so can not take the risk of being copied or so.] These days simulation is the most prominent technique for verification. However, simulation can only cover a part of all cases possible thus simulation does not guarantee that certain properties will hold everywhere in the system. For example, any complex asynchronous boolean circuit with 100 variables will have 2100 combination. Not everyone can afford verifying all these combination with computers using simulation. Only a handful of companies like Intel can afford to do so with thousands of C.P.U. running in parallel verifying a chip design or testing a chip before sending it to foundry. If you are a smaller company, then you have to make sure that you hire smart people who can break down a larger problem into smaller one. Partitioning a large system into smaller one is an art and requires a lot of experience and eyes for details though there are few techniques available such as expander graphs and matroids etc. A good techniques which widely used these days is <em>temporal logic model checking</em> . In this method the system being verified is modeled as <strong>finite state transition system</strong> and by exhaustively exploring the model, we check whether property holds or not. The biggest advantage using this is, if some property does not hold on this system then a <em>witness</em> (counterexample) is produces. This helps a lot in improving and correcting the design. Now we are going to consider a real time example to show how to use this method. Consider the following VHDL description of an state machine with two architecture. This was given to us as an assignment at IIT Bombay by Prof. M. P. Desai. I am not sure which of his Teaching Assistant wrote it. Anyway this entity of <strong>FSM</strong> has two architecture, <strong>one_hot</strong> and <strong>encode</strong>. Our job is to verify that both of them are <strong>equal</strong> without using the simulation. [sourcecode language=&ldquo;css&rdquo;] &ndash; entity fsm has two architectures entity fsm is port (up, down: in bit; done: out bit; clock: in bit; reset: in bit); end fsm; &ndash; this is the first. architecture one_hot of fsm is signal state_sig: bit_vector(3 downto 0); begin process(clock,up,down,state_sig) variable next_state: bit_vector(3 downto 0); variable done_var : bit; begin done_var := &lsquo;0&rsquo;; if(reset = &lsquo;1&rsquo;) then next_state := (0 => &lsquo;1&rsquo;, others => &lsquo;0&rsquo;); else if(up = &lsquo;1&rsquo;) then &ndash; rotate left by 1 next_state := state_sig(2 downto 0) & state_sig(3); if(state_sig(3) = &lsquo;1&rsquo;) then done_var := &lsquo;1&rsquo;; end if; elsif (down = &lsquo;1&rsquo;) then &ndash; rotate right by 1 next_state := state_sig(0) & state_sig(3 downto 1); else next_state := state_sig; end if; end if; done &lt;= done_var; if(clock&rsquo;event and clock = &lsquo;1&rsquo;) then state_sig &lt;= next_state; end if; end process; end one_hot; &ndash; this is the second architecture encode of fsm is signal state_sig,state_sig_p1, state_sig_m1: bit_vector(1 downto 0); begin state_sig_p1(0) &lt;= not state_sig(0); state_sig_p1(1) &lt;= state_sig(0) xor state_sig(1); state_sig_m1(0) &lt;= not state_sig(0); state_sig_m1(1) &lt;= state_sig(1) xor (not state_sig(0)); process(clock,up,down,state_sig,state_sig_p1,state_sig_m1) variable next_state: bit_vector(1 downto 0); variable done_var : bit; begin done_var := &lsquo;0&rsquo;; if(reset = &lsquo;1&rsquo;) then next_state := (others => &lsquo;0&rsquo;); else if(up = &lsquo;1&rsquo;) then next_state := state_sig_p1; if(state_sig(1) = &lsquo;1&rsquo; and state_sig(0) = &lsquo;0&rsquo;) then done_var := &lsquo;1&rsquo;; end if; elsif (down = &lsquo;1&rsquo;) then next_state := state_sig_m1; else next_state := state_sig; end if; end if; done &lt;= done_var; if(clock&rsquo;event and clock = &lsquo;1&rsquo;) then state_sig &lt;= next_state; end if; end process; end encode; [/sourcecode]</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/binary-decision-diagrams>binary-decision-diagrams</a></li>
+<li><a href=/tags/kripke-structure>kripke-structure</a></li>
+<li><a href=/tags/state-machine>state-machine</a></li>
+<li><a href=/tags/verification>verification</a></li>
+<li><a href=/tags/verification-of-vlsi>verification-of-vlsi</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

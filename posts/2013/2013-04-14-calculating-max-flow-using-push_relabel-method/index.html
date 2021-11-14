@@ -1,0 +1,82 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Calculating max-flow using push-relabel method - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Calculating max-flow using push-relabel method">
+<meta property="og:description" content="Calculating maximum flow in a flow-network is a fundamental problem. It has been observed that smart implementation of &lsquo;push-relabel&rsquo; methods performs better than algorithms based on finding &lsquo;augmenting paths&rsquo;. We have implemented one such variation of push-relabel method. It is known as &lsquo;relabel to front&rsquo; algorithm. It is discussed in details in &lsquo;Introduction to algorithms&rsquo; by &lsquo;Cormen, Leiserson, Rivest, and Stein&rsquo;. We do not guarantee that it is the exact implementation of what is given in this book.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2013/2013-04-14-calculating-max-flow-using-push_relabel-method/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2013-04-14T00:00:00+00:00">
+<meta property="article:modified_time" content="2013-04-14T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Calculating max-flow using push-relabel method">
+<meta name=twitter:description content="Calculating maximum flow in a flow-network is a fundamental problem. It has been observed that smart implementation of &lsquo;push-relabel&rsquo; methods performs better than algorithms based on finding &lsquo;augmenting paths&rsquo;. We have implemented one such variation of push-relabel method. It is known as &lsquo;relabel to front&rsquo; algorithm. It is discussed in details in &lsquo;Introduction to algorithms&rsquo; by &lsquo;Cormen, Leiserson, Rivest, and Stein&rsquo;. We do not guarantee that it is the exact implementation of what is given in this book.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Calculating max-flow using push-relabel method</h1>
+<div class=meta>Posted at &mdash; Apr 14, 2013</div>
+</div>
+<div class=markdown>
+<p>Calculating maximum flow in a flow-network is a fundamental problem. It has been observed that smart implementation of &lsquo;push-relabel&rsquo; methods performs better than algorithms based on finding &lsquo;augmenting paths&rsquo;. We have implemented one such variation of push-relabel method. It is known as &lsquo;relabel to front&rsquo; algorithm. It is discussed in details in &lsquo;Introduction to algorithms&rsquo; by &lsquo;Cormen, Leiserson, Rivest, and Stein&rsquo;. We do not guarantee that it is the exact implementation of what is given in this book. In fact, it is slightly different for we are selecting nodes in some fixed order. We uses boost::graph library. Details are in &lsquo;Readme.md&rsquo; file. It is available on my <a href=http://github.com/dilawar/algorithms/tree/master/Push_relabel>github repository</a>. You can use it, but you are not allowed to modify it without notifying the author. I wish to keep track of bugs.</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/combinatorics>combinatorics</a></li>
+<li><a href=/tags/maximum-flow-problem>maximum-flow-problem</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

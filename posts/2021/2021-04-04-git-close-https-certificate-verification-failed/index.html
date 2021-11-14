@@ -1,0 +1,199 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Fixing git clone over https - Server certificate verification failed - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Fixing git clone over https - Server certificate verification failed">
+<meta property="og:description" content="As soon as I try to clone using git clone https://gitlab.subcom.tech/subcom/voicedb, I run into the following problem:
+admin@ip-172-26-13-71:~/Work$ git clone https://gitlab.subcom.tech/subcom/voicedb.git Cloning into 'voicedb'... fatal: unable to access 'https://gitlab.subcom.tech/subcom/voicedb.git/': server certificate verification failed. CAfile: none CRLfile: none This is a big problem. The only protocol which works out of box is ssh. To use ssh protocol, everyone has to upload public key to the server. A bit of hassle if you are not working on your own machine :sad:.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2021/2021-04-04-git-close-https-certificate-verification-failed/"><meta property="article:section" content="posts">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Fixing git clone over https - Server certificate verification failed">
+<meta name=twitter:description content="As soon as I try to clone using git clone https://gitlab.subcom.tech/subcom/voicedb, I run into the following problem:
+admin@ip-172-26-13-71:~/Work$ git clone https://gitlab.subcom.tech/subcom/voicedb.git Cloning into 'voicedb'... fatal: unable to access 'https://gitlab.subcom.tech/subcom/voicedb.git/': server certificate verification failed. CAfile: none CRLfile: none This is a big problem. The only protocol which works out of box is ssh. To use ssh protocol, everyone has to upload public key to the server. A bit of hassle if you are not working on your own machine :sad:.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Fixing git clone over https - Server certificate verification failed</h1>
+<div class=meta>Posted at &mdash; Jan 1, 0001</div>
+</div>
+<div class=markdown>
+<p>As soon as I try to clone using <code>git clone https://gitlab.subcom.tech/subcom/voicedb</code>, I run into the following problem:</p>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>admin@ip-172-26-13-71:~/Work$ git clone https://gitlab.subcom.tech/subcom/voicedb.git
+Cloning into <span style=color:#0ff;font-weight:700>&#39;voicedb&#39;</span>...
+fatal: unable to access <span style=color:#0ff;font-weight:700>&#39;https://gitlab.subcom.tech/subcom/voicedb.git/&#39;</span>: server certificate verification failed. CAfile: none CRLfile: none
+</code></pre></div><p>This is a big problem. The only protocol which works out of box is ssh. To use ssh protocol, everyone has to upload public key to the server. A bit of hassle if you are not working on your own machine :sad:.</p>
+<p>First thing first, there is an issue with certificate. Lets debug this.</p>
+<h2 id=check-for-certificates>Check for certificates</h2>
+<p>First, I&rsquo;d like to know how certificates behaves on a working site.</p>
+<h3 id=base-case-githubcom-certificates>Base case: github.com certificates.</h3>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>admin@ip-172-26-7-193:~$ openssl s_client -showcerts -servername github.com -connect github.com:443 &lt;/dev/null 2&gt;/dev/null
+CONNECTED(00000003)
+---
+Certificate chain
+ <span style=color:#ff0;font-weight:700>0</span> s:C = US, ST = California, L = San Francisco, O = <span style=color:#0ff;font-weight:700>&#34;GitHub, Inc.&#34;</span>, CN = github.com
+   i:C = US, O = <span style=color:#0ff;font-weight:700>&#34;DigiCert, Inc.&#34;</span>, CN = DigiCert High Assurance TLS Hybrid ECC SHA256 <span style=color:#ff0;font-weight:700>2020</span> CA1
+-----BEGIN CERTIFICATE-----
+... redacted ...
+-----END CERTIFICATE-----
+ <span style=color:#ff0;font-weight:700>1</span> s:C = US, O = <span style=color:#0ff;font-weight:700>&#34;DigiCert, Inc.&#34;</span>, CN = DigiCert High Assurance TLS Hybrid ECC SHA256 <span style=color:#ff0;font-weight:700>2020</span> CA1
+   i:C = US, O = DigiCert Inc, OU = www.digicert.com, CN = DigiCert High Assurance EV Root CA
+-----BEGIN CERTIFICATE-----
+... redacted ...
+-----END CERTIFICATE-----
+---
+Server certificate
+subject=C = US, ST = California, L = San Francisco, O = <span style=color:#0ff;font-weight:700>&#34;GitHub, Inc.&#34;</span>, CN = github.com
+
+issuer=C = US, O = <span style=color:#0ff;font-weight:700>&#34;DigiCert, Inc.&#34;</span>, CN = DigiCert High Assurance TLS Hybrid ECC SHA256 <span style=color:#ff0;font-weight:700>2020</span> CA1
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: ECDSA
+Server Temp Key: X25519, <span style=color:#ff0;font-weight:700>253</span> bits
+---
+SSL handshake has <span style=color:#fff;font-weight:700>read</span> <span style=color:#ff0;font-weight:700>2708</span> bytes and written <span style=color:#ff0;font-weight:700>366</span> bytes
+Verification: OK
+---
+New, TLSv1.3, Cipher is TLS_AES_128_GCM_SHA256
+Server public key is <span style=color:#ff0;font-weight:700>256</span> bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify <span style=color:#fff;font-weight:700>return</span> code: <span style=color:#ff0;font-weight:700>0</span> (ok)
+---
+</code></pre></div><p>Everything smoothly and now I know the expected output. I don&rsquo;t understand all
+of it but I can make some sense out of it. Now let&rsquo;s try on my gitlab instance.</p>
+<h3 id=gitlabsubcomtech-certificates>gitlab.subcom.tech certificates</h3>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>admin@ip-172-26-7-193:~$ openssl s_client -showcerts -servername gitlab.subcom.tech -connect gitlab.subcom.tech:443 &lt;/dev/null 2&gt;/dev/null
+CONNECTED(00000003)
+---
+Certificate chain
+ <span style=color:#ff0;font-weight:700>0</span> s:CN = gitlab.subcom.tech
+   i:C = US, O = Let<span style=color:#0ff;font-weight:700>&#39;s Encrypt, CN = R3
+</span><span style=color:#0ff;font-weight:700>-----BEGIN CERTIFICATE-----
+</span><span style=color:#0ff;font-weight:700>... redacted ...
+</span><span style=color:#0ff;font-weight:700>-----END CERTIFICATE-----
+</span><span style=color:#0ff;font-weight:700>---
+</span><span style=color:#0ff;font-weight:700>Server certificate
+</span><span style=color:#0ff;font-weight:700>subject=CN = gitlab.subcom.tech
+</span><span style=color:#0ff;font-weight:700>
+</span><span style=color:#0ff;font-weight:700>issuer=C = US, O = Let&#39;</span>s Encrypt, CN = R3
+
+---
+No client certificate CA names sent
+Peer signing digest: SHA256
+Peer signature type: RSA-PSS
+Server Temp Key: X25519, <span style=color:#ff0;font-weight:700>253</span> bits
+---
+SSL handshake has <span style=color:#fff;font-weight:700>read</span> <span style=color:#ff0;font-weight:700>1884</span> bytes and written <span style=color:#ff0;font-weight:700>390</span> bytes
+Verification error: unable to verify the first certificate
+---
+New, TLSv1.3, Cipher is TLS_AES_256_GCM_SHA384
+Server public key is <span style=color:#ff0;font-weight:700>2048</span> bit
+Secure Renegotiation IS NOT supported
+Compression: NONE
+Expansion: NONE
+No ALPN negotiated
+Early data was not sent
+Verify <span style=color:#fff;font-weight:700>return</span> code: <span style=color:#ff0;font-weight:700>21</span> (unable to verify the first certificate)
+---
+</code></pre></div><p>All right, the problem seems to be that we are <strong>unable to verify the first
+certificate.</strong>. Seems like there are multiple of certificates involved; and we
+are unable to verify the first certificate itself!</p>
+<p>To add to the confusion, the site works fine in browser
+<code>https://gitlab.subcom.tech</code>. This means that certificates (I downloaded them
+using <code>certbot</code>) are at least fine for browser. The git clone behaviour is
+<em>definately</em> different than the browser.</p>
+<p>I did an internet sortie. Some useful pointers:
+<a href=https://docs.microsoft.com/en-us/archive/blogs/phkelley/adding-a-corporate-or-self-signed-certificate-authority-to-git-exes-store>https://docs.microsoft.com/en-us/archive/blogs/phkelley/adding-a-corporate-or-self-signed-certificate-authority-to-git-exes-store</a>
+offers a solution. But still very confused.</p>
+<p>I search in gitlab documentation. Their documentation is good and I got a
+helpful hit:
+<strong><a href=https://docs.gitlab.com/omnibus/settings/ssl.html#common-ssl-errors>https://docs.gitlab.com/omnibus/settings/ssl.html#common-ssl-errors</a></strong>. I had
+to google few terms and read a bit more. For a person like me who has short
+attention span, this is the hardest part. But after spending enough hours, I
+finally figured out the solution.</p>
+<h1 id=solution>Solution</h1>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>admin@ip-172-26-7-193:/etc/gitlab/ssl$ ls /etc/gitlab/ssl/ -l
+total 4
+lrwxrwxrwx 1 root root   54 Apr  4 19:21 gitlab.subcom.tech.crt -&gt; /etc/letsencrypt/live/gitlab.subcom.tech/cert.pem
+lrwxrwxrwx 1 root root   52 Mar 12 15:25 gitlab.subcom.tech.key -&gt; /etc/letsencrypt/live/gitlab.subcom.tech/privkey.pem
+-r-------- 1 root root 1675 Mar 15 15:40 gitlab.subcom.tech.key-staging
+</code></pre></div><p>Note that <code>gitlab.subcom.tech.crt</code> and <code>gitlab.subcom.tech.key</code> are links to
+certificate and keys downloaded using <code>certbot</code>. The problem here is with
+<code>cert.pem</code> which does not contain the &ldquo;chain&rdquo; of certificates but rather a
+single certificate. This worked in browser but not using <code>git</code> (curious!).</p>
+<p>After I realized that the chain of certificate is missing, I changed the
+<code>gitlab.subcom.tech.crt</code> link.</p>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-shell data-lang=shell>admin@ip-172-26-7-193:/etc/gitlab/ssl$ ls /etc/gitlab/ssl/ -l
+total <span style=color:#ff0;font-weight:700>4</span>
+lrwxrwxrwx <span style=color:#ff0;font-weight:700>1</span> root root   <span style=color:#ff0;font-weight:700>54</span> Apr  <span style=color:#ff0;font-weight:700>4</span> 19:21 gitlab.subcom.tech.crt -&gt; /etc/letsencrypt/live/gitlab.subcom.tech/fullchain.pem
+lrwxrwxrwx <span style=color:#ff0;font-weight:700>1</span> root root   <span style=color:#ff0;font-weight:700>52</span> Mar <span style=color:#ff0;font-weight:700>12</span> 15:25 gitlab.subcom.tech.key -&gt; /etc/letsencrypt/live/gitlab.subcom.tech/privkey.pem
+-r-------- <span style=color:#ff0;font-weight:700>1</span> root root <span style=color:#ff0;font-weight:700>1675</span> Mar <span style=color:#ff0;font-weight:700>15</span> 15:40 gitlab.subcom.tech.key-staging
+</code></pre></div><p>Now the file (rather a link) <code>/etc/gitlab/ssl/gitlab.subcom.tech.crt</code> points to
+<code>/etc/letsencrypt/live/gitlab.subcom.tech/fullchain.pem</code> rather than to
+<code>/etc/letsencrypt/live/gitlab.subcom.tech/cert.pem</code>. This solved the issue for
+me. <code>fullchain.pem</code> has all the certificates needed for verification to be
+successful.</p>
+<p>Finally, I did a <code>gitlab-ctl reconfigure</code> followed by <code>gitlab.ctl restart</code>. I
+can now clone the repositories over https protocol from &lsquo;gitlab.subcom.tech&rsquo;
+server. Phew!</p>
+</div>
+<div class=post-tags>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

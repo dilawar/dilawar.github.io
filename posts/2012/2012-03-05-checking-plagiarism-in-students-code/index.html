@@ -1,0 +1,87 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Checking plagiarism in assignment (tested with VHDL language) - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Checking plagiarism in assignment (tested with VHDL language)">
+<meta property="og:description" content="I have developed some python scripts available here. I have used them in EE705 (VHDL, verilog) and found them very useful. It generates detailed log (which file matches which file) and sent emails to offenders with an archive of all file which were matched. It is integrated with my moodle-application (automatic download, extract, compare, sending-emails.) It also generates graphs (using python graph-tool) which shows the level of copying in the assignments.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2012/2012-03-05-checking-plagiarism-in-students-code/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2012-03-05T00:00:00+00:00">
+<meta property="article:modified_time" content="2012-03-05T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Checking plagiarism in assignment (tested with VHDL language)">
+<meta name=twitter:description content="I have developed some python scripts available here. I have used them in EE705 (VHDL, verilog) and found them very useful. It generates detailed log (which file matches which file) and sent emails to offenders with an archive of all file which were matched. It is integrated with my moodle-application (automatic download, extract, compare, sending-emails.) It also generates graphs (using python graph-tool) which shows the level of copying in the assignments.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Checking plagiarism in assignment (tested with VHDL language)</h1>
+<div class=meta>Posted at &mdash; Mar 5, 2012</div>
+</div>
+<div class=markdown>
+<p>I have developed some python scripts available <a href=https://github.com/dilawar/MyPublic/tree/master/MoodleIITB>here</a>. I have used them in EE705 (VHDL, verilog) and found them very useful. It generates detailed log (which file matches which file) and sent emails to offenders with an archive of all file which were matched. It is integrated with my moodle-application (automatic download, extract, compare, sending-emails.) It also generates graphs (using python graph-tool) which shows the level of copying in the assignments. Few graphs are attached in this post. Thickness of edge (and hotness of edge color) shows the level of similarity. This gives a quite a picture of the class. [caption id=&ldquo;attachment_559&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;522&rdquo; caption=&ldquo;Graph shows suspects of plagiarism. Each edge represent a pair of files containing significant matching. Edge thickness (and hotness of color) is the amount of similarity.<a href=http://dilawarnotes.files.wordpress.com/2012/03/copy_all.png><img src=http://dilawarnotes.files.wordpress.com/2012/03/copy_all.png alt title=copy_all></a>Similar to previous one. But it shows the the level of interaction among students. As usually heavy and red - edges shows significant copying while light blue edges shows that fragments of text was similar (which may shows the level of discussion).<a href=http://dilawarnotes.files.wordpress.com/2012/03/detailed.png><img src=http://dilawarnotes.files.wordpress.com/2012/03/detailed.png alt title=detailed></a>This is the dirty and detailed graph. It shows a overall interaction between codes submitted by student. Many students have more than 1 file which mathces (parallel edge)"]<a href=http://dilawarnotes.files.wordpress.com/2012/03/copy_suspect.png><img src=images/copy_suspect.png alt title=copy_suspect></a>[/caption]</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/graph-tool-python>graph-tool-python</a></li>
+<li><a href=/tags/moodle>moodle</a></li>
+<li><a href=/tags/plagiarism-detection>plagiarism-detection</a></li>
+<li><a href=/tags/python-scripts>python-scripts</a></li>
+<li><a href=/tags/python-moodle>python-moodle</a></li>
+<li><a href=/tags/similarity-checking-in-vhdl-codes>similarity-checking-in-vhdl-codes</a></li>
+<li><a href=/tags/similarity-in-codes>similarity-in-codes</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

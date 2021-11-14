@@ -1,0 +1,190 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Simulation of PN junction at equilibrium in Scilab - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Simulation of PN junction at equilibrium in Scilab">
+<meta property="og:description" content="This is version 0.5 There is a bug in this implementation, since hole concentration is constant in both side of the junction. Thanks to Urmimala for pointing this out.. In ver 1.0, we&rsquo;ll provide complete documentation and will remove this bug. The pn-junction is quite an interesting junction. If most the semiconductor theory can be tested around it, it also poses significant challenges in numerical method also. In this implementation in Scilab, we are solving Poisson equation to get the results when junction is in equilibrium.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2010/2010-10-08-simulation-of-pn-junction-in-equilibrium-in-scilab/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2010-10-08T00:00:00+00:00">
+<meta property="article:modified_time" content="2010-10-08T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Simulation of PN junction at equilibrium in Scilab">
+<meta name=twitter:description content="This is version 0.5 There is a bug in this implementation, since hole concentration is constant in both side of the junction. Thanks to Urmimala for pointing this out.. In ver 1.0, we&rsquo;ll provide complete documentation and will remove this bug. The pn-junction is quite an interesting junction. If most the semiconductor theory can be tested around it, it also poses significant challenges in numerical method also. In this implementation in Scilab, we are solving Poisson equation to get the results when junction is in equilibrium.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Simulation of PN junction at equilibrium in Scilab</h1>
+<div class=meta>Posted at &mdash; Oct 8, 2010</div>
+</div>
+<div class=markdown>
+<p><strong>This is version 0.5 There is a bug in this implementation, since hole concentration is constant in both side of the junction. Thanks to Urmimala for pointing this out.. In ver 1.0, we&rsquo;ll provide complete documentation and will remove this bug.</strong> The <a href=http://ecee.colorado.edu/~bart/book/book/chapter4/ch4_2.htm>pn-junction</a> is quite an interesting junction. If most the semiconductor theory can be tested around it, it also poses significant challenges in numerical method also. In this  implementation in Scilab, we are solving Poisson equation to get the results when junction is in equilibrium. No part of this work used propriety softwares. Please wait for complete documentation of code.</p>
+<h1 id=simulation-results>Simulation Results</h1>
+<p>[gallery link=&ldquo;file&rdquo; columns=&ldquo;5&rdquo; orderby=&ldquo;rand&rdquo;] Click on image to enlarge it.</p>
+<h1 id=scilab-functions>Scilab Functions</h1>
+<p>This is my top most function. Write a script which call this function and every other functions will be called in order. [sourcecode language=&ldquo;matlab&rdquo;] // This function will discretized the domain and will create a grid points. // Then we&rsquo;ll discretise the equation there. Matrices // will be created and saved in an binary file for further processing. function [] = solveEquilibriumCondition() // Open file to read the data. // Check if file exists. If not run the script to create it. ifExists = exists("./profilePN.dat"); if ifExists == 0 then disp(&ldquo;File does not exist. Executing script to generate this file."); exec(&rdquo;./profilePN.sci"); profilePN(); load("./profilePN.dat"); load("./myParameters.dat"); else disp(&lsquo;File already exists. Loading &mldr;'); load("./profilePN.dat"); load("./myParameters.dat"); disp(&ldquo;if there is any problem with this file. Delete it and re-execute this function/script."); end; delta_acc = 1E-5;               // Preset the Tolerance //////////////////////////////////////////////////////////////////////// /////////// EQUILIBRIUM  SOLUTION PART BEGINS                      ///// //////////////////////////////////////////////////////////////////////// // Define the elements of the coefficient matrix for the internal nodes and dx2 = delX*delX; for i = 2: n_max-1 a(i) = 1/dx2; c(i) = 1/dx2; b(i) = -(2/dx2+exp(fi(i))+exp(-fi(i))); f(i) = exp(fi(i)) - exp(-fi(i)) - dop(i) - fi(i)*(exp(fi(i))+exp(-fi(i))); end // Define the elements of the coefficient matrix and initialize the forcing //   function at the ohmic contacts a(1) = 0; c(1) = 0; b(1) = 1; f(1) = fi(1); a(n_max) = 0; c(n_max) = 0; b(n_max) = 1; f(n_max) = fi(n_max); //  Start the iterative procedure for the solution of the linearized Poisson //  equation using LU decomposition method: flag_conv = 0;                   // convergence of the Poisson loop k_iter= 0; while flag_conv == 0 then k_iter = k_iter + 1; alpha1(1) = b(1); for i= 2 : n_max beta1(i)=a(i)/alpha1(i-1); alpha1(i)=b(i)-beta1(i)*c(i-1); end; // Solution of Lv = f v(1) = f(1); for i = 2:n_max v(i) = f(i) - beta1(i)*v(i-1); end; // Solution of U*fi = v temp = v(n_max)/alpha1(n_max); delta(n_max) = temp - fi(n_max); fi(n_max)=temp; for i = (n_max-1):-1:1       //delta temp = (v(i)-c(i)*fi(i+1))/alpha1(i); delta(i) = temp - fi(i); fi(i) = temp; end; delta_max = 0; for i = 1: n_max xx = abs(delta(i)); if xx > delta_max then delta_max=xx; end; //sprintf(&lsquo;delta_max = %d&rsquo;,delta_max)      //&lsquo;k_iter = %d&rsquo;,k_iter,&rsquo; end; //delta_max=max(abs(delta)); // Test convergence and recalculate forcing function and // central coefficient b if necessary if delta_max &lt; delta_acc then flag_conv = 1; else for i = 2: n_max-1 b(i) = -(2/dx2 + exp(fi(i)) + exp(-fi(i))); f(i) = exp(fi(i)) - exp(-fi(i)) - dop(i) - fi(i)*(exp(fi(i)) + exp(-fi(i))); end; end; end; xx1(1) = delX*1e4; for i = 2:n_max-1 Ec(i) = dEc - Vt*fi(i);     //Values from the second Node% ro(i) = -ni*(exp(fi(i)) - exp(-fi(i)) - dop(i)); el_field1(i) = -(fi(i+1) - fi(i))*Vt/(delX*Ldi); el_field2(i) = -(fi(i+1) - fi(i-1))*Vt/(2*delX*Ldi); n(i) = exp(fi(i)); p(i) = exp(-fi(i)); xx1(i) = xx1(i-1) + delX*Ldi*1e4; end; Ec(1) = Ec(2); Ec(n_max) = Ec(n_max-1); xx1(n_max) = xx1(n_max-1) + delX*Ldi*1e4; el_field1(1) = el_field1(2); el_field2(1) = el_field2(2); el_field1(n_max) = el_field1(n_max-1); el_field2(n_max) = el_field2(n_max-1); nf = n*ni; pf = p*ni; ro(1) = ro(2); ro(n_max) = ro(n_max-1); // save all these values in a file. save(&lsquo;equilibriumSol.dat&rsquo;, Ec, Vt, fi, xx1, nf, pf, ro, n, p, el_field1, el_field2); h = figure(1) plot(xx1, Vt*fi,&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) xlabel(&lsquo;x [um]'); ylabel(&lsquo;Potential [eV]'); title(&lsquo;Potential vs Position - at Equilibrium&rsquo;); xs2gif(1, &lsquo;./figs/PotentialVsPos.gif&rsquo;); close(h); h = figure(2) plot(xx1, [el_field1, el_field2],&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) //plot(xx1, el_field2,&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) xlabel(&lsquo;x [um]'); ylabel(&lsquo;Electric Field [V/cm]'); title(&lsquo;Field Profile vs Position - at Equilibrium&rsquo;); xs2gif(2, &lsquo;./figs/ElectricalFieldVsPos.gif&rsquo;); close(h); h = figure(3) plot2d1(&ldquo;onn&rdquo;, xx1, [nf, pf]); xlabel(&lsquo;x [um]'); ylabel(&lsquo;Electron & Hole Densities [1/cm^3]'); title(&lsquo;Electron & Hole Densities vs Position - at Equilibrium&rsquo;); legend(&lsquo;n&rsquo;,&lsquo;p&rsquo;); xs2gif(3, &lsquo;./figs/ElectronAndHolesDensity.gif&rsquo;); close(h); h = figure(4) plot(xx1, q_e*ro,&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) xlabel(&lsquo;x [um]'); ylabel(&lsquo;Total Charge Density [C/cm^3]'); title(&lsquo;Total Charge Density vs Position - at Equilibrium&rsquo;); xs2gif(4, &lsquo;./figs/TotalChargeDensity.gif&rsquo;); close(h); h = figure(5) plot(xx1, Ec,&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) xlabel(&lsquo;x [um]'); ylabel(&lsquo;Conduction Band Energy (eV)'); title(&lsquo;Conduction Band vs Position - at Equilibrium&rsquo;); xs2gif(5, &lsquo;./figs/ConductionBandDiagram.gif&rsquo;); close(h); endfunction [/sourcecode]</p>
+<p>This function will profile the PN junction and return the doping and p and n distributions across the junction
+[sourcecode language=&ldquo;matlab&rdquo;]
+// This function will profile the PN junction and return the doping and p and n
+// distributions across the junction.
+// Open file to read the data.
+// Check if file exists. If not run the script to create it.
+function [] = profilePN()
+ifExists = exists(&rdquo;./myParameters.dat");
+if ifExists == 0 then
+disp(&ldquo;File does not exist. Executing script to generate this file.");
+exec(&rdquo;./calcParameters.sci");
+calcParameters();
+load("./myParameters.dat");
+else
+disp(&lsquo;File already exists. Loading &mldr;');
+load("./myParameters.dat");
+disp(&ldquo;if there is any problem with this file. Delete it and re-execute this function/script.");
+end;
+// Now we need to discretise the boundries.
+// Set grid size based on the extrinsic Debye Lengths.
+if Ldn &lt; Ldp then
+delX = Ldn/10;
+else
+delX = Ldp/10;
+end;
+// Length of the pn junction.
+if Wp > Wn then
+length_pn = 30*Wn;
+else
+length_pn = 30*Wp;
+end;
+// We have grid size, We have length. Calculate the total points.
+n_max = floor(length_pn/delX);
+delX = delX/Ldi; // renormalize lengths with Ldi.
+// Set up doping C(x) = Nd(x) - Na(x) that is normalised with ni
+// Half of the point are p type, rests are n-types.
+for i = 1:n_max
+if i &lt;= n_max/2 then
+dop(i) = -Na/ni; // p type
+elseif i > n_max/2 then
+dop(i) = Nd/ni; // n type
+end
+end
+// Initialize the potential based on the requirement of charge neutrality
+// throughout the whole structure.
+for i = 1: n_max
+tempZ = 0.5*dop(i);
+if tempZ > 0 then
+tempX = tempZ * (1 + sqrt(1 + 1/(tempZ*tempZ)));
+elseif tempZ &lt; 0 then
+tempX = tempZ * (1 - sqrt( 1 + 1/(tempZ*tempZ)));
+end;
+fi(i) = log(tempX);
+n(i) = tempX;
+p(i) = 1/tempX;
+end;
+save(&lsquo;profilePN.dat&rsquo;, fi, p, n, dop, length_pn, n_max, delX);
+endfunction
+[/sourcecode]
+Here is the part which calculates the parameters to be used by above posted functions. [sourcecode language=&ldquo;matlab&rdquo;]
+// This function will calculate the parameters. We&rsquo;ll store these parameters
+// in a file. We&rsquo;ll use this file to reuse the parametes for further processing.
+// (c) Dilawar, 2010
+// <a href=mailto:dilawar@ee.iitb.ac.in>dilawar@ee.iitb.ac.in</a>
+// <a href=http://www.ee.iitb.ac.in/student/~dilawar>www.ee.iitb.ac.in/student/~dilawar</a>
+// GNU - GPL
+// This function should return a ascii file containing parameters which are to
+// be used later.
+function [] = calcParameters()
+T = 300; // Substrate is Silicon. Temp 300 K
+u_e = 1350; // cm*cm/V/s Mobility of electron in Silicon
+u_p = 480; // cm*cm/V/s Mobility of holes in Silicon
+D_n = 35; // cm*cm/s Diffusion coeff.
+D_p = 12.4; // cm*cm/s Diffusion coeff.
+q_e = 1.6e-19; // Charge on an electron.
+kt_q = 0.0259;
+kb = 1.38e-23; // Boltzmann Constant JK^-1
+eps = 1.05e-12; // Permittivity of undopes silicon.
+ni = 1.5e10; // Intrinsic carrier concentration
+Vt = kb*T/q_e; // Threshold voltages.
+RNc = 2.8e20;
+dEc = Vt*log(RNc/ni);
+tauN0 = 0.1e-6;
+tauP0 = 0.1e-6;
+mu_n0 = 1500;
+mu_p0 = 1000;
+// Define doping values.
+Na = 1e16;
+Nd = 1e18;
+// Calculate parameters.
+Vbi = Vt*log(Na*Nd/(ni*ni)); // Built-in voltage.
+W = sqrt(2*eps*(Na + Nd)*Vbi/(q_e*Na*Nd) ); // Depletion width
+Wn = W*sqrt(Na/(Na + Nd)); // Depletion width at n side.
+Wp = W*sqrt(Nd/(Na + Nd)); // Depletion width at p side
+Wone = sqrt(2*eps*Vbi/(q_e*Na)); //
+E_p = q_e*Nd*Wn/eps;
+Ldn = sqrt(eps*Vt/(q_e*Nd));
+Ldp = sqrt(eps*Vt/(q_e*Na));
+Ldi = sqrt(eps*Vt/(q_e*ni));
+// We&rsquo;d like to save our paramters in some file.
+save(&lsquo;myParameters.dat&rsquo;, q_e, Na, Nd, Vbi, W, Wn, Wp, E_p, Ldn, Ldp, Ldi, ni, dEc, Vt, kt_q, mu_n0, mu_p0);
+endfunction;
+[/sourcecode]</p>
+<p>// This function will discretize the domain and will create a grid points. // Then we&rsquo;ll discretise the equation there. Matrices // will be created and saved in an binary file for further processing.   function [] = solveEquilibriumCondition() // Open file to read the data. // Check if file exists. If not run the script to create it. ifExists = exists(&rdquo;./profilePN.dat"); if ifExists == 0 then disp(&ldquo;File does not exist. Executing script to generate this file."); exec(&rdquo;./profilePN.sci"); profilePN(); load("./profilePN.dat"); load("./myParameters.dat"); else disp(&lsquo;File already exists. Loading &mldr;'); load("./profilePN.dat"); load("./myParameters.dat"); disp(&ldquo;if there is any problem with this file. Delete it and re-execute this function/script."); end; delta_acc = 1E-5;               // Preset the Tolerance //////////////////////////////////////////////////////////////////////// /////////// EQUILIBRIUM  SOLUTION PART BEGINS                      ///// //////////////////////////////////////////////////////////////////////// // Define the elements of the coefficient matrix for the internal nodes and dx2 = delX*delX; for i = 2: n_max-1 a(i) = 1/dx2; c(i) = 1/dx2; b(i) = -(2/dx2+exp(fi(i))+exp(-fi(i))); f(i) = exp(fi(i)) - exp(-fi(i)) - dop(i) - fi(i)*(exp(fi(i))+exp(-fi(i))); end // Define the elements of the coefficient matrix and initialize the forcing //   function at the ohmic contacts a(1) = 0; c(1) = 0; b(1) = 1; f(1) = fi(1); a(n_max) = 0; c(n_max) = 0; b(n_max) = 1; f(n_max) = fi(n_max); //  Start the iterative procedure for the solution of the linearized Poisson //  equation using LU decomposition method: flag_conv = 0;                   // convergence of the Poisson loop k_iter= 0; while flag_conv == 0 then k_iter = k_iter + 1; alpha1(1) = b(1); for i= 2 : n_max beta1(i)=a(i)/alpha1(i-1); alpha1(i)=b(i)-beta1(i)*c(i-1); end; // Solution of Lv = f v(1) = f(1); for i = 2:n_max v(i) = f(i) - beta1(i)*v(i-1); end; // Solution of U*fi = v temp = v(n_max)/alpha1(n_max); delta(n_max) = temp - fi(n_max); fi(n_max)=temp; for i = (n_max-1):-1:1       //delta temp = (v(i)-c(i)*fi(i+1))/alpha1(i); delta(i) = temp - fi(i); fi(i) = temp; end; delta_max = 0; for i = 1: n_max xx = abs(delta(i)); if xx > delta_max then delta_max=xx; end; //sprintf(&lsquo;delta_max = %d&rsquo;,delta_max)      //&lsquo;k_iter = %d&rsquo;,k_iter,&rsquo; end; //delta_max=max(abs(delta)); // Test convergence and recalculate forcing function and // central coefficient b if necessary if delta_max &lt; delta_acc then flag_conv = 1; else for i = 2: n_max-1 b(i) = -(2/dx2 + exp(fi(i)) + exp(-fi(i))); f(i) = exp(fi(i)) - exp(-fi(i)) - dop(i) - fi(i)*(exp(fi(i)) + exp(-fi(i))); end; end; end; xx1(1) = delX*1e4; for i = 2:n_max-1 Ec(i) = dEc - Vt*fi(i);     //Values from the second Node% ro(i) = -ni*(exp(fi(i)) - exp(-fi(i)) - dop(i)); el_field1(i) = -(fi(i+1) - fi(i))*Vt/(delX*Ldi); el_field2(i) = -(fi(i+1) - fi(i-1))*Vt/(2*delX*Ldi); n(i) = exp(fi(i)); p(i) = exp(-fi(i)); xx1(i) = xx1(i-1) + delX*Ldi*1e4; end; Ec(1) = Ec(2); Ec(n_max) = Ec(n_max-1); xx1(n_max) = xx1(n_max-1) + delX*Ldi*1e4; el_field1(1) = el_field1(2); el_field2(1) = el_field2(2); el_field1(n_max) = el_field1(n_max-1); el_field2(n_max) = el_field2(n_max-1); nf = n*ni; pf = p*ni; ro(1) = ro(2); ro(n_max) = ro(n_max-1); // save all these values in a file. save(&lsquo;equilibriumSol.dat&rsquo;, Ec, Vt, fi, xx1, nf, pf, ro, n, p, el_field1, el_field2); h = figure(1) plot(xx1, Vt*fi,&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) xlabel(&lsquo;x [um]'); ylabel(&lsquo;Potential [eV]'); title(&lsquo;Potential vs Position - at Equilibrium&rsquo;); xs2gif(1, &lsquo;./figs/PotentialVsPos.gif&rsquo;); close(h); h = figure(2) plot(xx1, [el_field1, el_field2],&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) //plot(xx1, el_field2,&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) xlabel(&lsquo;x [um]'); ylabel(&lsquo;Electric Field [V/cm]'); title(&lsquo;Field Profile vs Position - at Equilibrium&rsquo;); xs2gif(2, &lsquo;./figs/ElectricalFieldVsPos.gif&rsquo;); close(h); h = figure(3) plot2d1(&ldquo;onn&rdquo;, xx1, [nf, pf]); xlabel(&lsquo;x [um]'); ylabel(&lsquo;Electron & Hole Densities [1/cm^3]'); title(&lsquo;Electron & Hole Densities vs Position - at Equilibrium&rsquo;); legend(&lsquo;n&rsquo;,&lsquo;p&rsquo;); xs2gif(3, &lsquo;./figs/ElectronAndHolesDensity.gif&rsquo;); close(h); h = figure(4) plot(xx1, q_e*ro,&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) xlabel(&lsquo;x [um]'); ylabel(&lsquo;Total Charge Density [C/cm^3]'); title(&lsquo;Total Charge Density vs Position - at Equilibrium&rsquo;); xs2gif(4, &lsquo;./figs/TotalChargeDensity.gif&rsquo;); close(h); h = figure(5) plot(xx1, Ec,&lsquo;r&rsquo;,&lsquo;LineWidth&rsquo;,2) xlabel(&lsquo;x [um]'); ylabel(&lsquo;Conduction Band Energy (eV)'); title(&lsquo;Conduction Band vs Position - at Equilibrium&rsquo;); xs2gif(5, &lsquo;./figs/ConductionBandDiagram.gif&rsquo;); close(h); endfunction</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/pn-junction>pn-junction</a></li>
+<li><a href=/tags/simulation>simulation</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

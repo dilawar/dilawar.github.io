@@ -1,0 +1,156 @@
+<!doctype html><html>
+<head>
+<meta name=generator content="Hugo 0.89.2">
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Dilawar's Blog - watch -n 1 /dev/null </title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<link rel=alternate type=application/rss+xml href=https://dilawar.github.io/index.xml title="Dilawar's Blog">
+<meta property="og:title" content="Dilawar's Blog">
+<meta property="og:description" content>
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://dilawar.github.io/">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Dilawar's Blog">
+<meta name=twitter:description content>
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class="recent-posts section">
+<h2 class=section-header>
+Recent posts
+</h2>
+<div class=posts>
+<div class=post>
+<div class=meta>Jul 15, 2021</div>
+<a class=title href=/posts/2021/2021-07-15-insert-username-and-password-into-remote-url-before-git-push/>Insert username and password into remote url before git push</a> &mdash;
+<span class=description>
+I wrote a small script that is a wrapper around git push. It modifies the remote url and insert username and password (read from env) from it. No need to store ssh keys on remote server or git clone with https credentials.
+For github.com repo, It looks for GITHUB_USER first, then for GIT_USER, and then USER environment variable. Similarly it looks for GITHUB_TOKEN, GIT_TOKEN for tokens. Fot gitlab.com repo, it looks for GITLAB_USER or GIT_USER or USER for username, and GITLAB_TOKEN, GIT_TOKEN for password.&mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>Jul 2, 2021</div>
+<a class=title href=/posts/2021/2021-07-02-fixing-cmake-symbol-lookup-error-cmake-undefined-symbol-archive_write_add_filter_zst/>Fixing 'cmake: symbol lookup error: cmake: undefined symbol: archive_write_add_filter_zst'</a> &mdash;
+<span class=description>
+I get the following error during build. I think it is specific to CentOS-8.
+$ cmake -DCMAKE_BUILD_TYPE=Release .. && make cmake: symbol lookup error: cmake: undefined symbol: archive_write_add_filter_zstd It can be fixed easily by installing/updating libarchive.
+$ sudo yum install -y cmake libarchive &mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>May 30, 2021</div>
+<a class=title href=/posts/2021/2021-05-28-using-jekyll-docker-image/>Using Jekyll docker image to build your site</a> &mdash;
+<span class=description>
+I use Jekyll to build this site. Recently, I switched to Manjaro Linux which has ruby-3.0 by default, I could install Jekyll successfully using pacman but could not run it.
+$ jekyll --help /usr/lib/ruby/3.0.0/rubygems.rb:281:in `find_spec_for_exe': can't find gem jekyll (>= 0.a) with executable jekyll (Gem::GemNotFoundException) from /usr/lib/ruby/3.0.0/rubygems.rb:300:in `activate_bin_path' from /usr/bin/jekyll:23:in `&lt;main>' I don&rsquo;t like to fight with installation process. And also I know very little about ruby. So I turned to docker which I have used in the past.&mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>May 28, 2021</div>
+<a class=title href=/posts/2021/2021-05-28-vernaculars-are-not-in-danger/>Vernaculars are not facing external threats</a> &mdash;
+<span class=description>
+Let me add some context first. I am a native Hindustani speaker who spent most of his life in Southern India. I consider myself south Indian but I am yet to assign a state to myself. Since my wife is from Udupi, so I guess it&rsquo;s Karnataka for sure. I speak Kannada a little (and a little bit of Tamil since I lived in Chennai for 5 years). I spent most time in college learning English and computer languages.&mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>Jan 3, 2021</div>
+<a class=title href=/posts/2021/2021-01-03-all-you-needed-to-know-about-mfcc/>All you needed to know about MFCC</a> &mdash;
+<span class=description>
+See answers by Amir Poorjam on RG https://www.researchgate.net/post/Why_we_take_only_12-13_MFCC_coefficients_in_feature_extraction He has also given his lecture notes https://www.researchgate.net/profile/Amir-Hossein-Poorjam/post/Why_we_take_only_12-13_MFCC_coefficients_in_feature_extraction/attachment/5e29bb633843b093839ccbc1/AS%3A850528695238656%401579793251438/download/Mfccs.pdf . These are very good. Have a look at this thesis and read the portions you like https://ir.canterbury.ac.nz/handle/10092/7561 &mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>Dec 14, 2020</div>
+<a class=title href=/posts/2020/2020-12-14-it-is-faster-to-use-cv2-imwrite-cv2-imread-than-np-save-np-load-on-numpy-matrices-with-integers/>cv2.imwrite/cv2.imread are faster than np.save/np.load on numpy matrices with integers</a> &mdash;
+<span class=description>
+In one of the ongoing projects, I generate a lot of small matrices (~1000 entries). These are often written to the disk and read from it. I was trying to optimize this step since this step run in a REST api.
+The standard way is numpy.save and numpy.load which works fine. My experience with opencv made me wonder if cv2.imwrite and cv2.imread can be used. The later saves the matrices to png file which works without any loss of data if you have 8 or 16 bit integer values in your matrices.&mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>Dec 13, 2020</div>
+<a class=title href=/posts/2020/2020-12-13-convert-webm-file-to-wav/>Convert webm file to WAV</a> &mdash;
+<span class=description>
+Download the following script. Make sure you have ffmpeg installed on your system.&mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>Dec 7, 2020</div>
+<a class=title href=/posts/2020/2020-12-07-farm-bill-2020-err-on-the-side-of-caution/>Farm Bill | Err on the side of caution</a> &mdash;
+<span class=description>
+My father is a farmer. He works and lives in western U.P., a relatively prosperous area in terms of ground-water and road connectivity. He is not sufficiently poor. He managed to pay for my college (circa 2007). I spent the first 21 years of my life in the village, often working on the farms. It is a hard life once you have experienced the alternatives.
+We are sugar-cane farmers and are well organized.&mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>Nov 22, 2020</div>
+<a class=title href=/posts/2020/2020-11-22-reviews-of-small-micro-controllers-for-embedded-systems/>Review of small microcontrollers for embedded systems | The Amazing $1 microcontrollers</a> &mdash;
+<span class=description>
+Look no further! https://jaycarlson.net/microcontrollers/ (Wayback Machine link) has the most exhaustive review of µC I&rsquo;ve ever read.
+And here is the Hacker News links https://hn.algolia.com/?q=amazing+%241+microcontroller&mldr;
+</span>
+</div>
+<div class=post>
+<div class=meta>Nov 20, 2020</div>
+<a class=title href=/posts/2020/2020-11-20-generate-android-bundle-aab-file-for-a-cordova-app/>Generate Android Bundle (.aab file) for a Cordova app</a> &mdash;
+<span class=description>
+Cordova 8.1+ supports generating Android Bundle (.aab file). Usually cordova generates an .apk file for your app. Playstore often warns about .apk file about it&rsquo;s bloated size.
+To generate an .aab file, add --packageType=bundle option to your cordova build command.
+cordova build android --release -- --packageType=bundle Signed bundles Here is the command I use to generate a singed bundle.
+cordova build android --release -- --keystore=~/keystore/dilawar.jks --storePassword=$(KEYSTORE_PASSWORD) --alias=dilawar --password=$(KEYSTORE_PASSWORD) --packageType=bundle --webpack.mode=production The old way to generate bundle See the discussion here.&mldr;
+</span>
+</div>
+<ul class=pagination>
+<li class="page-item page-prev">
+</li>
+<li class="page-item page-next">
+<a href=/page/2/ class=page-link aria-label=Next><span aria-hidden=true>Next page →</span></a>
+</li>
+</ul>
+</div>
+</div>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

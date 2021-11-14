@@ -1,0 +1,122 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Using mutt - saving password and writing mail in markdown - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Using mutt - saving password and writing mail in markdown">
+<meta property="og:description" content="If I were to be forced to replace my mutt with some other general purpose email client I&rsquo;d prefer thunderbird with plugin muttator.
+If you prefer easy to setup and click-based tools then you will not find mutt very exciting, however those who loves to split hair and tweak their tools to their whims will find much in mutt to please them. Learning the full power of mutt takes time and some sort of persistence.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2014/2014-01-28-using-mutt-saving-password-and-writing-mail-in-markdown/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2014-01-28T00:00:00+00:00">
+<meta property="article:modified_time" content="2014-01-28T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Using mutt - saving password and writing mail in markdown">
+<meta name=twitter:description content="If I were to be forced to replace my mutt with some other general purpose email client I&rsquo;d prefer thunderbird with plugin muttator.
+If you prefer easy to setup and click-based tools then you will not find mutt very exciting, however those who loves to split hair and tweak their tools to their whims will find much in mutt to please them. Learning the full power of mutt takes time and some sort of persistence.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Using mutt - saving password and writing mail in markdown</h1>
+<div class=meta>Posted at &mdash; Jan 28, 2014</div>
+</div>
+<div class=markdown>
+<p>If I were to be forced to replace my mutt with some other general purpose email client I&rsquo;d prefer thunderbird with plugin <code>muttator</code>.</p>
+<p>If you prefer easy to setup and click-based tools then you will not find mutt very exciting, however those who loves to split hair and tweak their tools to their whims will find much in mutt to please them. Learning the full power of mutt takes time and some sort of persistence. This post is not intended for first time user. It is meant for those who have tried their hands on mutt. In the end, there are some link which can help who wants to start using mutt. I had the fleeting temptation to combine my scripts in one which can set up <a href=http://github.com/dilawar/mutt>mutt automatically</a> for arbitrary no of accounts, but then it beats the whole purpose of tweaking the tool.</p>
+<h2 id=storing-password>Storing password</h2>
+<p>Mutt stores password in plain text format. To avoid this, I used <code>gpg</code> to encrypt a file in which password are stored. For example, a simple text file is created to store the password.</p>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>export EE_NAME=&#34;Dilawar Singh&#34;
+export EE_USER=dilawar
+export EE_PASS=password1
+</code></pre></div><p>This has export command which set an environment variable. Now I encrypt the file using <code>gpg</code>.</p>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-fallback data-lang=fallback>gpd -c password.txt
+</code></pre></div><p>It will ask for a pass-phrase. When decrypting the file, you have provide the same pass-phrase. Passphrase are easy to remember and hard to crack. If I were Gabbar Singh, I would have chose something like <code>thakur a per katne chahiye the</code>. Hard to guess and easy to remember, isn&rsquo;t it? An encrypted file will be created by gpg default name <code>password.txt.gpg</code>. Mutt can read environment variables, let&rsquo;s exploit this fact. We write a wrapper around the mutt command. Let&rsquo;s name this script <code>my_mutt</code> or after the name of your pet doggie. And <code>chmod +x my_mutt</code> so it is executable. Store it somewhere like <code>/usr/local/bin</code>.</p>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#0f0;font-weight:700>#!/bin/bash
+</span><span style=color:#0f0;font-weight:700></span>pwds=gpg -d ~/.mutt/password.txt.gpg
+<span style=color:#fff;font-weight:700>eval</span> $pwds
+mutt -F ~/.mutt/mutt_server <span style=color:#0ff;font-weight:700>&#34;</span>$@<span style=color:#0ff;font-weight:700>&#34;</span>
+</code></pre></div><p>Second line de-crypt the encrypted file, text of the file is stored in <code>pwds</code> variable (valid mutt configuration lines) and this text is executed by <code>eval</code> command. We invoke mutt in this shell so that it can access environment variables EE_USER, EE_PASS etc. On line 4, <code>-F ~/.mutt/mutt_server</code> says that this file is my config file which mutt should read. The default configuration file is <code>~/.muttrc</code>.</p>
+<p>In the configuration file, write something like this. You need to write some more to setup mutt. This is only fragment which is relevant to one account.</p>
+<div class=highlight><pre tabindex=0 style=color:#e5e5e5;background-color:#000;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-bash data-lang=bash><span style=color:#007f7f># ~/Scripts/mutt/ee</span>
+<span style=color:#fff;font-weight:700>set</span> from=<span style=color:#0ff;font-weight:700>&#34;</span>$EE_NAME<span style=color:#0ff;font-weight:700> </span>$EE_USER<span style=color:#0ff;font-weight:700>@ee.iitb.ac.in&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> hostname=<span style=color:#0ff;font-weight:700>&#34;imaps://sandesh.ee.iitb.ac.in&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> folder=<span style=color:#0ff;font-weight:700>&#34;imaps://sandesh.ee.iitb.ac.in&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> imap_user=<span style=color:#0ff;font-weight:700>&#34;</span>$EE_USER<span style=color:#0ff;font-weight:700>&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> imap_pass=<span style=color:#0ff;font-weight:700>&#34;</span>$EE_PASS<span style=color:#0ff;font-weight:700>&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> record=<span style=color:#0ff;font-weight:700>&#34;+mail/Sent&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> postponed=<span style=color:#0ff;font-weight:700>&#34;=Drafts&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> spoolfile=<span style=color:#0ff;font-weight:700>&#34;imaps://sandesh.ee.iitb.ac.in/INBOX&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> signature=<span style=color:#0ff;font-weight:700>&#34;sign.txt&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> smtp_url=<span style=color:#0ff;font-weight:700>&#34;smtp://</span>$GPO_USER<span style=color:#0ff;font-weight:700>@smtp-auth.iitb.ac.in:25&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> stmp_pass=<span style=color:#0ff;font-weight:700>&#34;</span>$GPO_PASS<span style=color:#0ff;font-weight:700>&#34;</span>
+<span style=color:#fff;font-weight:700>set</span> realname=<span style=color:#0ff;font-weight:700>&#34;</span>$REAL_NAME<span style=color:#0ff;font-weight:700>&#34;</span>
+my_hdr Organization: EE, IIT Bombay, http://www.ee.iitb.ac.in
+</code></pre></div><p>In my personal opinion, this is a good solution to store password on a machine (don&rsquo;t commit your encrypted file to your Github/Gitlab repo.)</p>
+<h2 id=writing-html-emails>Writing HTML emails</h2>
+<p>Mutt works great with text emails. But if you want to write emails for wncc group where code has to be written inline, html can help. See this question for potential solutions. <a href=http://unix.stackexchange.com/questions/108485/send-email-written-in-markdown-using-mutt>I have also written mine</a>.</p>
+<h2 id=resources>Resources:</h2>
+<ol>
+<li>Mutt wiki is a good reference guide.</li>
+<li><a href=http://mutt.blackfish.org.uk/storage/>My first mutt</a></li>
+<li><a href=http://wcm1.web.rice.edu/mutt-tips.html>And this terminal lover blog</a></li>
+</ol>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/markdown-with-mutt>markdown-with-mutt</a></li>
+<li><a href=/tags/mutt>mutt</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

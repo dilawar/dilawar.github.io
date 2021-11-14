@@ -1,0 +1,103 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Natural Numbers : Definition - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Natural Numbers : Definition">
+<meta property="og:description" content="How to use natural numbers? That is very easy. We&rsquo;ve all learned how to use natural numbers in school. But it is hard to answer; &ldquo;How to define natural numbers?&rdquo;. And harder would be; &ldquo;How to define the actions we do on natural numbers such as multiplication or addition?&rdquo; Terrence Tao has discussed these issues beautifully in his book and I recommend that one should get this book and read Chapter 2 and 3 [1].">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2010/2010-07-17-natural-numbers/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2010-07-17T00:00:00+00:00">
+<meta property="article:modified_time" content="2010-07-17T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Natural Numbers : Definition">
+<meta name=twitter:description content="How to use natural numbers? That is very easy. We&rsquo;ve all learned how to use natural numbers in school. But it is hard to answer; &ldquo;How to define natural numbers?&rdquo;. And harder would be; &ldquo;How to define the actions we do on natural numbers such as multiplication or addition?&rdquo; Terrence Tao has discussed these issues beautifully in his book and I recommend that one should get this book and read Chapter 2 and 3 [1].">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Natural Numbers : Definition</h1>
+<div class=meta>Posted at &mdash; Jul 17, 2010</div>
+</div>
+<div class=markdown>
+<p>How to use natural numbers? That is very easy. We&rsquo;ve all learned how to use natural numbers in school. But it is hard to answer; &ldquo;How to define natural numbers?&rdquo;. And harder would be; &ldquo;How to define the actions we do on natural numbers such as multiplication or addition?&rdquo; Terrence Tao has discussed these issues beautifully in his book and I recommend that one should get this book and read Chapter 2 and 3 [1].</p>
+<p>Here we discuss one of the methods to define natural numbers.</p>
+<h2 id=defining-natural-numbers--peano-axiomshttpenwikipediaorgwikipeano_axioms><a href=http://en.wikipedia.org/wiki/Peano_axioms><strong>Defining Natural Numbers : Peano Axioms</strong></a></h2>
+<p>These axioms are the standard way to define natural numbers (Can you build your own set of axioms? This will be a nice exercise. Please let me know.). Let&rsquo;s first solve our first problem. To use natural numbers we have to write them down. How to write down the natural numbers? We use standard figures of 0, 1, 2, 3, etc. to represent them, but we would not take this for granted. But to start, we need some raw material. This raw material is the minimum required to build our structure called natural numbers. For example, if we wish to build the wall, we need bricks. If we are bold enough, we can start from clay and make the bricks by ourselves. Well, I&rsquo;d like to have superpowers so that I can make silica by myself. All  needed were fundamental particles. One can again ask whether I can start from more fundamental. This is where we are restricted by our imagination. Anyway, to build our structure of natural numbers, we start with two things. Lets assume that someone has given them to us, one is the number 0 (zero) and one is increment operator ++ and we collect all the natural number in a set (a mathematical basket) of Natural numbers represented by $latex \mathbb{N})$. <strong>Operator ++ :</strong> If we apply this operator to any of the natural number, we get the <strong>NEXT</strong> natural number. So <strong>0++</strong> is our next natural number (&lsquo;1&rsquo; is saner way to write this number). Next in line will be (0++)++ (or 2) and ((0++)++)++ (3) and so on. Now we bring in these axioms known as Peano Axioms.</p>
+<p><strong>Axiom 1.</strong> <em>0 is a natural number.</em></p>
+<p>No, you can not ask any question, you mortal earthling!</p>
+<p><strong>Axiom 2.</strong> <em>if n is a natural number then n++ is a natural number.</em></p>
+<p>We start from 0 and apply this axiom once. We get 0++ aka 1 in this big empty world. Apply this axiom again and we get (0++)++ aka 2. Now if someone ask you to prove that 5 is a natural number, then invoke axiom 1 and apply axiom 2 five times and do not forget to laugh at his face. [wink, wink]. These two axioms seems to be enough to build natural numbers. But world is not filled with ordinary people only : there are mathematicians too and these mathematicians do not like each other. Consider two mathematicians, Superman and Lax Luthor. Superman gave these two axioms and thought that he saved the day. But next day Lax Luthor came up with his evil argument. He argues (fortunately anti-Superman Lax Luthor only argues) that as soon as he goes up to some number say 7, next time Supey invokes axiom 2, He&rsquo;ll wrap back to 0, i.e. 7++ = 0. What you gonna do about it pretty face? These two axioms still holds but out natural number set $latex \mathbb{N}$ will contain numbers from this series 0 1 2 3 4 5 6 7 0 1 2 3 4 5 6 7 0 1 2 &mldr;.</p>
+<p><strong>Axiom 3 :</strong> <em>0 is not the successor of any natural number, i.e. there is no number n such that n++ = 0.</em></p>
+<p>Lax now argues, &ldquo;Ok, fine! 7++ is not equal to 0. Let say 7++ is now equal to 1 or 2 or 3 etc. This will not contradict with any of Superman&rsquo;s axioms. If 7++ = 2 then my system is 0 1 2 3 4 5 6 7 2 3 4 5 6 7 2 3 4 5 6 &mldr;.</p>
+<p><strong>Axiom 4:</strong> <em>Different natural numbers have different successors; i.e., if n, m are two different natural numbers than n++ and m++ are also different natural numbers. EQUIVALENTLY if m++ = n++ then we must have m = n.</em></p>
+<p>Now what Lax! All natural numbers are now distinct. 7++ can not be equal to 2 because there is another number 1 such that 1++ = 2. According to this axiom, 7++ and 1++ must be different. Should Superman think that he is done? Wait! Lax Luthor is not considered one of the top ranked super villain for nothing. He now argues that 0.5, 1.5, 2.5 etc are also natural numbers. He is introducing &lsquo;<em>rogue elements&rsquo;.</em> Now it is Superman primary duty to keep rogue elements away from Mathematics. Sure, one can argue that one can never get 0.5, 1.5 etc if he starts building natural numbers from 0 using these axioms. But how Superman will prove this. How does he know when 0.5 will never apears in $latex \mathbb{N}$. Superman can keep constructing natural number till the end of time and Lax will keep saying, &lsquo;You have not exhaused all possibilities. Keep it coming!&rdquo;.</p>
+<p>How superman will make this <em>Lakshman Rekha</em> to keep these rogue elements out of $latex \mathbb{N}$. Can Superman get away from it by stating, &ldquo;You can never get 0.5 in Natual numbers becasue 0.5 is between 0 and 1 and you can produce any number between 0 and 1.&rdquo; But it will be very difficult for Mathematical League (not the creepy Justice League. to quantify what Superman means by &ldquo;0.5 is between 0 and 1&rdquo;. How can he say that 0.5 lies between 0 and 1? Is there any proof?</p>
+<p><strong>Axiom 5* :</strong> (Principle of Mathematical Induction) <em>Let P(n) be any property pertaining to natural number n. Suppose that P(0) is true, ans suppose that when P(n) is true, P(n++) is also true. Then P(n) is true.</em></p>
+<p>What does Superman mean by &lsquo;property&rsquo; is hard to say at this point. For example P(n) might be &ldquo;n is prime&rdquo;; &ldquo;n is odd&rdquo;; &ldquo;n solve a given equation&rdquo;.</p>
+<p>Now P(n) is such that p(0) is true; and whenever P(n) is true, P(n++) is also true. The since P(0) is true P(0++) aka P(1) is true. Since P(1) is true so is P(1++) i.e. P(2) is true and so one. If this fail with P(0.5), then 0.5 is not an natural number. We can use a simple proof given in [2] to keep the rogue elements 0.5, 1.5 etc out of $latex \mathbb{N}$.</p>
+<p><em><strong>Proof :</strong></em> We will be needing integers without defining them. We borrow the definition of integers. Lets say P(n) = n  &ldquo;is not a half integer&rdquo; i.e. an integer plus 0.5. Then P(0) is true. And if P(n) is true, then P(n++) is true.  Thus this axiom assert that P(n) is true for all natural numbers n, i.e. no natural number can be half integer; and P(0.5) fails to pass this test.[2]</p>
+<blockquote>
+<p>Since this axiom refers not just to variable but also to PROPERTIES, it should technically be called &lsquo;axiom schema&rsquo; rather than an axiom - it is a template for producing an infinite number of axioms, rather than being a simple axiom in its own right. [Analysis I, Terence Tao. pp 20].</p>
+</blockquote>
+<p>NOTES:</p>
+<ul>
+<li>[1] It is hard to believe that there could be some people who does not have some idea of natural numbers. People use different name/figures to speak/write natural numbers. It is believed that most of the animals have some idea or sense of natural numbers. A bird can be seen in stress if one of her eggs is stolen i.e. she knows how to count. Language helps us to represent these numbers. However, there is a <a href=http://www.nature.com/news/2004/040816/full/news040816-10.html>study publiashed in Science</a> which contradict this view. Apparently their counting system consists of three quantity, one, few and many. Go ahead, read this story published in Nature. <a href=http://www.nature.com/news/2004/040816/full/news040816-10.html>http://www.nature.com/news/2004/040816/full/news040816-10.html</a></li>
+</ul>
+<h3 id=readings>READINGS:</h3>
+<ul>
+<li>1. <a href=http://terrytao.wordpress.com/books/analysis-i/><strong>Analysis I</strong></a>, by <a href=http://terrytao.wordpress.com/><em>Terrence Tao.</em></a></li>
+</ul>
+</div>
+<div class=post-tags>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

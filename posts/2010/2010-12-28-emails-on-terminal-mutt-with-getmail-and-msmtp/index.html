@@ -1,0 +1,92 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Emails with terminal - Mutt with getmail and msmtp - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Emails with terminal - Mutt with getmail and msmtp">
+<meta property="og:description" content="Hello, terminal lovers. There are many other blogs written about &lsquo;mutt&rsquo; and &lsquo;getmail&rsquo;. Surely you can take hints from any of them. This post is written for IIT Bombay email servers. You pathetic Windows guys, piss off!!
+Get Emails from Server First of all, we need to use &lsquo;something&rsquo; to fetch emails from gpo server. Mutt can be used to read directly from server. But I like storing my emails on my machine.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2010/2010-12-28-emails-on-terminal-mutt-with-getmail-and-msmtp/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2010-12-28T00:00:00+00:00">
+<meta property="article:modified_time" content="2010-12-28T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Emails with terminal - Mutt with getmail and msmtp">
+<meta name=twitter:description content="Hello, terminal lovers. There are many other blogs written about &lsquo;mutt&rsquo; and &lsquo;getmail&rsquo;. Surely you can take hints from any of them. This post is written for IIT Bombay email servers. You pathetic Windows guys, piss off!!
+Get Emails from Server First of all, we need to use &lsquo;something&rsquo; to fetch emails from gpo server. Mutt can be used to read directly from server. But I like storing my emails on my machine.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Emails with terminal - Mutt with getmail and msmtp</h1>
+<div class=meta>Posted at &mdash; Dec 28, 2010</div>
+</div>
+<div class=markdown>
+<p>Hello, terminal lovers. There are many other blogs written about &lsquo;mutt&rsquo; and &lsquo;getmail&rsquo;. Surely you can take hints from any of them. This post is written for IIT Bombay email servers. You pathetic Windows guys, piss off!!</p>
+<h3 id=get-emails-from-server>Get Emails from Server</h3>
+<p>First of all, we need to use &lsquo;something&rsquo; to fetch emails from gpo server. Mutt can be used to read directly from server. But I like storing my emails on my machine. I prefer <a href=http://en.wikipedia.org/wiki/Getmail>&lsquo;getmai</a>l&rsquo; over fetchmail to do that for reasons I don&rsquo;t know. It is an awesome tool to do that since it never gave me trouble.  IIT Bombay email server supports IMAP. We have to configure getmail to fetch mails from there using IMAP and store it somewhere. Here is the script of this. Make sure you have three directories in /GPO-IITB/ directory named &lsquo;cur&rsquo;, &lsquo;new&rsquo;, and &lsquo;temp&rsquo; (without single quote). We are storing emails in two type of mainboxes, maildir and mboxrd. To understand these concepts read <a href=http://pyropus.ca/software/getmail/configuration.html>this</a>. Name this file &lsquo;getmail.gpo&rsquo; and store it in ~/.getmail directory. [sourcecode language=&ldquo;txt&rdquo;] [retriever] type = SimpleIMAPRetriever server = imap.iitb.ac.in username = khookhar password = darinda [destination] type = MultiDestination destinations = ('[mboxrd-destination]', &lsquo;[maildir-destination]') [mboxrd-destination] type = Mboxrd path = ~/Mail/GPO-IITB/gpo_backup.mbox [maildir-destination] type = Maildir path = ~/Mail/GPO-IITB/ [options] verbose = 2 read_all = False message_log = ~/.getmail/gpo.log [/sourcecode] If you also wants EE account then create one more file getmail.ee as following. [sourcecode language=&ldquo;text&rdquo;] [retriever] type = SimpleIMAPRetriever server = sandesh.ee.iitb.ac.in username = profchaos password = ihatekartman [destination] type = MultiDestination destinations = ('[mboxrd-destination]&rsquo;, &lsquo;[maildir-destination]') [mboxrd-destination] type = Mboxrd path = ~/Mail/EE-IITB/ee_backup.mbox [maildir-destination] type = Maildir path = ~/Mail/EE-IITB/ [options] verbose = 2 read_all = False message_log = ~/.getmail/ee.log [/sourcecode] Now run from terminal. <code>$getmail -r getmail.gpo $getmail -r getmail.ee</code> First line will download all new messages into local directories. Now you are ready to read them using mutt or some other client. This will not delete messages from your server.</p>
+<h3 id=using-mutt-to-read-and-send-emails>Using mutt to read and send emails</h3>
+<p>Here is my ~/.muttrc file for this purpose. Not that even if you are storing a same message in two mailbox we are only using one mailbox to read and send message. Other one is for backup. [sourcecode] # Name set realname = &lsquo;Prof Chaos&rsquo; ########## # This is to read gmail message directly from server. set folder = &ldquo;imaps://imap.gmail.com:993&rdquo; set spoolfile = &ldquo;+INBOX&rdquo; set postponed = &ldquo;+[Gmail]/Drafts&rdquo; set trash = &ldquo;imaps://imap.gmail.com/[Gmail]/Trash&rdquo; set username = &ldquo;<a href=mailto:profchaos@gmail.com>profchaos@gmail.com</a>&rdquo; set password = &ldquo;ihatekartman&rdquo; ## set local folder. set header_cache = ~/.mutt/cache/headers set message_cachedir = ~/.mutt/cache/bodies set certificate_file = ~.mutt/certificates # ## where mails are stored set folder = ~/Mail/ mailboxes = GPO-IITB mailboxes = EE-IITB mailboxes = INBOX set record = ~/Mail/GPO-IITB/sent set sort = threads set postponed = ~/Mail/GPO-IITB/drafts set mbox_type = MailDir set content_type = &ldquo;text/html&rdquo; set signature = &ldquo;~/Mail/sign.html&rdquo; #message-hook ~A &lsquo;set pager=vim&rsquo; ## message-hook &lsquo;~f rfs&rsquo; &lsquo;set pager=&ldquo;less&rdquo;+/^ subject: .*\""&rsquo; ## this our send email client. set sendmail = &ldquo;/usr/bin/msmtp&rdquo; ## Editor set editor = &ldquo;vim&rdquo; ignore * unignore date from subject to cc # ### mutt option ### set folder_format = &ldquo;%2C %t %N %8s %d %f&rdquo; set edit_headers = no set askbcc = yes set text_flowed = yes set abort_nosubject = ask-yes set abort_unmodified = ask-yes set copy = yes set include = yes set metoo = yes # send reply to myself. set hdrs my_hdr From: Dilawar my_hdr X-Mailer: &lsquo;mutt -v| head -n 1&rsquo; macro generic &ldquo;1&rdquo; &ldquo;:set from &lsquo;Dilawar &lsquo;&rdquo; color hdrdefault brightcyan black color header brightwhite black &ldquo;^from:&rdquo; color header brightwhite black &ldquo;^subject:&rdquo; color quoted brightgreen blue color quoted brightwhite blue color quoted brightwhite blue color signature brightwhite black color indicator blue green color error red black mono error bold color status black cyan mono status bold color tree yellow blue color tilde brightmagenta blue color body red black &ldquo;[-a-z_0-9.]+@[-a-z_0-9.]+&rdquo; mono body bold &ldquo;[-a-z_0-9.]+@[-a-z_0-9.]+&rdquo; color body red black &ldquo;^Good signature&rdquo; mono body bold &ldquo;^Good signature&rdquo; color body brightwhite red &ldquo;^Bad signature from.*&rdquo; mono body bold &ldquo;^Bad signature from.*&rdquo; color normal white black color message red white color attachment red blue ## Here is address-book alias epw-circulation Circulation alias harami harami alias pilla pilla [/sourcecode] Now we need to send email. We have choses &lsquo;msmtp&rsquo; as our send-mail client. Configure it too. We are using iitb-gpo for sending emails. [sourcecode] account default host smtp-auth.iitb.ac.in port 25 protocol smtp auth on from <a href=mailto:profchaos@iitb.ac.in>profchaos@iitb.ac.in</a> user profchaos password ihatecartman tls on tls_starttls on tls_certcheck off [/sourcecode]</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/getmail>getmail</a></li>
+<li><a href=/tags/iitb-ee>iitb-ee</a></li>
+<li><a href=/tags/iitb-gpo>iitb-gpo</a></li>
+<li><a href=/tags/mutt>mutt</a></li>
+<li><a href=/tags/smstp>smstp</a></li>
+<li><a href=/tags/terminal-email-clien>terminal-email-clien</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

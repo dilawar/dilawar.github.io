@@ -1,0 +1,96 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Making figures with TikZ/pgfplots for scientific publishing in Biology - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Making figures with TikZ/pgfplots for scientific publishing in Biology">
+<meta property="og:description" content="I am a heavy user of matplotlib but secretly I am in love with tikz (well who isn&rsquo;t!). I&rsquo;ve been training myself with tikz and pgfplots for few years now, by drawing (umm.. coding) figures for labnotes, journal club and student&rsquo;s seminars. For my recent paper published in eLife, I used tikz/pgfplots to draw all my figures and the results were awesome!
+[gallery ids=&ldquo;2113,2114,2115,2116,2117,2118,2119,2120,2121&rdquo; type=&ldquo;rectangular&rdquo;]
+The code and data used to generate these figures are available on my Github repository.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2018/2018-11-23-making-figures-with-tikz-pgfplots-for-scientific-publishing-in-biology/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2018-11-23T00:00:00+00:00">
+<meta property="article:modified_time" content="2018-11-23T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Making figures with TikZ/pgfplots for scientific publishing in Biology">
+<meta name=twitter:description content="I am a heavy user of matplotlib but secretly I am in love with tikz (well who isn&rsquo;t!). I&rsquo;ve been training myself with tikz and pgfplots for few years now, by drawing (umm.. coding) figures for labnotes, journal club and student&rsquo;s seminars. For my recent paper published in eLife, I used tikz/pgfplots to draw all my figures and the results were awesome!
+[gallery ids=&ldquo;2113,2114,2115,2116,2117,2118,2119,2120,2121&rdquo; type=&ldquo;rectangular&rdquo;]
+The code and data used to generate these figures are available on my Github repository.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Making figures with TikZ/pgfplots for scientific publishing in Biology</h1>
+<div class=meta>Posted at &mdash; Nov 23, 2018</div>
+</div>
+<div class=markdown>
+<p>I am a heavy user of <code>matplotlib</code> but secretly I am in love with <code>tikz</code> (well who isn&rsquo;t!). I&rsquo;ve been training myself with tikz and pgfplots for few years now, by drawing (umm.. coding) figures for labnotes, journal club and student&rsquo;s seminars. For <a href=https://elifesciences.org/articles/41412>my recent paper published in eLife</a>, I used tikz/pgfplots to draw all my figures and the results were awesome!</p>
+<p>[gallery ids=&ldquo;2113,2114,2115,2116,2117,2118,2119,2120,2121&rdquo; type=&ldquo;rectangular&rdquo;]</p>
+<p>The code and data used to generate these figures are available on <a href=https://github.com/dilawar/SinghAndBhalla_CaMKII_SubunitExchange_2018/PaperFigures/>my Github repository</a>.</p>
+<p>I also made a striking digest image for eLife using Tikz only <a href=https://raw.githubusercontent.com/dilawar/SinghAndBhalla_CaMKII_SubunitExchange_2018/master/PaperFigures/Abstract/camkii_xkcd.b.tex>code here</a>. It turns out to be more suitable for XKCD than for eLife. Nonetheless, I am proud of it and hope that it makes the cut and get published in [eLife digest](<a href=https://elifesciences.org/digests>https://elifesciences.org/digests</a>) of my paper.</p>
+<p><img src=images/camkii_xkcd-b.png alt=camkii_xkcd.b></p>
+<p>Tikz and pgfplots are great for making neat figures but keep in mind that they are not for faint hearted. You’d need lot of patience and time to get comfortable with them (just like vim editor). And just like the vim Jedi, you’d feel grateful that you put enough effort to become master of TikZ/pgfplots.</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/camkii>camkii</a></li>
+<li><a href=/tags/data-visualization-using-pgfplots>data-visualization-using-pgfplots</a></li>
+<li><a href=/tags/elife>elife</a></li>
+<li><a href=/tags/memory>memory</a></li>
+<li><a href=/tags/pgfplots>pgfplots</a></li>
+<li><a href=/tags/subunit-exchange>subunit-exchange</a></li>
+<li><a href=/tags/tikz>tikz</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

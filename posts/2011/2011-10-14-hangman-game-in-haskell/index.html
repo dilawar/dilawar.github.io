@@ -1,0 +1,179 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Hangman game in Haskell - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Hangman game in Haskell">
+<meta property="og:description" content="Hangman in Haskell Rule of Hangman You play this game with a man called Hangman. The job of hangman is to kill you. Hangman is fair and have some rules. He is abided by these rules.
+ Hangman writes down a secret word. Let the word is W and its length is n. He asks you to guess a letter of W. Whenever you guess a letter which is in W, hangman shows you that part of the word.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2011/2011-10-14-hangman-game-in-haskell/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2011-10-14T00:00:00+00:00">
+<meta property="article:modified_time" content="2011-10-14T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Hangman game in Haskell">
+<meta name=twitter:description content="Hangman in Haskell Rule of Hangman You play this game with a man called Hangman. The job of hangman is to kill you. Hangman is fair and have some rules. He is abided by these rules.
+ Hangman writes down a secret word. Let the word is W and its length is n. He asks you to guess a letter of W. Whenever you guess a letter which is in W, hangman shows you that part of the word.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Hangman game in Haskell</h1>
+<div class=meta>Posted at &mdash; Oct 14, 2011</div>
+</div>
+<div class=markdown>
+<h1 id=hangman-in-haskell>Hangman in Haskell</h1>
+<h2 id=rule-of-hangman>Rule of Hangman</h2>
+<p>You play this game with a man called Hangman. The job of hangman is to kill you. Hangman is fair and have some rules. He is abided by these rules.</p>
+<ul>
+<li>Hangman writes down a secret word. Let the word is <em>W</em> and its length is <em>n</em>.</li>
+<li>He asks you to guess a letter of <em>W</em>. Whenever you guess a letter which is in <em>W</em>, hangman shows you that part of the word. For instance, if the word was <code>cat</code> and you guessed &lsquo;a&rsquo; then hangman shows you <code>_a_</code>. At first correct guess, you get to know the size of the word and the position of your guess. If the word contains your guessed letter more than one time then hangman also shows them. For example, if the word was <code>tweedledee</code> and you guessed &lsquo;e&rsquo; then hangman shows you <code>__ee__e_ee</code>.</li>
+<li>You have minimum of <em>n</em> guesses. Every time you guess right, your get one more guess to make i.e. for each correct guess, total number of guess you can make in future are same.</li>
+<li>If you can not guess the correct word in given guesses, hangman kills you.</li>
+</ul>
+<h2 id=functions-we-need>Functions we need</h2>
+<p>Obviously, it requires input-output to system. When hangman inputs the word, you should not see. For this purpose, we have to disable echo at <code>stdin</code>.</p>
+<p>=
+import System.IO</p>
+<p>@ Now we have to read the word from terminal. For this purpose we create a function <code>getWord</code>.</p>
+<p>=
+getWord :: IO String
+getWord = do
+c &lt;- getChar
+if c == &lsquo;\n&rsquo;
+then return ""
+else do
+l &lt;- getWord
+return (c:l)</p>
+<p>@</p>
+<h5 id=checking-if-a-letter-is-in-word>Checking if a letter is in word</h5>
+<p>To do this, first we check if a given letter is in word by using function <code>posChar</code>. It returns a list of <code>Bool</code> specifying if given letter exists in the word or not. For example, give a word &lsquo;gabbar&rsquo; and a letter b, <code>posChar</code> returns a list of <em>[False, False, True, True, False, False]</em>.</p>
+<p>+=
+posChar :: [Char] -> Char -> [Bool]
+posChar [] char = []
+posChar (x:xs) char = (x==char) : (posChar xs char)</p>
+<p>It would be useful sometimes, just to see if a letter exists in given word or not. We can simply create another function <code>ifContain</code> using <code>foldr</code>. The idea is to use logical <code>or</code> operation on the returned list from <code>posChar</code>.</p>
+<p>+=
+ifContain :: [Char] -> Char -> Bool
+ifContain word c = foldr (||) False (posChar word c)</p>
+<h5 id=hangman-constructs-word-from-guesses>Hangman constructs word from guesses</h5>
+<p>Now if the guessed letter exists in the word then hangman has to show the word with guessed letter unmasked. We will use letter <code>_</code>to mask the hidden letter. At the beginning, hangman creates a word and a masked copy of it. Both of them must have the same size. We need a function to create such a masked copy. To make such a copy, we write a lambda expression on the fly,</p>
+<p>foldr(\x ->('_':))[] word</p>
+<p>does the job nicely. Now the job of hangman is to maintain the mask word and display its unmasked letter to the player. To maintain it, he needs a function <code>addGuessToWord</code>.</p>
+<p>+=
+addGuessToWord :: [Char] -> [Char] -> Char -> [Char]
+addGuessToWord w w1 c
+| length(w) /= length(w1) = error &ldquo;Length mismatch&rdquo; &ndash; just for safety.
+| ifContain w c = buildW1 w1 c (posChar w c)
+| otherwise = w1
+buildW1 :: [Char] -> Char -> [Bool] -> [Char]
+buildW1 (x:[]) c (p:[])
+| x == &lsquo;_&rsquo; && p == True = c:[]
+| x /= &lsquo;_&rsquo; = x:[]
+| otherwise = &lsquo;_':[]
+buildW1 (x:xs) c (p:ps)
+| x == &lsquo;_&rsquo; && p == True = c:buildW1 xs c ps
+| x /= &lsquo;_&rsquo; = x:buildW1 xs c ps
+| otherwise = &lsquo;_&rsquo; : buildW1 xs c ps</p>
+<p>This function is slightly complicated. It uses extensive pattern matching. At the heart of this function is another function <code>buildW1</code> which unmasks (or rather put) correct guessed letter into masked-word.</p>
+<h2 id=put-things-together>Put things together</h2>
+<p>Now we have all the pieces to play hangman. Now we have to maintain no of guesses a player is allowed to make and <code>callHangman</code> at each step. We do it by,</p>
+<p>+=
+callHangman :: Int -> [Char] -> [Char] -> Char -> IO ()
+{- No attempt left, you are dead -}
+callHangman 0 wrd wrd1 c = do putStrLn &ldquo;Dead&rdquo;
+{- Attempts left, play on! -}
+callHangman n wrd wrd1 c
+| ifContain wrd c = do
+let newWrd = addGuessToWord wrd wrd1 c
+putStrLn (" &ndash;> " ++ (show newWrd))
+if wrd == newWrd
+then do
+putStrLn &ldquo;Well done!&rdquo;
+else do
+putStrLn (&ldquo;Guess again. Left " ++ (show n))
+guess &lt;- getChar
+callHangman n wrd newWrd guess
+| not (ifContain wrd c) = do
+putStrLn (&ldquo;Guess again. Left " ++ (show (n-1)))
+guess &lt;- getChar
+callHangman (n-1) wrd wrd1 guess
+| otherwise = error &ldquo;Something wrong in logic.&rdquo;</p>
+<h2 id=the-main-function>The main function</h2>
+<p>=
+main :: IO ()
+main = do
+hSetEcho stdin False &ndash; echo off to get the word from hangman.
+putStrLn &ldquo;I am going to give you a work to guess.&rdquo;
+word &lt;- getWord
+hSetEcho stdin True &ndash; Now, echo on so player can play.
+let n = (length word)
+putStrLn (show n)
+let emptyWrd = foldr(\x->('_':)) [] word &ndash;create a masked copy of word.
+putStrLn emptyWrd
+callHangman (n+1) word emptyWrd ' ' &ndash; dummy call to start the game.
+putStrLn &ldquo;Game over&rdquo; &ndash; make sure you are alive ;-)</p>
+<h2 id=program-structure>Program structure</h2>
+<p>&lt;*>=
+<em></em>
+<em></em>
+<em></em></p>
+<h5 id=index>Index</h5>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/hangman-game>hangman-game</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>

@@ -1,0 +1,90 @@
+<!doctype html><html>
+<head>
+<meta charset=utf-8>
+<meta http-equiv=x-ua-compatible content="IE=edge"><title>Combinational circuits - Equivalence checking - Dilawar's Blog</title><link rel=icon type=image/png href=icons/icon.png><meta name=viewport content="width=device-width,initial-scale=1">
+<meta property="og:title" content="Combinational circuits - Equivalence checking">
+<meta property="og:description" content="Given a VLSI entity and its two description, establishing if both of them are equivalent is fundamental problem in VLSI verification. In this post, I am going to give describe an small part of this problem. Lets say someone has provided us with an behavioral description of an entity. For example lets say the given behavior of this entity is following. [caption id=&ldquo;attachment_255&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;326&rdquo; caption=&ldquo;a, b, c, and d are input to this entity and e is output.">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://dilawar.github.io/posts/2010/2010-11-19-combinational-circuits-equivalence-checking/"><meta property="article:section" content="posts">
+<meta property="article:published_time" content="2010-11-19T00:00:00+00:00">
+<meta property="article:modified_time" content="2010-11-19T00:00:00+00:00">
+<meta name=twitter:card content="summary">
+<meta name=twitter:title content="Combinational circuits - Equivalence checking">
+<meta name=twitter:description content="Given a VLSI entity and its two description, establishing if both of them are equivalent is fundamental problem in VLSI verification. In this post, I am going to give describe an small part of this problem. Lets say someone has provided us with an behavioral description of an entity. For example lets say the given behavior of this entity is following. [caption id=&ldquo;attachment_255&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;326&rdquo; caption=&ldquo;a, b, c, and d are input to this entity and e is output.">
+<link href="https://fonts.googleapis.com/css?family=Ubuntu:300,400,300italic,400italic|Raleway:200,300" rel=stylesheet>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/normalize.css>
+<link rel=stylesheet type=text/css media=screen href=https://dilawar.github.iocss/main.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom.css>
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/dark.css media="(prefers-color-scheme: dark)">
+<link rel=stylesheet type=text/css href=https://dilawar.github.iocss/custom-dark.css media="(prefers-color-scheme: dark)">
+<script src=https://cdn.jsdelivr.net/npm/feather-icons/dist/feather.min.js></script>
+<script src=https://dilawar.github.iojs/main.js></script>
+<script src=https://dilawar.github.iojs/abc.js></script>
+<script src=https://dilawar.github.iojs/xyz.js></script>
+<script src=https://code.jquery.com/jquery-3.4.1.js></script>
+</head>
+<body>
+<div class="container wrapper post">
+<div class=header>
+<base href=https://dilawar.github.io>
+<h1 class=site-title><a href=https://dilawar.github.io>Dilawar's Blog</a></h1>
+<div class=site-description><h2>watch -n 1 /dev/null</h2><nav class="nav social">
+<ul class=flat><a href=https://github.com/dilawar title=Github><i data-feather=github></i></a></ul>
+</nav>
+</div>
+<nav class=nav>
+<ul class=flat>
+<li>
+<a href=/>Home</a>
+</li>
+<li>
+<a href=/posts>All posts</a>
+</li>
+<li>
+<a href=/about>About</a>
+</li>
+<li>
+<a href=/tags>Tags</a>
+</li>
+</ul>
+</nav>
+</div>
+<div class=post-header>
+<h1 class=title>Combinational circuits - Equivalence checking</h1>
+<div class=meta>Posted at &mdash; Nov 19, 2010</div>
+</div>
+<div class=markdown>
+<p>Given a VLSI entity and its two description, establishing if both of them are equivalent is fundamental problem in VLSI verification. In this post, I am going to give describe an small part of this problem. Lets say someone has provided us with an behavioral description of an entity. For example lets say the given behavior of this entity is following. [caption id=&ldquo;attachment_255&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;326&rdquo; caption=&ldquo;a, b, c, and d are input to this entity and e is output."]<a href=http://dilawarnotes.files.wordpress.com/2010/11/untitleddocument1.png><img src=images/untitleddocument1.png alt title="Cblock entity"></a>[/caption] Lets say if $latex a = 1$ and $latex b =1$ then $latex c = c \otimes d$ and if $latex a = 1$ and $latex b = 0$ then $latex e = c \bar{\otimes} d$. Otherwise, I don&rsquo;t give a damn! Ok! Now I have to give a hardware description of this entity else no would care about it. I give the following VHDL description (I hate verilog!). [sourcecode language=&ldquo;text&rdquo;] &ndash; This is the entity entity Cblock is port(a,b,c,d: in bit; e: out bit); end entity Cblock; &ndash; this is the specification architecture Behave of Cblock is begin process(a,b,c,d) begin if(a = &lsquo;1&rsquo; and b = &lsquo;1&rsquo;) then e &lt;= c xor d; elsif (a = &lsquo;1&rsquo; and b = &lsquo;0&rsquo;) then e &lt;= c xnor d; else end if; end process; end Behave; [/sourcecode] Next task is to find an equivalent circuit description of this behavior. We can surely use some synthesizer but they are not smart enough. Sometimes they produce garbage (though this case is way too simple to make a synthesizer go mad.). We are going to build our own. <strong>We introduce one more condition, say a, c, and d can never be same at any time. So we can treat them as don&rsquo;t care condition.</strong> Lets make the truth table of Cblock. [caption id=&ldquo;attachment_270&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;630&rdquo; caption=&ldquo;First table shows the truth table. Second shows truth table after don&rsquo;t cares and third shows the minimization process. Note that blue color is being overlapped by other one. We have three min terms here."]<a href=http://dilawarnotes.files.wordpress.com/2010/11/truthtables.png><img src=images/truthtables.png alt title=truthtables></a>[/caption] After minimization, Cblock can be written as $latex e = b \bar{c}\bar{d} + abd + abc$.  Notice that since $latex a, c, d$ are not allowed to be same at any given time. We have  $latex \bar{a}{b}\bar{c}\bar{d}$, $latex \bar{a}\bar{b}\bar{c}\bar{d}$, $latex abdc$, $latex {a}\bar{b}{c}{d}$ should not be taken into accout i.e. don&rsquo;t care conditions.</p>
+<h3 id=build-the-circuit>Build the circuit</h3>
+<p>Lets our life more miserable. We say that we have only <strong>AND</strong> and <strong>NOT</strong> gates available. Can we realise the given function $latex e$. Yes we can, remember that <strong>AND</strong> and <strong>NOT</strong> together represents <a href=http://en.wikipedia.org/wiki/NAND_logic><strong>NAND</strong> which is universal gate</a> and others gates can be realised using it. Now we can construct the following circuit. [caption id=&ldquo;attachment_271&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;630&rdquo; caption=&ldquo;Circuit representing the function in Qucs."]<a href=http://dilawarnotes.files.wordpress.com/2010/11/circuit.png><img src=images/circuit.png alt title=circuit></a>[/caption] This circuit can be simulated in any circuit simulator like <strong>ngspice.</strong> If you are using <strong>Qucs</strong> than you can use the following file. Since I can not attach this type of file, here is the code.</p>
+<h2 id=verify-both-implementation>Verify both implementation</h2>
+<p>Now the final task to is to verify whether out implementation matches with the given behaviour. To verify, I must check my implementation for all the possible input combination and output must match the given bahviorial description. We use <strong>VHDL</strong> to describe our implementation and then we make a test-bench to verify it. Following is the code for testbench. All entities are given in a single file. [sourcecode language=&ldquo;text&rdquo;] &ndash; VHDL file for assignment 06. &ndash; Dilawar Singh &ndash; <a href=mailto:dilawar@ee.iitb.ac.in>dilawar@ee.iitb.ac.in</a> &ndash; Modified from its original version. &ndash; GHDL is used to compile it. &ndash; AND GATE entity And2 is port(a,b: in bit; c: out bit); end entity And2; architecture Behave of And2 is begin c &lt;= a and b; end Behave; &ndash; Invertor entity Inv is port(a: in bit; b: out bit); end entity Inv; architecture Behave of Inv is begin b &lt;= not a; end Behave; &ndash; This is the entity entity Cblock is port(a,b,c,d: in bit; e: out bit); end entity Cblock; &ndash; this is the specification architecture Behave of Cblock is begin process(a,b,c,d) begin if(a = &lsquo;1&rsquo; and b = &lsquo;1&rsquo;) then e &lt;= c xor d; elsif (a = &lsquo;1&rsquo; and b = &lsquo;0&rsquo;) then e &lt;= c xnor d; else end if; end process; end Behave; &ndash; this is the implementation which you have to write. &ndash; you may assume that the dont care set is a=c=d architecture Impl of Cblock is component And2 is port(a,b: in bit; c: out bit); end component; component Inv is port(a: in bit; b: out bit); end component; &ndash; fill in your implementation &ndash; declare signals for interconnecting your gates signal i1_out, i2_out, i3_out, i4_out, i5_out, i6_out, i7_out, i8_out : bit; signal a1_out, a2_out, a3_out, a4_out, a5_out, a6_out : bit; begin &ndash; fill in your implementation &ndash; instantiate your gates. i1 : Inv port map(a => c, b => i1_out); i2 : Inv port map(a => d, b => i2_out); i3 : Inv port map(a => c, b => i3_out); i4 : Inv port map(a => d, b => i4_out); i5 : Inv port map(a => a1_out, b => i5_out); i6 : Inv port map(a => b, b => i6_out); i7 : Inv port map(a => a4_out, b => i7_out); i8 : Inv port map(a => a5_out, b => i8_out); i9 : Inv port map(a => a6_out, b => e); a1 : And2 port map(i1_out, i2_out, a1_out); a2 : And2 port map(a, b, a2_out); a3 : And2 port map(i3_out, i4_out, a3_out); a4 : And2 port map(i5_out, a2_out, a4_out); a5 : And2 port map(i6_out, a3_out, a5_out); a6 : And2 port map(i7_out, i8_out, a6_out); end Impl; entity Testbench is end entity Testbench; &ndash; testbench architecture Compare of Testbench is signal a,b,c,d,eref,edut: bit; type bV2 is array(natural range &lt;>) of bit_vector(3 downto 0); &ndash; legal patterns. constant pattern: bV2(0 to 11) := ( (&lsquo;0&rsquo;,&lsquo;0&rsquo;,&lsquo;0&rsquo;,&lsquo;1&rsquo;), (&lsquo;0&rsquo;,&lsquo;0&rsquo;,&lsquo;1&rsquo;,&lsquo;0&rsquo;), (&lsquo;0&rsquo;,&lsquo;0&rsquo;,&lsquo;1&rsquo;,&lsquo;1&rsquo;), (&lsquo;0&rsquo;,&lsquo;1&rsquo;,&lsquo;0&rsquo;,&lsquo;1&rsquo;), (&lsquo;0&rsquo;,&lsquo;1&rsquo;,&lsquo;1&rsquo;,&lsquo;0&rsquo;), (&lsquo;0&rsquo;,&lsquo;1&rsquo;,&lsquo;1&rsquo;,&lsquo;1&rsquo;), (&lsquo;1&rsquo;,&lsquo;0&rsquo;,&lsquo;0&rsquo;,&lsquo;0&rsquo;), (&lsquo;1&rsquo;,&lsquo;0&rsquo;,&lsquo;0&rsquo;,&lsquo;1&rsquo;), (&lsquo;1&rsquo;,&lsquo;0&rsquo;,&lsquo;1&rsquo;,&lsquo;0&rsquo;), (&lsquo;1&rsquo;,&lsquo;1&rsquo;,&lsquo;0&rsquo;,&lsquo;0&rsquo;), (&lsquo;1&rsquo;,&lsquo;1&rsquo;,&lsquo;0&rsquo;,&lsquo;1&rsquo;), (&lsquo;1&rsquo;,&lsquo;1&rsquo;,&lsquo;1&rsquo;,&lsquo;0&rsquo;)); component Cblock is port(a,b,c,d: in bit; e: out bit); end component; for ref:Cblock use entity work.Cblock(behave); for dut:Cblock use entity work.Cblock(behave); &ndash; use impl when ready begin ref: Cblock port map(a=>a,b=>b,c=>c,d=>d,e=>eref); &ndash; change to implementation when you have one ready dut: Cblock port map(a=>a,b=>b,c=>c,d=>d,e=>edut); process variable I : integer := 0; begin while I &lt; 12 loop a &lt;= pattern(I)(3); b &lt;= pattern(I)(2); c &lt;= pattern(I)(1); d &lt;= pattern(I)(0); I := I+1; wait for 1 ns; assert(eref = edut) report &ldquo;Mismatch between Reference and DUT&rdquo; severity error; end loop; assert false report "Test Over" severity note; wait; end process; end Compare; [/sourcecode]</p>
+<h2 id=results>Results</h2>
+<p>Now we have to run this testbench. There are few VHDL simulator available, one is ghdl. We are going to use this. Make sure you can ghdl installed. You can get it from <a href=http://ghdl.free.fr/>here</a>. Now we have to run following commands. <code>$ghdl -a filename.vhd</code> <code>$ghdl -e testbench</code> <code>$ghdl -r testbench --vcd=filename.vcd</code> Since my filename was <code>dilawar.vhd</code> I got following output. <code>dilawar.vhdl:118:8:@12ns:(assertion note):Test Over</code> Note that since we have exhausted all the possible combination of inputs. This is not possible in big circuits with a lot of inputs. Simulation is too slow to handle all the cases. In future, we’ll be in need of better formal verification tools. About that some other day. [caption id=&ldquo;attachment_287&rdquo; align=&ldquo;aligncenter&rdquo; width=&ldquo;630&rdquo; caption=&ldquo;Waveform of both of the implementation. Note that for given input combinations, output is same. Thats is what an engineer establishes for equivalence."]<a href=http://dilawarnotes.files.wordpress.com/2010/11/wave.png><img src=images/wave.png alt title=wave></a>[/caption]</p>
+</div>
+<div class=post-tags>
+<nav class="nav tags">
+<ul class=flat>
+<li><a href=/tags/comparison-of-two-circuits>comparison-of-two-circuits</a></li>
+<li><a href=/tags/verification-of-vlsi>verification-of-vlsi</a></li>
+<li><a href=/tags/vhdl>vhdl</a></li>
+<li><a href=/tags/vlsi>vlsi</a></li>
+</ul>
+</nav>
+</div>
+<div id=disqus_thread></div>
+<script type=text/javascript>(function(){var a,b;if(window.location.hostname=="localhost")return;a=document.createElement('script'),a.type='text/javascript',a.async=!0,b='dilawarsblog',a.src='//'+b+'.disqus.com/embed.js',(document.getElementsByTagName('head')[0]||document.getElementsByTagName('body')[0]).appendChild(a)})()</script>
+<noscript>Please enable JavaScript to view the <a href=http://disqus.com/?ref_noscript>comments powered by
+Disqus.</a></noscript>
+<a href=http://disqus.com/ class=dsq-brlink>comments powered by <span class=logo-disqus>Disqus</span></a>
+</div>
+<div class="footer wrapper">
+<nav class=nav>
+<div> <a href=https://github.com/vividvilla/ezhil>Ezhil theme</a> | Built with <a href=https://gohugo.io>Hugo</a></div>
+</nav>
+</div>
+<script type=application/javascript>var doNotTrack=!1;doNotTrack||(window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)},ga.l=+new Date,ga('create','UA-180197482-1','auto'),ga('send','pageview'))</script>
+<script async src=https://www.google-analytics.com/analytics.js></script>
+<script>feather.replace()</script>
+</body>
+</html>
