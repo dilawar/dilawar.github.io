@@ -1,6 +1,9 @@
 ---
 title: Where to put default arguments, definition or declaration?
 tags: [C++,note]
+date: 2021-11-26
+commentable: true
+author: Dilawar
 ---
 
 Default parameter values arguably are better suited on the declaration since that 
