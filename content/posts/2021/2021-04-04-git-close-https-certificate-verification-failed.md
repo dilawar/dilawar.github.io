@@ -1,7 +1,7 @@
 ---
 title: Fixing git clone over https - Server certificate verification failed
 author: Dilawar Singh
-date: April 04, 2021
+date: 04 Apr 2021
 comments: true
 ---
 

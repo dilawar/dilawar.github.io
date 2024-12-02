@@ -1,7 +1,7 @@
 ---
 title: Online store for electronic parts
 author: Dilawar Singh
-date: March 23, 2021
+date: 23 Mar 2021
 comments: true
 ---
 
