@@ -2,6 +2,7 @@ baseURL = "https://dilawar.github.io"
 languageCode = "en-us"
 title = "Dilawar's Blog"
 author = "Dilawar Singh"
+theme = "cactus"
 enableRobotsTXT = true
 googleAnalytics = "G-W9SB8FTCTQ"
 copyright = "© 2021, Dilawar Singh"
