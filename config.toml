@@ -4,10 +4,13 @@ title = "Dilawar's Blog"
 author = "Dilawar Singh"
 theme = "cactus"
 enableRobotsTXT = true
-googleAnalytics = "G-W9SB8FTCTQ"
-copyright = "© 2021, Dilawar Singh"
+copyright = "© 2024, Dilawar Singh"
 
 custom_css = ["css/custom.css"]
+
+[services]
+    [services.googleAnalytics]
+        id = 'G-W9SB8FTCTQ'
 
 [params]
     homepage = false
@@ -19,13 +22,6 @@ custom_css = ["css/custom.css"]
     # Content types which are included in home page recent posts list.
     mainSections = ["posts"]
 
-
-[params.comments]
-enabled = true
-engine = "disqus"
-
-[params.comments.disqus]
-shortname = "dilawarsblog"
 
 # Main menu which appears below site header.
 [[menu.main]]
