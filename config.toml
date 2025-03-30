@@ -4,10 +4,12 @@ title = "Dilawar's Blog"
 author = "Dilawar Singh"
 theme = "hugo-vitae"
 enableRobotsTXT = true
-googleAnalytics = "UA-180197482-1"
 copyright = "© 2021, Dilawar Singh"
 
 custom_css = ["css/custom.css"]
+
+[services.googleAnalytics]
+id = "G-W9SB8FTCTQ"
 
 [params]
     homepage = false
