@@ -14,7 +14,7 @@ custom_css = ["css/custom.css"]
     math = true
 
     # Blog subtitle which appears below blog title. Supports markdown.
-    subtitle = "watch -n 1 /dev/null"
+    subtitle = "watch -n 1 /dev/null | moved to https://dilawars.notion.site"
 
     # Content types which are included in home page recent posts list.
     mainSections = ["posts"]
