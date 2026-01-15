@@ -1,9 +1,6 @@
 ---
-title: "Fix \"LaTeX Error: File `flushend.sty' not found.\""
-date: "2020-09-09"
-tags: 
-  - "flushend-sty"
-  - "texlive-sttools"
+title: 'Fix "LaTeX Error: File `flushend.sty'' not found."'
+date: 2020-09-09
 ---
 
 Install package `texlive-sttools`.

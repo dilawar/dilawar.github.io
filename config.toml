@@ -2,9 +2,8 @@ baseURL = "https://dilawar.github.io"
 languageCode = "en-us"
 title = "Dilawar's Blog"
 author = "Dilawar Singh"
-theme = "hugo-vitae"
+theme = "PaperMod"
 enableRobotsTXT = true
-copyright = "© 2021, Dilawar Singh"
 
 custom_css = ["css/custom.css"]
 
@@ -12,15 +11,14 @@ custom_css = ["css/custom.css"]
 id = "G-W9SB8FTCTQ"
 
 [params]
-    homepage = false
-    math = true
+homepage = true
+math = true
 
-    # Blog subtitle which appears below blog title. Supports markdown.
-    subtitle = "watch -n 1 /dev/null | moved to https://dilawars.notion.site"
+# Blog subtitle which appears below blog title. Supports markdown.
+subtitle = "watch -n 1 /dev/null | moved to https://dilawars.notion.site"
 
-    # Content types which are included in home page recent posts list.
-    mainSections = ["posts"]
-
+# Content types which are included in home page recent posts list.
+mainSections = ["posts"]
 
 [params.comments]
 enabled = true
@@ -66,7 +64,6 @@ cmd = "mailto:dilawar.s.rajput@gmail.com"
 
 # Enable tags.
 [taxonomies]
-   tag = "tags"
-   category = "categories"
-   series = "series"
-
+tag = "tags"
+category = "categories"
+series = "series"

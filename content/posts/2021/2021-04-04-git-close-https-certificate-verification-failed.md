@@ -1,7 +1,7 @@
 ---
 title: Fixing git clone over https - Server certificate verification failed
 author: Dilawar Singh
-date: April 04, 2021
+date: 2021-04-04
 comments: true
 ---
 
@@ -13,6 +13,7 @@ admin@ip-172-26-13-71:~/Work$ git clone https://gitlab.subcom.tech/subcom/voiced
 Cloning into 'voicedb'...
 fatal: unable to access 'https://gitlab.subcom.tech/subcom/voicedb.git/': server certificate verification failed. CAfile: none CRLfile: none
 ```
+
 This is a big problem. The only protocol which works out of box is ssh. To use ssh protocol, everyone has to upload public key to the server. A bit of hassle if you are not working on your own machine :sad:.
 
 First thing first, there is an issue with certificate. Lets debug this.
@@ -69,7 +70,6 @@ of it but I can make some sense out of it. Now let's try on my gitlab instance.
 
 ### gitlab.subcom.tech certificates
 
-
 ```shell
 admin@ip-172-26-7-193:~$ openssl s_client -showcerts -servername gitlab.subcom.tech -connect gitlab.subcom.tech:443 </dev/null 2>/dev/null
 CONNECTED(00000003)
@@ -106,8 +106,8 @@ Verify return code: 21 (unable to verify the first certificate)
 ---
 ```
 
-All right,  the problem seems to be that we are __unable to verify the first
-certificate.__. Seems like there are multiple of certificates involved; and we
+All right, the problem seems to be that we are **unable to verify the first
+certificate.**. Seems like there are multiple of certificates involved; and we
 are unable to verify the first certificate itself!
 
 To add to the confusion, the site works fine in browser
@@ -121,7 +121,7 @@ offers a solution. But still very confused.
 
 I search in gitlab documentation. Their documentation is good and I got a
 helpful hit:
-__https://docs.gitlab.com/omnibus/settings/ssl.html#common-ssl-errors__. I had
+**https://docs.gitlab.com/omnibus/settings/ssl.html#common-ssl-errors**. I had
 to google few terms and read a bit more. For a person like me who has short
 attention span, this is the hardest part. But after spending enough hours, I
 finally figured out the solution.
@@ -158,8 +158,6 @@ Now the file (rather a link) `/etc/gitlab/ssl/gitlab.subcom.tech.crt` points to
 me. `fullchain.pem` has all the certificates needed for verification to be
 successful.
 
-
-Finally, I did  a `gitlab-ctl reconfigure` followed by `gitlab.ctl restart`. I
+Finally, I did a `gitlab-ctl reconfigure` followed by `gitlab.ctl restart`. I
 can now clone the repositories over https protocol from 'gitlab.subcom.tech'
 server. Phew!
-
