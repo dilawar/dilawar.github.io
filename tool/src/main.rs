@@ -1,4 +1,6 @@
 use chrono::prelude::*;
+use dateparser::parse;
+use regex::Regex;
 use std::path::Path;
 use std::path::PathBuf;
 use tracing_subscriber::{EnvFilter, fmt, prelude::*};
@@ -39,13 +41,22 @@ fn process_file(path: &Path) -> anyhow::Result<()> {
     // tracing::info!("{matter:#?}");
     // generate new path.
     let mut new_name = PathBuf::new();
-    if let Some(year) = matter.created {
-        // tracing::info!("  year={:?}", year.year());
-        new_name.push(year.format("%Y").to_string());
+
+    // Search for 'Published On' else use created field from metadata.
+    let regex_published_on = Regex::new(r"Published On:\s+(?P<date>.+?)\n").expect("must compile");
+    let mut published_date = if let Some(caps) = regex_published_on.captures(&md_text) {
+        tracing::info!("==> Found published date {:?}", caps);
+        parse(&caps["date"]).ok()
+    } else {
+        matter.created
+    };
+
+    if let Some(date) = published_date {
+        new_name.push(date.format("%Y").to_string());
 
         let title = matter.title.unwrap_or("NA".to_string());
         let filename = title.replace(" ", "_");
-        new_name.push(format!("{}-{}", year.format("%Y-%m-%d"), filename,));
+        new_name.push(format!("{}-{}.md", date.format("%Y-%m-%d"), filename,));
     }
 
     let new_path = Path::new("../content/posts").join(new_name);
@@ -58,13 +69,14 @@ fn process_file(path: &Path) -> anyhow::Result<()> {
 
     // create parent of this new_path is doesn't exists.
     if let Some(parent) = new_path.parent()
-        && !parent.is_dir() {
-            std::fs::create_dir(parent)?;
-        }
+        && !parent.is_dir()
+    {
+        std::fs::create_dir(parent)?;
+    }
 
     // copy to new location.
     std::fs::write(&new_path, md_text)?;
-    println!("Wrote {path:?} to {new_path:?}");
+    println!("Wrote {} to {}", path.display(), new_path.display());
 
     Ok(())
 }
