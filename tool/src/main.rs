@@ -1,5 +1,6 @@
 use chrono::prelude::*;
-use std::{fmt::Formatter, path::Path, string::ParseError};
+use std::path::Path;
+use std::path::PathBuf;
 use tracing_subscriber::{EnvFilter, fmt, prelude::*};
 
 #[derive(Debug, serde::Deserialize)]
@@ -32,12 +33,38 @@ fn process_dir(path: &Path) -> anyhow::Result<()> {
 }
 
 fn process_file(path: &Path) -> anyhow::Result<()> {
-    tracing::info!("Processing {path:?}");
     let md_text = std::fs::read_to_string(path).expect("must read");
     let (matter, _body) = markdown_frontmatter::parse::<Frontmatter>(&md_text).unwrap();
-    tracing::info!("{matter:#?}");
 
+    // tracing::info!("{matter:#?}");
     // generate new path.
+    let mut new_name = PathBuf::new();
+    if let Some(year) = matter.created {
+        // tracing::info!("  year={:?}", year.year());
+        new_name.push(year.format("%Y").to_string());
+
+        let title = matter.title.unwrap_or("NA".to_string());
+        let filename = title.replace(" ", "_");
+        new_name.push(format!("{}-{}", year.format("%Y-%m-%d"), filename,));
+    }
+
+    let new_path = Path::new("../content/posts").join(new_name);
+
+    anyhow::ensure!(
+        new_path.parent().and_then(|x| x.parent()).unwrap().is_dir(),
+        "{:?} is not a directory",
+        new_path.parent().and_then(|x| x.parent())
+    );
+
+    // create parent of this new_path is doesn't exists.
+    if let Some(parent) = new_path.parent()
+        && !parent.is_dir() {
+            std::fs::create_dir(parent)?;
+        }
+
+    // copy to new location.
+    std::fs::write(&new_path, md_text)?;
+    println!("Wrote {path:?} to {new_path:?}");
 
     Ok(())
 }
