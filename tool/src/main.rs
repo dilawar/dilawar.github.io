@@ -18,7 +18,7 @@ fn main() {
         .with(EnvFilter::from_default_env())
         .init();
 
-    process_dir(Path::new("../content/posts/from_notion")).unwrap();
+    process_dir(Path::new("./from_notion")).unwrap();
 }
 
 fn process_dir(path: &Path) -> anyhow::Result<()> {
