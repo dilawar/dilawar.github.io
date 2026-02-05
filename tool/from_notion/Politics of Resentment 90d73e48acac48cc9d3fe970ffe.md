@@ -1,0 +1,29 @@
+---
+title: Politics of Resentment 90d73e48acac48cc9d3fe970ffec52ed
+updated: 2026-01-14 22:55:26Z
+created: 2026-01-15 04:51:09Z
+---
+
+# Politics of Resentment
+
+Published On: June 4, 2023
+Author: dilawar
+Status: Published
+Type: Article
+Tags: opinion, politics
+
+The disintegration of the Congress party over the last few decades is well-deserved. Many factors have contributed to this disintegration, including corruption, indiscipline, and the sheer ineptitude and lethargy of its aging leadership. Fortunately for the Congress, the old eventually die. The condition of Congress seems to be improving lately. In particular, its leadership's paralysis in the face of even the most trivial sorts of crises in interpersonal relations has been improving. The success of Congress in the 2023 assembly election in Karnataka has been ascribed to this which is welcome news for Indian democracy.
+
+The BJP has done remarkably well in last few decades and most of its success is not because the Congress is weak. BJP even managed to resonate with people outside the Hindi heartland, especially in West Bengal and Karnataka. I found BJP's success in West Bengal quite surprising. A state that was in the firm grip of the Left party’s culture for over 3 decades now votes for BJP in large numbers! The vote share of the BJP in Karnataka is also very impressive.
+
+20 years ago, If I were to sum up the BJP’s political culture in a single phrase, it was ‘*Hindu bano, Hindi bolo’*. I first heard that phrase when I was in school from an RSS pracharak. Though they started this slogan in the aftermath of the Emergency. In the great Hindi-speaking region of the country, it has an immediate appeal for all political parties, but it is the BJP that can articulate the sentiment behind it most effectively. The Congress has a different past which it cannot shake off very easily.
+
+If it were only a matter of Hindutva (*Hindu Bano)*, the BJP would be able to spread its influence without too much trouble. After all, more than 80 percent of Indians are Hindus, of one sort or another. What would be the problem in adding Shiv and Durga, or even the Pir Satyanarayan, to Ram? But persuading people to embrace Hindi may be more difficult than persuading them to remain Hindu. Most politicians of South India, including BJP, will be more at ease in a Hindu temple than at a political rally where all the slogans are in Hindi. And this may be true for the vast majority of Indians outside the Hindi heartland.
+
+Whereas Hindus make up more than 80 percent of the population, Hindi speakers do not add up to more than 40 percent by even the most liberal estimate. This must surely be a source of anxiety to the leaders of a political party identified so closely not only with the Hindu religion but also with the Hindi language. Mr. Narendra Modi, a Gujarati, may have succeeded in taking the attention away from the Hindi chauvinists for the time being, but I don’t think he can [keep them under control for a very long time](https://www.outlookindia.com/national/stalin-flays-hindi-for-jobs-proposal-of-parliamentary-panel-news-230335). Will they not do something about it that will give their party a different direction and a different image? I believe that they can do very little. In the age of mass democracy, it is easier to alter a party’s political programme than to alter its political culture.
+
+Secularists liked to frighten themselves with the thought that as soon as the BJP comes to power in New Delhi, it will start a massacre of the Muslims. That has not happened so far but some of their fears had been justified. BJP doesn’t seem to have either a radically different economic policy or a radically different foreign policy. What the BJP has succeeded in hitting the hardest — in addition to democratic institutes — is education where, apart from the opportunity to distribute patronage widely, there is the bonus for demanding the expulsion of English. ‘Angrezi hatao’ expresses [hostility not just to the English language](https://www.theguardian.com/world/2022/oct/22/modi-employs-new-tool-in-indias-war-against-the-english-language-hindi-medical-degrees) but to a whole system and [method of education](https://www.nature.com/articles/d41586-023-01750-2). 
+
+Fortunately, education is largely a state subject, so whether or not the BJP remains in power at the center, the damage will not be equally extensive everywhere. The principal targets of attack will be those things that stand for progress and modernity in education and culture. This will affect economic development only indirectly, and its adverse economic effects will not be visible in the short term. Those who feel threatened by liberal modern culture are by no means all averse to the material gains from improved technology and more profitable international trade. And they will continue to be no less hypocritic in the future as they are now.
+
+The politics of BJP, above all, is a politics of resentment. In India today, there is resentment against a great many things, not just the Brahmins or even the upper castes. That has now become a general feature of Indian politics to the extent that the tone and language used at national or state level politics is hardly any different than the one used during local panchayat elections in my village. The language of politics in the country today is the language of resentment. This style and language have acquired a particular emphasis in the Hindi heartland because of its backwardness where it far more easier to mobilize the masses causing resentment. Here the BJP has a clear advantage, for its target of attack is not just Islam, but the modern world, including its secular intellectuals.
